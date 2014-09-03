@@ -57,11 +57,13 @@ require.config({
 });
 
 // Load our app module and pass it to our definition function
+// TODO console.min.js load befare for all ?
 define([
     'js/AdminUIApp',
     'lib/jquery/jquery.min.js',
     'lib/underscore/underscore',
-    'lib/highcharts/highcharts'
+    'lib/highcharts/highcharts',
+    'lib/support/console.min.js'
 ], function (App) {
     App.initialize();
 });
