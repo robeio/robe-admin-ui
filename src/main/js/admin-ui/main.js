@@ -57,13 +57,14 @@ require.config({
 });
 
 // Load our app module and pass it to our definition function
-// TODO console.min.js load befare for all ?
+// TODO console.min.js load before for all ?
 define([
     'js/AdminUIApp',
-    'lib/jquery/jquery.min.js',
+    'lib/jquery/jquery.min',
     'lib/underscore/underscore',
     'lib/highcharts/highcharts',
-    'lib/support/console.min.js'
+    'lib/support/console.min',
+    'lib/kendoui/js/cultures/kendo.culture.tr-TR.min'
 ], function (App) {
     App.initialize();
 });
