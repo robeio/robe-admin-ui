@@ -13,7 +13,8 @@ define(['robe/core/Class'], function(Class) {
             if (this.data == null) {
                 console.log("Initializing " + this.name);
                 this.initialize();
-            } else if (read) {
+            }
+            if (read) {
                 this.read();
             }
 
