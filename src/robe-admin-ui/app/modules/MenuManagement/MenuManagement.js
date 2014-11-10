@@ -83,23 +83,6 @@ define([
                 click: refreshTree
             });
 
-            $("#btnMenuManagementHelp").kendoButton({
-                click: onShowHelp
-            });
-
-            function onShowHelp() {
-                var wnd = $("#menuManagementHelpWindow").kendoWindow({
-                    title: "Yardım",
-                    modal: true,
-                    visible: false,
-                    resizable: false,
-                    width: 500
-                }).data("kendoWindow");
-
-                wnd.center().open();
-
-            };
-
             function onTreeMenuDrag(e) {
                 // if the current status is "insert-top/middle/bottom"
                 if (e.statusClass.indexOf("insert") >= 0) {

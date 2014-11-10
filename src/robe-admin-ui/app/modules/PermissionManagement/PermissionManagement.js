@@ -56,6 +56,7 @@ define([
                     title: "Servis",
                     width: 90,
                     headerTemplate: "Servis<button class=\"pull-right\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>",
+                    groupable: true
 
                 }]
             });
@@ -180,13 +181,11 @@ define([
                 }
             });
 
-            $("#btnMenuManagementHelp").kendoButton({
-                click: onShowHelp
-            });
+        
             // function that gathers IDs of checked nodes
             function checkedNodeIds(me, nodes, checkedNodes) {
                 for (var i = 0; i < nodes.length; i++) {
-                    if (nodes[i].checked) {
+                    if (noledes[i].checked) {
                         checkedNodes.push(nodes[i].id);
                     }
 
@@ -213,17 +212,6 @@ define([
                 }
             };
 
-            function onShowHelp() {
-                var wnd = $("#permissionManagementHelpWindow").kendoWindow({
-                    title: "Yardım",
-                    modal: true,
-                    visible: false,
-                    resizable: false,
-                    width: 500
-                }).data("kendoWindow");
-
-                wnd.center().open();
-            };
 
             //on click of the checkbox:
             function selectRow() {

@@ -1,23 +1,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-<div class="row clearfix">
-    <div class="col-md-12 column">
-
-        <div>
-            <!-- HELP BUTTON START-->
-            <button id="btnMenuManagementHelp" class="pull-right"><b class="fa fa-h-square"></b>&nbspHelp</button>
-            <!-- HELP BUTTON END-->
-            <button class="pull-right" id="btnSavePermission"><b class="fa fa-floppy-o"></b>&nbspKaydet</button>
-            </br></br>
-        </div>
-    </div>
-</div>
 <div class="row clearfix">
     <div class="col-md-12 column">
         <div class="row" >        
-            <div class="col-md-2"> 
-                <span><b>Rol: </b> </span>
-                <select id="cmbRoles"></select>
+            <div class="col-md-5"> 
+                <div class="row">
+                    <span><b>Rol: </b> </span>
+                    <select id="cmbRoles"></select>            
+                    <button  id="btnSavePermission"><b class="fa fa-floppy-o"></b>&nbspKaydet</button>
+                </div>
             </div>
         </div>
         <div id="horizontalTabStrips">          
@@ -33,7 +23,7 @@
 
 
 <!-- HELP WINDOW START-->
-<div id="permissionManagementHelpWindow" hidden="true">
+<div id="containerHelpWindow" hidden="true">
     <p>Yeni izin eklemek için, tablonun "Yeni İzin" butonuna tıkladıktan sonra form verilerin doldurup,
         "Güncelle" butonuna tıklamalısınız.</p>
 

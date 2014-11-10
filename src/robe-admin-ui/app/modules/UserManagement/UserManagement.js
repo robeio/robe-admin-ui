@@ -67,11 +67,7 @@ define([
                     confirmDelete: "Yes"
                 }
             });
-
-            $("#btnUserManagementHelp").kendoButton({
-                click: onShowHelp
-            });
-
+         
             function userRoleDropDownEditor(container, options) {
                 $('<input required  data-text-field="name" data-value-field="oid"  data-bind="value:' + options.field + '"/>')
                     .appendTo(container)
@@ -86,17 +82,6 @@ define([
                     });
             };
 
-            function onShowHelp() {
-                var wnd = $("#userManagementHelpWindow").kendoWindow({
-                    title: "Yardım",
-                    modal: true,
-                    visible: false,
-                    resizable: false,
-                    width: 500
-                }).data("kendoWindow");
-
-                wnd.center().open();
-            };
         }
     });
 

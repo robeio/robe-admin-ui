@@ -68,9 +68,7 @@ define([
                 },
                 edit: onEdit
             });
-            $("#btnMailTemplateManagementHelp").kendoButton({
-                click: onBtnMailTemplateManagementHelp
-            });
+           
 
             function onEdit(e) {
                 var editWindow = this.editable.element.data("kendoWindow");
@@ -142,18 +140,6 @@ define([
                         dataSource: SystemLanguageDatasource.get(),
                         index: 0
                     });
-            };
-
-            function onBtnMailTemplateManagementHelp() {
-                var wnd = $("#mailTemplateManagementHelpWindow").kendoWindow({
-                    title: "Yardım",
-                    modal: true,
-                    visible: false,
-                    resizable: false,
-                    width: 500
-                }).data("kendoWindow");
-
-                wnd.center().open();
             };
         }
     });

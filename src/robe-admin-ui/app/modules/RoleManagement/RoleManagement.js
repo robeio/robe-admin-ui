@@ -141,10 +141,6 @@ define([
                 }
             });
 
-            $("#btnRoleManagementHelp").kendoButton({
-                click: onShowHelp
-            });
-
             function onListChange(e) {
 
                 var data = RoleDataSource.get(false).view(),
@@ -173,17 +169,6 @@ define([
                 });
             };
 
-            function onShowHelp() {
-                var wnd = $("#roleManagementHelpWindow").kendoWindow({
-                    title: "Yardım",
-                    modal: true,
-                    visible: false,
-                    resizable: false,
-                    width: 500
-                }).data("kendoWindow");
-                wnd.center().open();
-
-            };
             $("#tabstrip").kendoTabStrip();
         }
     });

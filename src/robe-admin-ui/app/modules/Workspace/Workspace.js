@@ -66,6 +66,7 @@ define([
                 duration: 200
             }
         });
+
         kendo.destroy($("#container"));
 //        Welcome page created again.Why did we give blank html content ??
 //        $("#container").html("");
@@ -87,6 +88,22 @@ define([
             minWidth: 300
         });
 
+         $("#btnContainerHelp").kendoButton({
+                click: onShowHelp
+            });
+
+          function onShowHelp() {
+                var wnd = $("#containerHelpWindow").kendoWindow({
+                    title: "Yardım",
+                    modal: true,
+                    visible: false,
+                    resizable: false,
+                    width: 500
+                }).data("kendoWindow");
+
+                wnd.center().open();
+            };
+
         $(document).ajaxStart(function () {
             showIndicator(true);
         });
@@ -102,7 +119,7 @@ define([
         }
 
         function onClickSettingsButton(e) {
-            $("#dropdownMenu").toggle("slow");
+            $("#dropdownMenu").toggle("fast");
         };
 
         function showIndicator(show) {
@@ -156,9 +173,11 @@ define([
                                 break;
                             }
                         }
+                        $('#lblContainerTitle').text($(e.item).find("span").text());
                         WorkspaceView.openMenuItem(selection);
                     }
                 });
+                $('#menu').find("span").find("span").remove();
 
             }
         });
