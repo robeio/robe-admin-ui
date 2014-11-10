@@ -56,6 +56,7 @@ define([
         $('#body').html('');
         window.location.href = "#/Workspace";
     }
+
     return Router;
 
 });
