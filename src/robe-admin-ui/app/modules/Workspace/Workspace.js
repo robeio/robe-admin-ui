@@ -1,14 +1,13 @@
 define([
     'text!./Workspace.html',
     'modules/Login/Login',
-    'modules/ProfileManagement/ProfileManagement',
     'kendo/kendo.fx.min',
     'kendo/kendo.progressbar.min',
     'kendo/kendo.button.min',
     'kendo/kendo.window.min',
     'kendo/kendo.panelbar.min',
     'robe/view/RobeView'
-], function (view, LoginView, ProfileManagementView) {
+], function (view, LoginView) {
     
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
 
@@ -70,15 +69,6 @@ define([
         kendo.destroy($("#container"));
 //        Welcome page created again.Why did we give blank html content ??
 //        $("#container").html("");
-        $("#profile").click(function () {
-
-            $('#dialogMessage').html('');
-            showDialog(null, "Profil Bilgileri");
-            kendo.destroy($('#dialogMessage'));
-
-
-            ProfileManagementView.render();
-        });
 
         $("#logout").click(function () {
             $.cookie.destroy("auth-token");

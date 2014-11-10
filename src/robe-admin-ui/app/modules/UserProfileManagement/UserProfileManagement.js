@@ -38,22 +38,20 @@ define([
 
             $("#newPassword").focusout(function () {
                 if (validatePassword()) {
-                    $("#newPassword").style.background = goodColor;
+                    $("#newPassword").css("background-color", goodColor);
                 } else {
-                    $("#newPassword").style.background = badColor;
+                    $("#newPassword").css("background-color", badColor);
                 }
 
             });
 
             $("#reNewPassword").keyup(function () {
                 if (validatePassword() && isMatch()) {
-                    $("#newPassword").style.background = goodColor;
-                    $("#reNewPassword").style.background = goodColor;
-                    $("#matchMessage").style.background = goodColor;
-                    $("#confirmMessage").style.background = goodColor;
+                    $("#newPassword").css("background-color", goodColor);
+                    $("#reNewPassword").css("background-color", goodColor);
                 } else {
-                    $("#newPassword").style.background = badColor;
-                    $("#reNewPassword").style.background = badColor;
+                    $("#newPassword").css("background-color", badColor);
+                    $("#reNewPassword").css("background-color", badColor);
                 }
             });
 
@@ -65,27 +63,26 @@ define([
                 var newPassword = $("#newPassword");
                 var message = $("#confirmMessage");
 
-                if ((newPassword.value.length < 4) || (newPassword.value.length > 15)) {
+                if ((newPassword.val().length < 4) || (newPassword.val.length > 15)) {
                     error += "Şifreniz en az 4 en fazla 15 karakter uzunluğunda olmalı.<br/>";
                     message.innerHTML = error;
                     isValid = false;
                 }
                 // Accepts Only Alphanumeric Chars
-                if (!(newPassword.value.match(/^.*(?=.*[a-zA-Z])(?=.*\d).*$/i))) {
+                if (!(newPassword.val().match(/^.*(?=.*[a-zA-Z])(?=.*\d).*$/i))) {
                     error += "Şifrenizde en az bir adet rakam ve bir adet harf olmalıdır<br/>";
                     message.innerHTML = error;
 
                     isValid = false;
                 }
 
-                if (!(newPassword.value.match(/^\S*$/))) {
+                if (!(newPassword.val().match(/^\S*$/))) {
                     error += "Şifrenizde boşluk olamaz.<br/>";
                     message.innerHTML = error;
 
                     isValid = false;
                 }
-
-                $("#confirmMessage").val(error);
+                message.html(error);
                 return isValid;
             }
 
@@ -93,10 +90,11 @@ define([
                 var newPassword = $("#newPassword");
                 var reNewPassword = $("#reNewPassword");
                 var matchMessage = $("#matchMessage");
-                if (newPassword.value != reNewPassword.value) {
-                    matchMessage.innerHTML = "Şifreleriniz eşleşmiyor.";
+                if (newPassword.val() != reNewPassword.val()) {
+                    matchMessage.text("Şifreleriniz eşleşmiyor.");
                     return false;
                 }
+                matchMessage.text("");
                 return true;
             }
 
@@ -118,9 +116,8 @@ define([
                                 $("#newPassword").val("");
                                 $("#reNewPassword").val("");
 
-
-                                $("#newPassword").style.background = "White";
-                                $("#reNewPassword").style.background = "White";
+                                $("#newPassword").css("background-color", "white");
+                                $("#reNewPassword").css("background-color", "white");
                             },
                             error: function (e) {
                                 showToast("error", "Hata: Şifre Güncellenemedi !");
@@ -128,8 +125,8 @@ define([
                                 $("#newPassword").val("");
                                 $("#reNewPassword").val("");
 
-                                $("#newPassword").style.background = "White";
-                                $("#reNewPassword").style.background = "White";
+                                $("#newPassword").css("background-color", "white");
+                                $("#reNewPassword").css("background-color", "white");
                             }
                         });
                     } else {
