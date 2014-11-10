@@ -21,7 +21,7 @@ define([
         initialize: function() {
             var me = this;
 
-            $("#horizontalTabStrips").kendoSplitter({
+           /* $("#horizontalTabStrips").kendoSplitter({
                 panes: [{
                     collapsible: false,
                     size: "20%",
@@ -36,10 +36,11 @@ define([
                     scrollable: true
                 }]
             });
-
+*/
             $("#gridServices").kendoGrid({
                 dataSource: ServiceDataSource.get(),
-                width: 100,
+                width: 110,
+                selectable:false,
                 columns: [{
                     template: '<input type="checkbox" class="checkRow"/>',
                     headerTemplate: '<input type="checkbox" id="checkAll"/>',
@@ -53,10 +54,9 @@ define([
                 }, {
                     field: "path",
                     title: "Servis",
-                    width: 50
-                }, {
-                    headerTemplate: "<button class=\"pull-left\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>",
-                    width: 10
+                    width: 90,
+                    headerTemplate: "Servis<button class=\"pull-right\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>",
+
                 }]
             });
 
@@ -66,14 +66,14 @@ define([
                     for (var i = 0; i < $(".checkRow").length; i++) {
                         var row = $(".checkRow")[i];
                         row.setAttribute("checked", true);
-                        row.parentElement.parentElement.setAttribute("class", "k-state-selected");
+                        row.parentElement.parentElement.setAttribute("class", "r-state-selected");
                     }
                     checkAllFlag = false;
                 } else {
                     for (var i = 0; i < $(".checkRow").length; i++) {
                         var row = $(".checkRow")[i];
                         row.removeAttribute("checked");
-                        row.parentElement.parentElement.removeAttribute("class", "k-state-selected");
+                        row.parentElement.parentElement.removeAttribute("class", "r-state-selected");
                     }
                     checkAllFlag = true;
                 }
@@ -229,13 +229,13 @@ define([
             function selectRow() {
                 var checked = this.checked,
                     row = $(this).closest("tr");
-                if (checked) {
+                /*if (checked) {
                     //-select the row
                     row.addClass("k-state-selected");
                 } else {
                     //-remove selection
                     row.removeClass("k-state-selected");
-                }
+                }*/
             };
 
             //on dataBound event restore previous selected rows:
@@ -247,10 +247,10 @@ define([
                     var row = gridTbody.find("tr[data-uid='" + view[i].uid + "']");
                     if (checkedServiceOids.indexOf(view[i].id) >= 0) {
                         row.find("input[type=checkbox]").prop("checked", true);
-                        row.addClass("k-state-selected");
+                        row.addClass("r-state-selected");
                     } else {
                         row.find("input[type=checkbox]").prop("checked", false);
-                        row.removeClass("k-state-selected");
+                        row.removeClass("r-state-selected");
                     }
                 }
             };
@@ -262,7 +262,7 @@ define([
                 var checkedServiceOids = [];
                 for (var i = 0; i < view.length; i++) {
                     var className = gridTbody.find("tr[data-uid='" + view[i].uid + "']").attr("class");
-                    if (className != null && className.indexOf("k-state-selected") >= 0) {
+                    if (className != null && className.indexOf("r-state-selected") >= 0) {
                         checkedServiceOids.push(view[i].get("oid"))
                     }
                 }
