@@ -21,25 +21,8 @@ define([
         initialize: function() {
             var me = this;
 
-           /* $("#horizontalTabStrips").kendoSplitter({
-                panes: [{
-                    collapsible: false,
-                    size: "20%",
-                    resizable: false
-                }, {
-                    collapsible: false,
-                    size: "20%",
-                    resizable: false
-                }, {
-                    collapsible: false,
-                    size: "60%",
-                    scrollable: true
-                }]
-            });
-*/
             $("#gridServices").kendoGrid({
                 dataSource: ServiceDataSource.get(),
-                width: 110,
                 selectable:false,
                 columns: [{
                     template: '<input type="checkbox" class="checkRow"/>',
@@ -55,9 +38,7 @@ define([
                     field: "path",
                     title: "Servis",
                     width: 90,
-                    headerTemplate: "Servis<button class=\"pull-right\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>",
-                    groupable: true
-
+                    headerTemplate: "Servis<button class=\"pull-right\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>"
                 }]
             });
 
