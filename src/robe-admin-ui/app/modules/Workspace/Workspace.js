@@ -8,7 +8,7 @@ define([
     'kendo/kendo.panelbar.min',
     'robe/view/RobeView'
 ], function (view, LoginView) {
-    
+
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
 
     WorkspaceView.render = function () {
@@ -88,21 +88,21 @@ define([
             minWidth: 300
         });
 
-         $("#btnContainerHelp").kendoButton({
-                click: onShowHelp
-            });
+        $("#btnContainerHelp").kendoButton({
+            click: onShowHelp
+        });
 
-          function onShowHelp() {
-                var wnd = $("#containerHelpWindow").kendoWindow({
-                    title: "Yardım",
-                    modal: true,
-                    visible: false,
-                    resizable: false,
-                    width: 500
-                }).data("kendoWindow");
+        function onShowHelp() {
+            var wnd = $("#containerHelpWindow").kendoWindow({
+                title: "Yardım",
+                modal: true,
+                visible: false,
+                resizable: false,
+                width: 500
+            }).data("kendoWindow");
 
-                wnd.center().open();
-            };
+            wnd.center().open();
+        };
 
         $(document).ajaxStart(function () {
             showIndicator(true);
@@ -135,7 +135,7 @@ define([
             if (title == null)
                 title = "";
             $('#dialog').data("kendoWindow").setOptions({
-                width:500
+                width: 500
             });
             $('#dialog').data("kendoWindow").title(title);
             $('#dialog').data("kendoWindow").open();
@@ -170,12 +170,16 @@ define([
                             var css = arr[i];
                             if (css.indexOf("command:") == 0) {
                                 selection = css.substring(8);
+                                var ul = $(e.item).children("ul");
+                                if (ul.children("li").length > 1) {
+                                    break;
+                                }
                                 $('#lblContainerTitle').text($(e.item).find("span").text());
-
+                                WorkspaceView.openMenuItem(selection);
                                 break;
                             }
                         }
-                        WorkspaceView.openMenuItem(selection);
+
                     }
                 });
                 $('#menu').find("span").find("span").remove();
