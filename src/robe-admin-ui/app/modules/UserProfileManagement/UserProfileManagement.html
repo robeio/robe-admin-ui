@@ -1,65 +1,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<form id="userProfileManagementForm" data-role="validator" novalidate="novalidate">
-    <table cellspacing="5">
+<div class="k-block k-inset" style="width: 400px">
+    <div id="panelHeader" class="hidden" style="height: auto;text-align: center">
+        <div id="panelError" class="hidden"></div>
+    </div>
+    <form id="userProfileManagementForm" data-role="validator" novalidate="novalidate">
 
-        <tr>
-            <td>İsim ve Soy İsim:</td>
-            <td>
-                <span class="k-textbox">
-                    <input type="text" class="k-textbox" id="firstAndLastName" disabled/>
-                </span>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>E-Posta Adresi:</td>
-            <td>
-                <span class="k-textbox">
+        <ul>
+            <li>
+                <label for="firstAndLastName" class="required">Ad-Soyad:</label>
+                <input type="text" class="k-textbox" id="firstAndLastName" disabled/>
+            </li>
+            <li>
+                <label for="emailAddress" class="required">E-Posta Adresi:</label>
                 <input type="text" class="k-textbox" id="emailAddress" disabled/>
-                    </span>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>Eski Şifre:</td>
-            <td>
-                <span class="k-textbox">
+            </li>
+            <li>
+                <label for="emailAddress" class="required">Eski Şifre:</label>
                 <input type="password" class="k-textbox" id="oldPassword" required="required"/>
-            </span>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>Yeni Şifre:</td>
-            <td>
-                <span class="k-textbox">
+            </li>
+            <li>
+                <label for="newPassword" class="required">Yeni Şifre:</label>
                 <input type="password" class="k-textbox" id="newPassword" required="required"/>
-            </span>
-            </td>
-            <td><span id="confirmMessage" class="confirmMessage"></span>
-        </tr>
-
-
-        <tr>
-            <td>Yeni Şifre Tekrarı:</td>
-            <td>
-                <span class="k-textbox">
+            </li>
+            <li>
+                <label for="reNewPassword" class="required">Şifre Tekrarı:</label>
                 <input type="password" class="k-textbox" id="reNewPassword" required="required"/>
-                    </span>
-            </td>
-            <td><span id="matchMessage" class="confirmMessage"></span></td>
-        </tr>
+            </li>
+            <li>
+                <div align="right">
+                    <h3></h3>
+                    <button type="button" id="savePassword" style="margin-right: 20px;margin-top: 5px" data-role="button" data-sprite-css-class="k-icon k-i-tick" data-click='save'>Kaydet</button>
+                </div>
 
+            </li>
+        </ul>
+    </form>
+</div>
+<!-- HELP WINDOW START-->
+<div id="containerHelpWindow" hidden="true">
+    <p>Şifre değiştirme işleminiz için eski şifrenizle beraber yeni şifrenizi girip "Kaydet" butonuna tıklayınız</p>
 
-        <tr>
-            <td>
-                <button type="button" id="savePassword" data-role="button" data-sprite-css-class="k-icon k-i-tick" data-click='save'>Save</button>
-            </td>
-        </tr>
-
-    </table>
-</form>
+</div>
+<!-- HELP WINDOW END-->
