@@ -1,6 +1,16 @@
 .hiddenDiv {
     visibility: hidden;
 }
+
+.scrollDiv {
+    overflow-y: scroll !important;
+    overflow-x: visible !important;
+    width: 500px !important;
+    height: 450px !important;
+    min-height: 200px !important;
+    max-height: 500px !important;
+}
+
 #userProfileManagementForm h3 {
     font-weight: normal;
     font-size: 1.4em;
@@ -53,7 +63,6 @@
     float: left;
 }
 
-
 #container {
     max-height: 80%;
     overflow: auto !important;
@@ -65,7 +74,7 @@ body {
     background: url("../body_bg.jpg");
     margin: 0px;
     width: 100% !important;
-    overflow: hidden;
+    overflow-y: scroll;
     height: 100% !important;
 }
 
@@ -168,10 +177,6 @@ tr[role="row"]:hover {
 #horizontalTabStrips {
     background-color: rgb(245, 245, 245);
     margin: 10px 10px 10px 10px;
-}
-
-#gridServices {
-    width: 400px;
 }
 
 #liveFeedPanel {
