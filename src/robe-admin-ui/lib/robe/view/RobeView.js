@@ -19,11 +19,12 @@ define(['robe/core/Class'], function(Class) {
         },
 
         render: function(containerId) {
+
             if ((containerId !== undefined) && (containerId !== null)) {
-                $('#' + containerId).append(html);
+                $('#' + containerId).html(html);
                 this.initialize();
             } else if ((this.containerId !== undefined) && (this.containerId !== null)) {
-                $('#' + this.containerId).append(this.html);
+                $('#' + this.containerId).html(this.html);
                 this.initialize();
             }
         },
