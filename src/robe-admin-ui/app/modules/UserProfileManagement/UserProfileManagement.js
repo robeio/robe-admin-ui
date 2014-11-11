@@ -19,6 +19,9 @@ define([
         initialize: function () {
 
             var me = this;
+
+            var panelError = $("#panelError");
+            var panelHeader=$("#panelHeader");
             $.ajax({
                 type: "GET",
                 url: AdminApp.getBackendURL() + "user/profile",
@@ -72,7 +75,6 @@ define([
                 if (!(newPassword.val().match(/^.*(?=.*[a-zA-Z])(?=.*\d).*$/i))) {
                     error += "Şifrenizde en az bir adet rakam ve bir adet harf olmalıdır<br/>";
                     message.innerHTML = error;
-
                     isValid = false;
                 }
 
@@ -82,7 +84,9 @@ define([
 
                     isValid = false;
                 }
-                message.html(error);
+                panelHeader.attr("class", "k-header");
+                panelError.attr("class", "k-block k-error-colored");
+                panelError.html(error);
                 return isValid;
             }
 
@@ -91,9 +95,13 @@ define([
                 var reNewPassword = $("#reNewPassword");
                 var matchMessage = $("#matchMessage");
                 if (newPassword.val() != reNewPassword.val()) {
-                    matchMessage.text("Şifreleriniz eşleşmiyor.");
+                    panelError.text("Şifreleriniz eşleşmiyor.");
+                    panelError.attr("class", "k-block k-error-colored");
+                    panelHeader.attr("class", "k-header");
                     return false;
                 }
+                panelError.attr("class", "hiddenDiv");
+                panelHeader.attr("class", "hiddenDiv");
                 matchMessage.text("");
                 return true;
             }
