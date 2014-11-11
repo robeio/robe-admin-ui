@@ -133,6 +133,10 @@ define([
                 checkboxes: {
                     checkChildren: true
                 },
+                select: function(e){
+                    e.preventDefault();
+                    $(e.node).find(':checkbox').click();
+                },
                 dataTextField: "name"
             });
 
@@ -185,7 +189,7 @@ define([
             // function that gathers IDs of checked nodes
             function checkedNodeIds(me, nodes, checkedNodes) {
                 for (var i = 0; i < nodes.length; i++) {
-                    if (noledes[i].checked) {
+                    if (nodes[i].checked) {
                         checkedNodes.push(nodes[i].id);
                     }
 
