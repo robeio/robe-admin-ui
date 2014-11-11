@@ -170,10 +170,11 @@ define([
                             var css = arr[i];
                             if (css.indexOf("command:") == 0) {
                                 selection = css.substring(8);
+                                $('#lblContainerTitle').text($(e.item).find("span").text());
+
                                 break;
                             }
                         }
-                        $('#lblContainerTitle').text($(e.item).find("span").text());
                         WorkspaceView.openMenuItem(selection);
                     }
                 });
