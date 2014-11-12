@@ -1,4 +1,4 @@
-GroupedRoleDataSource, UnGroupedRoleDataSource, MenuDataSource, ServiceDataSource, MailManagementDataSource, SystemLanguageDatasource, QuartzJobDataSource, TriggerDataSource;
+var MailManagementDataSource, SystemLanguageDatasource;
 define([
     'js/data/SingletonDataSource', 'js/Models'], function (S, HDS) {
 
@@ -53,39 +53,6 @@ define([
         batch: false,
         schema: {
             model: SystemLanguageModel
-        }
-    });
-
-    QuartzJobDataSource = new SingletonDataSource("QuartzJobDataSource", {
-        transport: {
-            read: {
-                type: "GET",
-                url: AdminApp.getBackendURL() + "quartzJob",
-                dataType: "json",
-                contentType: "application/json"
-            },
-            update: {
-                type: "POST",
-                url: AdminApp.getBackendURL() + "quartzJob/update",
-                dataType: "json",
-                contentType: "application/json"
-            },
-            create: {
-                type: "POST",
-                url: AdminApp.getBackendURL() + "quartzJob/fire",
-                dataType: "json",
-                contentType: "application/json"
-            },
-            parameterMap: function (options, operation) {
-                if (operation !== "read") {
-                    return kendo.stringify(options);
-                }
-            }
-        },
-        batch: false,
-        pageSize: 20,
-        schema: {
-            model: QuartzJobModel
         }
     });
 });

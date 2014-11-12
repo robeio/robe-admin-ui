@@ -135,7 +135,7 @@ define([
             if (title == null)
                 title = "";
             $('#dialog').data("kendoWindow").setOptions({
-                width: 500
+                width: 420
             });
             $('#dialog').data("kendoWindow").title(title);
             $('#dialog').data("kendoWindow").open();

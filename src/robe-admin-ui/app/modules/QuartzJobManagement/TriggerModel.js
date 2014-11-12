@@ -1,6 +1,6 @@
 define([
     'kendo/kendo.data.min', 'robe/Validations'
-], function() {
+], function () {
 
     var TriggerModel = kendo.data.Model.define({
         id: "oid",

@@ -3,10 +3,11 @@ var QuartzJobManagement;
 define([
     'text!./QuartzJobManagement.html',
     './QuartzJobDataSource',
+    './TriggerModel',
     'kendo/kendo.grid.min',
     'robe/view/RobeView',
     'kendo/kendo.multiselect.min'
-], function(view,QuartzJobDataSource) {
+], function(view,QuartzJobDataSource,TriggerModel) {
 
     var QuartzJobManagement = require('robe/view/RobeView').define({
         name: "QuartzJobManagement",
@@ -143,8 +144,7 @@ define([
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
                     success: function(response) {
-                        $('#gridJobs').data('kendoGrid').dataSource.read();
-                        $('#gridJobs').data('kendoGrid').refresh();
+                        QuartzJobDataSource.read();
                     }
                 });
             }
@@ -158,8 +158,7 @@ define([
                     contentType: "application/json; charset=utf-8",
                     success: function(response) {
                         console.log(response);
-                        $('#gridJobs').data('kendoGrid').dataSource.read();
-                        $('#gridJobs').data('kendoGrid').refresh();
+                        QuartzJobDataSource.read();
                     }
                 });
             }
@@ -173,8 +172,7 @@ define([
                     contentType: "application/json; charset=utf-8",
                     success: function(response) {
                         console.log(response);
-                        $('#gridJobs').data('kendoGrid').dataSource.read();
-                        $('#gridJobs').data('kendoGrid').refresh();
+                        QuartzJobDataSource.read();
                     }
                 });
             }
