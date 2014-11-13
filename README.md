@@ -25,3 +25,5 @@ Robe Admin-ui have:
 
 To be continued...
 -------------------------------
+
+Robe, supported by Atlassian, IntelliJ and BrowserStack.
