@@ -12,7 +12,11 @@ define([], function() {
 			}
 			var header = "<div class='panel panel-default'><div class='panel-heading'><div class='panel-title'>" + title + "</div>" + max.toFixed(0) + " total </div><table class='panel-body' style='border-collapse:separate;'>";
 			for (var i = 0; i < model.length; i++) {
-				header += this.createMeterRow(max.toFixed(0), ((model[i + 1][valueKey]) / multiplier).toFixed(0), model[i++]);
+                try {
+                    header += this.createMeterRow(max.toFixed(0), ((model[i + 1][valueKey]) / multiplier).toFixed(0), model[i++]);
+                }catch (e){
+                    header += this.createMeterRow(max.toFixed(0), 0, model[i++]);
+                }
 			};
 
 			header += "</table></div>";
