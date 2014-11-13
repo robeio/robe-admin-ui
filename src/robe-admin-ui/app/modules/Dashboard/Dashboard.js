@@ -90,6 +90,9 @@ define([
             ];
             ProgressBarGroup.define().render('heapMem', 'Heap (MB)', heapData,'value',1024*1024);
 
+            if(gauges["jvm.memory.non-heap.max"]['value']<0){
+                gauges["jvm.memory.non-heap.max"]['value'] = gauges["jvm.memory.non-heap.used"]['value'];
+            }
             var unusednonHeap = gauges["jvm.memory.non-heap.max"]['value'] - gauges["jvm.memory.non-heap.used"]['value'];
             var nonheapData = [
                 "Used",gauges["jvm.memory.non-heap.used"],
