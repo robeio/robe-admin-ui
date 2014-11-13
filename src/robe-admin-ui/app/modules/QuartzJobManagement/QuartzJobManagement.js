@@ -1,5 +1,3 @@
-var QuartzJobManagement;
-
 define([
     'text!./QuartzJobManagement.html',
     './QuartzJobDataSource',
@@ -7,14 +5,14 @@ define([
     'kendo/kendo.grid.min',
     'robe/view/RobeView',
     'kendo/kendo.multiselect.min'
-], function(view,QuartzJobDataSource,TriggerModel) {
+], function (view, QuartzJobDataSource, TriggerModel) {
 
     var QuartzJobManagement = require('robe/view/RobeView').define({
         name: "QuartzJobManagement",
         html: view,
         containerId: "container",
 
-        initialize: function() {
+        initialize: function () {
             $("#gridJobs").kendoGrid({
                 dataSource: QuartzJobDataSource.get(),
                 sortable: true,
@@ -23,34 +21,42 @@ define([
                 },
                 autoBind: false,
                 detailInit: detailInit,
-                dataBound: function() {
+                dataBound: function () {
                     this.expandRow(this.tbody.find("tr.k-master-row").first());
                 },
                 type: "odata",
-                columns: [{
-                    field: "oid",
-                    title: "OID",
-                    hidden: true
-                }, {
-                    field: "schedulerName",
-                    title: "Scheduler Name"
-                }, {
-                    field: "jobClassName",
-                    title: "Job Name"
-                }, {
-                    field: "description",
-                    title: "Description",
-                    editor: cronExpressionEditor
-                }, {
-                    command: [{
-                        name: "add",
-                        text: "",
-                        className: "grid-command-iconfix",
-                        imageClass: "k-icon k-si-plus",
-                        click: addTrigger
-                    }],
-                    width: "90px"
-                }]
+                columns: [
+                    {
+                        field: "oid",
+                        title: "OID",
+                        hidden: true
+                    },
+                    {
+                        field: "schedulerName",
+                        title: "Scheduler Name"
+                    },
+                    {
+                        field: "jobClassName",
+                        title: "Job Name"
+                    },
+                    {
+                        field: "description",
+                        title: "Description",
+                        editor: cronExpressionEditor
+                    },
+                    {
+                        command: [
+                            {
+                                name: "add",
+                                text: "",
+                                className: "grid-command-iconfix",
+                                imageClass: "k-icon k-si-plus",
+                                click: addTrigger
+                            }
+                        ],
+                        width: "90px"
+                    }
+                ]
             });
 
             function detailInit(e) {
@@ -76,7 +82,7 @@ define([
                                 dataType: "json",
                                 contentType: "application/json"
                             },
-                            parameterMap: function(options, operation) {
+                            parameterMap: function (options, operation) {
                                 if (operation !== "read") {
                                     return kendo.stringify(options);
                                 }
@@ -95,44 +101,54 @@ define([
                     scrollable: false,
                     sortable: true,
                     pageable: false,
-                    columns: [{
-                        command: [{
-                            name: "destroy",
-                            text: "",
-                            className: "grid-command-iconfix"
-                        }, {
-                            name: "edit",
-                            text: {
-                                edit: ""
-                            },
-                            className: "grid-command-iconfix"
-                        }, {
-                            name: "run",
-                            text: "",
-                            imageClass: "k-icon k-i-arrow-e",
-                            className: "k-link k-pager-nav",
-                            click: fire
-                        }, {
-                            name: "stop",
-                            text: "",
-                            className: "grid-command-iconfix",
-                            imageClass: "k-icon k-i-seek-e",
-                            click: stop
-                        }],
-                        title: "&nbsp;",
-                        width: "90px"
-                    }, {
-                        field: "cronExpression",
-                        title: "Cron Expression",
-                        editor: cronExpressionEditor
-                    }, {
-                        field: "fireTime",
-                        title: "Fire Time",
-                        template: "#=(data.fireTime==-1)?'Start Immediately': fireTime #"
-                    }, {
-                        field: "active",
-                        title: "Is Active"
-                    }]
+                    columns: [
+                        {
+                            command: [
+                                {
+                                    name: "destroy",
+                                    text: "",
+                                    className: "grid-command-iconfix"
+                                },
+                                {
+                                    name: "edit",
+                                    text: {
+                                        edit: ""
+                                    },
+                                    className: "grid-command-iconfix"
+                                },
+                                {
+                                    name: "run",
+                                    text: "",
+                                    imageClass: "k-icon k-i-arrow-e",
+                                    className: "k-link k-pager-nav",
+                                    click: fire
+                                },
+                                {
+                                    name: "stop",
+                                    text: "",
+                                    className: "grid-command-iconfix",
+                                    imageClass: "k-icon k-i-seek-e",
+                                    click: stop
+                                }
+                            ],
+                            title: "&nbsp;",
+                            width: "90px"
+                        },
+                        {
+                            field: "cronExpression",
+                            title: "Cron Expression",
+                            editor: cronExpressionEditor
+                        },
+                        {
+                            field: "fireTime",
+                            title: "Fire Time",
+                            template: "#=(data.fireTime==-1)?'Start Immediately': fireTime #"
+                        },
+                        {
+                            field: "active",
+                            title: "Is Active"
+                        }
+                    ]
                 });
             }
 
@@ -143,7 +159,7 @@ define([
                     dataType: "json",
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
-                    success: function(response) {
+                    success: function (response) {
                         QuartzJobDataSource.read();
                     }
                 });
@@ -156,7 +172,7 @@ define([
                     dataType: "json",
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
-                    success: function(response) {
+                    success: function (response) {
                         console.log(response);
                         QuartzJobDataSource.read();
                     }
@@ -170,7 +186,7 @@ define([
                     dataType: "json",
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
-                    success: function(response) {
+                    success: function (response) {
                         console.log(response);
                         QuartzJobDataSource.read();
                     }
@@ -335,31 +351,40 @@ define([
                 var hours = ["Every Hour"];
                 var days = ["Every Day", "?", "Last Day of Month"];
                 var months = ["Every Month"];
-                var daysOfWeek = [{
-                    name: " ? ",
-                    value: "?"
-                }, {
-                    name: "Monday",
-                    value: "2"
-                }, {
-                    name: "Tuesday",
-                    value: "3"
-                }, {
-                    name: "Wednesday",
-                    value: "4"
-                }, {
-                    name: "Thursday",
-                    value: "5"
-                }, {
-                    name: "Friday",
-                    value: "6"
-                }, {
-                    name: "Saturday",
-                    value: "7"
-                }, {
-                    name: "Sunday",
-                    value: "1"
-                }];
+                var daysOfWeek = [
+                    {
+                        name: " ? ",
+                        value: "?"
+                    },
+                    {
+                        name: "Monday",
+                        value: "2"
+                    },
+                    {
+                        name: "Tuesday",
+                        value: "3"
+                    },
+                    {
+                        name: "Wednesday",
+                        value: "4"
+                    },
+                    {
+                        name: "Thursday",
+                        value: "5"
+                    },
+                    {
+                        name: "Friday",
+                        value: "6"
+                    },
+                    {
+                        name: "Saturday",
+                        value: "7"
+                    },
+                    {
+                        name: "Sunday",
+                        value: "1"
+                    }
+                ];
 
                 // Paramters for cron builder (Days of week,Months, Days, Hours, Minutes, Seconds)
 
