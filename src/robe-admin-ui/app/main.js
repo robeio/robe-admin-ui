@@ -24,19 +24,6 @@ require.config({
         'lib/cryptojs/sha256': {
             deps: ['lib/cryptojs/enc-base64-min']
         },
-        'lib/robe/Charts': {
-            deps: ['lib/highcharts/highcharts']
-        },
-        'lib/highcharts/highcharts': {
-            deps: ["lib/jquery/jquery.min"],
-            exports: 'Highcharts'
-        },
-        'lib/highcharts/highcharts-more': {
-            deps: ['lib/highcharts/highcharts']
-        },
-        'lib/highcharts/exports': {
-            deps: ['lib/highcharts/highcharts']
-        },
         'router': {
             deps: ['lib/jquery/jquery.min']
         },
@@ -60,7 +47,6 @@ define([
     'lib/zebra_cookie',
     'robe/AlertDialog',
     'lib/underscore/underscore',
-    'lib/highcharts/highcharts',
     'lib/support/console.min',
     'lib/kendoui/js/cultures/kendo.culture.tr-TR.min'
 ], function(App) {
