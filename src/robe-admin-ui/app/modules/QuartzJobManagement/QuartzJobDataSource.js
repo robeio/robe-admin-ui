@@ -1,5 +1,5 @@
 define([
-    'common/SingletonDataSource', './QuartzJobModel','./TriggerModel'
+    'common/SingletonDataSource', './QuartzJobModel'
 ], function (SingletonDataSource, QuartzJobModel) {
     var QuartzJobDataSource = SingletonDataSource.define({
         name: "QuartzJobDataSource",

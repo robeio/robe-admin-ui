@@ -33,7 +33,8 @@ define([
                     },
                     {
                         field: "schedulerName",
-                        title: "Scheduler Name"
+                        title: "Scheduler Name",
+                        width: 150
                     },
                     {
                         field: "jobClassName",
@@ -54,7 +55,7 @@ define([
                                 click: addTrigger
                             }
                         ],
-                        width: "90px"
+                        width: "50px"
                     }
                 ]
             });
@@ -91,7 +92,6 @@ define([
                         schema: {
                             model: TriggerModel
                         },
-                        pageSize: 5,
                         filter: {
                             field: "jobId",
                             operator: "eq",
@@ -102,38 +102,6 @@ define([
                     sortable: true,
                     pageable: false,
                     columns: [
-                        {
-                            command: [
-                                {
-                                    name: "destroy",
-                                    text: "",
-                                    className: "grid-command-iconfix"
-                                },
-                                {
-                                    name: "edit",
-                                    text: {
-                                        edit: ""
-                                    },
-                                    className: "grid-command-iconfix"
-                                },
-                                {
-                                    name: "run",
-                                    text: "",
-                                    imageClass: "k-icon k-i-arrow-e",
-                                    className: "k-link k-pager-nav",
-                                    click: fire
-                                },
-                                {
-                                    name: "stop",
-                                    text: "",
-                                    className: "grid-command-iconfix",
-                                    imageClass: "k-icon k-i-seek-e",
-                                    click: stop
-                                }
-                            ],
-                            title: "&nbsp;",
-                            width: "90px"
-                        },
                         {
                             field: "cronExpression",
                             title: "Cron Expression",
@@ -146,7 +114,41 @@ define([
                         },
                         {
                             field: "active",
-                            title: "Is Active"
+                            title: "Is Active",
+                            template: "<span class='"+"#=(data.active)?'k-icon k-i-tick':'k-icon k-i-cancel'#'/>",
+                            width: 80
+                        },
+                        {
+                            command: [
+                                {
+                                    name: "run",
+                                    text: "",
+                                    imageClass: "k-icon k-i-arrow-e",
+                                    className: "k-link k-pager-nav grid-command-iconfix",
+                                    click: fire
+                                },
+                                {
+                                    name: "stop",
+                                    text: "",
+                                    className: "grid-command-iconfix",
+                                    imageClass: "k-icon k-i-seek-e grid-command-iconfix",
+                                    click: stop
+                                },
+                                {
+                                    name: "edit",
+                                    text: {
+                                        edit: ""
+                                    },
+                                    className: "grid-command-iconfix"
+                                },
+                                {
+                                    name: "destroy",
+                                    text: "",
+                                    className: "grid-command-iconfix"
+                                }
+                            ],
+                            title: "&nbsp;",
+                            width: "140px"
                         }
                     ]
                 });
@@ -290,8 +292,6 @@ define([
                 var dayValues = allValues[3].split(",");
                 var monthValues = allValues[4].split(",");
                 var dayOfWeekValues = allValues[5].split(",");
-
-                console.log(secondValues + " - " + minuteValues + " -  " + hourValues + " -  " + dayValues + " -  " + monthValues + "values" + allValues)
 
                 if (secondValues.indexOf("*") != -1) {
                     $("#second").data("kendoMultiSelect").value("Every Second");

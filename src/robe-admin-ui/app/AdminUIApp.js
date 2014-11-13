@@ -16,7 +16,7 @@ define(['router'], function () {
             AdminApp.backendURL = response.backendURL;
         });
 
-    }
+    };
 
     return {
         initialize: initialize

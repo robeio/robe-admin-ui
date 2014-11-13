@@ -1,3 +1,27 @@
+.gridTriggers .k-grid-header .k-header {
+    /*padding: 0px 10px !important;*/
+    /*margin: 0px !important;*/
+    /*border: 0px!important;*/
+    background: white !important;
+}
+#gridJobs .k-grid-header .k-header .k-pager-wrap .k-grid-pager .k-widget {
+    /*padding: 0px 10px !important;*/
+    /*margin: 0px !important;*/
+    /*border: 0px!important;*/
+    background: white !important;
+}
+
+.k-grid tbody .k-button {
+    min-width: 16px !important;
+    width: 30px !important;
+    margin-top: -0.2em !important;
+    margin-bottom: -0.2em !important;
+}
+
+.gridTriggers {
+    /*background-color: #ff0000!important;*/
+}
+
 .hiddenDiv {
     visibility: hidden;
 }
@@ -18,6 +42,7 @@
     margin: 10px 0 0;
     padding: 0;
 }
+
 #userProfileManagementForm ul {
     list-style-type: none;
     margin: 0;
