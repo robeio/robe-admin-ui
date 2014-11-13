@@ -5,7 +5,7 @@ Motivation
 -------------------------------
 Robe is a perspective which eliminates the complications and problems occurred in a software development chain by following the approach of Dropwizard. Robe solves these complication by including various production ready libraries along with Dropwizard.
 
-robe-admin-ui have:
+Robe Admin-ui have:
 
 **UserProfileManagemen:** Profile management screen
 
