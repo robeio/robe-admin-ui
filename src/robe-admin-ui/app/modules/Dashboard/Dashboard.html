@@ -1,93 +1,72 @@
-<div class="row">
-    <div class="col-md-5 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Memory</div>
-            <div class="panel-body">
-                <div id="memory"></div>
+<div class="container-fluid">
+    <div class="row panel panel-default">
+        <div class="panel-heading"><span class="panel-title">HTTP Response Details</span></div>
+        <div class="panel-body">
+            <div class="row">
+                <div id="totalReq" class="column col-md-12"></div>
+            </div>
+            <div class="row">
+                <div id="2xxReq" class="column col-md-4"></div>
+                <div id="4xxReq" class="column col-md-4"></div>
+                <div id="5xxReq" class="column col-md-4"></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-5 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Threads</div>
-            <div class="panel-body">
-                <div id="threads"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-2 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">VM Info</div>
-            <div class="panel-body">
-                <b>Name</b>
 
-                <div id="vmName"></div>
-                <b>Version</b>
+        <div class="panel-heading"><span class="panel-title">VM Details</span></div>
+        <div class="panel-body">
+            <div class="row">
+                <div id="totalMem" class="column col-md-6"></div>
+                <div id="poolMem" class="column col-md-6"></div>
+            </div>
+            <div class="row">
+                <div id="heapMem" class="column col-md-6"></div>
+                <div id="nonheapMem" class="column col-md-6"></div>
+            </div>
+            <div class="row">
+                <div id="threads" class="column col-md-6"></div>
+                <div id="gc" class="column col-md-3">
+                    <div class='panel panel-default'>
+                        <div class='panel-heading'>
+                            <div class='panel-title'>
+                                COMING SOON
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            Beautiful Details about GC
+                        </div>
+                    </div>
+                </div>
+                <div id="something" class="column col-md-3">
+                    <div class='panel panel-default'>
+                        <div class='panel-heading'>
+                            <div class='panel-title'>
+                                COMING SOON
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            Beautiful Details about VM
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <div id="vmVersion"></div>
-            </div>
         </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading">Heap Usage</div>
-            <div class="panel-body">
-                <b>Heap Usage:</b>
+    </div>
 
-                <div id="heapUsage"></div>
-                <b>Non Heap Usage:</b>
-
-                <div id="nonHeapUsage"></div>
-                <input id="btnHeapDump" type="button" value="Dump"/>
+    <div class="row panel panel-default">
+            <div class="panel-heading"><span class="panel-title">Log Details</span></div>
+            <div class="panel-body">
+                <div id="logbackLogs" class="column col-md-12"></div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-5 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Logback</div>
-            <div class="panel-body">
-                <div id="allLogback"></div>
-            </div>
-        </div>
-    </div>
-    <div class=" col-md-5 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Heap Memory</div>
-            <div class="panel-body">
-                <div id="heapMemory"></div>
-            </div>
-        </div>
-    </div>
-    <div class=" col-md-2 column">
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-10 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Server Response Count</div>
-            <div class="panel-body">
-                <div id="responseCount"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Server Response Count</div>
-            <div class="panel-body">
-                <div id="robeAdminResourcesCount"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5 column">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Response Time</div>
-            <div class="panel-body">
-                <div id="robeAdminResourcesTime"></div>
-            </div>
+    <div class="row panel panel-default">
+        <div class="panel-heading"><span class="panel-title">Service Details</span></div>
+        <div class="panel-body">
+            <div id="service1" class="column col-md-6"></div>
+            <div id="service2" class="column col-md-6"></div>
         </div>
     </div>
 </div>
 <div id="containerHelpWindow" hidden="true">
     <p>Sisteminiz hakkındaki bilgilerinizi görebilirsiniz.</p>
-
 </div>
