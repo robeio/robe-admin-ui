@@ -1,9 +1,18 @@
+.k-grid-email-request {
+    float: right !important;
+}
+
+span.k-tooltip {
+    margin-left: 6px;
+}
+
 .gridTriggers .k-grid-header .k-header {
     /*padding: 0px 10px !important;*/
     /*margin: 0px !important;*/
     /*border: 0px!important;*/
     background: white !important;
 }
+
 #gridJobs .k-grid-header .k-header .k-pager-wrap .k-grid-pager .k-widget {
     /*padding: 0px 10px !important;*/
     /*margin: 0px !important;*/
