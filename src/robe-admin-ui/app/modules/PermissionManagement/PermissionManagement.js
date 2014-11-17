@@ -11,19 +11,19 @@ define([
     'kendo/kendo.dropdownlist.min',
     'kendo/kendo.treeview.min',
     'robe/view/RobeView'
-], function(view, ServiceDataSource,RoleDataSource,MenuTreeModel) {
+], function (view, ServiceDataSource, RoleDataSource, MenuTreeModel) {
 
     var PermissionManagement = require('robe/view/RobeView').define({
         name: "PermissionManagement",
         html: view,
         containerId: "container",
 
-        initialize: function() {
+        initialize: function () {
             var me = this;
 
             $("#gridServices").kendoGrid({
                 dataSource: ServiceDataSource.get(),
-                selectable:false,
+                selectable: false,
                 columns: [{
                     template: '<input type="checkbox" class="checkRow"/>',
                     headerTemplate: '<input type="checkbox" id="checkAll"/>',
@@ -43,7 +43,7 @@ define([
             });
 
 
-            $("#checkAll").click(function() {
+            $("#checkAll").click(function () {
                 if (checkAllFlag) {
                     for (var i = 0; i < $(".checkRow").length; i++) {
                         var row = $(".checkRow")[i];
@@ -61,21 +61,18 @@ define([
                 }
             });
 
-            $("#gridServices").data("kendoGrid").table.on("click", "input[type=checkbox]", selectRow);
-
-
             $("#cmbRoles").kendoDropDownList({
                 dataTextField: "name",
                 dataValueField: "oid",
                 dataSource: RoleDataSource.get(),
-                change: function() {
+                change: function () {
                     var roleOid = $("#cmbRoles").val();
                     $.ajax({
                         type: "GET",
                         url: AdminApp.getBackendURL() + "permission/" + roleOid + "/menu",
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
-                        success: function(response) {
+                        success: function (response) {
                             var tree = $("#treeMenus").data("kendoTreeView");
                             tree.expand(".k-item");
                             checkByNodeIds(tree.dataSource.data(), response);
@@ -86,7 +83,7 @@ define([
                         url: AdminApp.getBackendURL() + "permission/" + roleOid + "/service",
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
-                        success: function(response) {
+                        success: function (response) {
                             checkRows(response);
                         }
                     });
@@ -101,7 +98,7 @@ define([
                 url: AdminApp.getBackendURL() + "menu/roots",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                success: function(response) {
+                success: function (response) {
                     var dataSource = new kendo.data.HierarchicalDataSource({
                         data: response,
                         schema: MenuTreeModel
@@ -114,7 +111,7 @@ define([
                 checkboxes: {
                     checkChildren: true
                 },
-                select: function(e){
+                select: function (e) {
                     e.preventDefault();
                     $(e.node).find(':checkbox').click();
                 },
@@ -122,13 +119,13 @@ define([
             });
 
             $("#btnRefreshServices").kendoButton({
-                click: function() {
+                click: function () {
                     $.ajax({
                         type: "GET",
                         url: AdminApp.getBackendURL() + "service/refresh",
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
-                        success: function(response) {
+                        success: function (response) {
                             showToast("success", "Başarılı. Bulunan Yeni Servis Sayısı :" + response);
                             ServiceDataSource.read();
                         }
@@ -137,7 +134,7 @@ define([
             });
 
             $("#btnSavePermission").kendoButton({
-                click: function() {
+                click: function () {
                     var roleOid = $("#cmbRoles").val();
                     var checkedNodes = [];
                     var treeMenus = $("#treeMenus").data("kendoTreeView");
@@ -149,7 +146,7 @@ define([
                         dataType: "json",
                         data: kendo.stringify(checkedNodes),
                         contentType: "application/json; charset=utf-8",
-                        success: function() {
+                        success: function () {
                             showToast("success", "Başarılı")
                         }
                     });
@@ -161,12 +158,13 @@ define([
                         dataType: "json",
                         data: kendo.stringify(getCheckedRows()),
                         contentType: "application/json; charset=utf-8",
-                        success: function(result) {}
+                        success: function (result) {
+                        }
                     });
                 }
             });
 
-        
+
             // function that gathers IDs of checked nodes
             function checkedNodeIds(me, nodes, checkedNodes) {
                 for (var i = 0; i < nodes.length; i++) {
@@ -198,19 +196,6 @@ define([
             };
 
 
-            //on click of the checkbox:
-            function selectRow() {
-                var checked = this.checked,
-                    row = $(this).closest("tr");
-                /*if (checked) {
-                    //-select the row
-                    row.addClass("k-state-selected");
-                } else {
-                    //-remove selection
-                    row.removeClass("k-state-selected");
-                }*/
-            };
-
             //on dataBound event restore previous selected rows:
             function checkRows(checkedServiceOids) {
                 var grid = $("#gridServices").data("kendoGrid");
@@ -230,16 +215,14 @@ define([
 
             function getCheckedRows() {
                 var grid = $("#gridServices").data("kendoGrid");
-                var gridTbody = grid.tbody;
-                var view = grid.dataSource.view();
-                var checkedServiceOids = [];
-                for (var i = 0; i < view.length; i++) {
-                    var className = gridTbody.find("tr[data-uid='" + view[i].uid + "']").attr("class");
-                    if (className != null && className.indexOf("r-state-selected") >= 0) {
-                        checkedServiceOids.push(view[i].get("oid"))
-                    }
-                }
-                return checkedServiceOids;
+                var sel = $("input:checked", grid.tbody).closest("tr");
+                var items = [];
+                $.each(sel, function (idx, row) {
+                    var item = grid.dataItem(row);
+                    items.push(item.get("oid"));
+
+                });
+                return items;
             }
 
         }
