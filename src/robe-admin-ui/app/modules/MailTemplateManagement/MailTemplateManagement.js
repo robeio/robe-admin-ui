@@ -1,14 +1,14 @@
 define([
     'text!./MailTemplateManagement.html',
     './MailTemplateDataSource',
-    './SystemLanguageDatasource',
+    './SystemLanguageDataSource',
     'kendo/kendo.button.min',
     'kendo/kendo.grid.min',
     'kendo/kendo.editor.min',
     'kendo/kendo.dropdownlist.min',
     'robe/AlertDialog',
     'robe/view/RobeView'
-], function(view, MailTemplateDataSource,SystemLanguageDatasource) {
+], function(view, MailTemplateDataSource,SystemLanguageDataSource) {
 
     var MailTemplateManagement = require('robe/view/RobeView').define({
         name: "MailTemplateManagement",
@@ -137,7 +137,7 @@ define([
                         optionLabel: "Dil seçiniz...",
                         dataTextField: "name",
                         dataValueField: "code",
-                        dataSource: SystemLanguageDatasource.get(),
+                        dataSource: SystemLanguageDataSource.get(),
                         index: 0
                     });
             };

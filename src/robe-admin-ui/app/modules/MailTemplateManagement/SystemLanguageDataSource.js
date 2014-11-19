@@ -1,8 +1,8 @@
 define(['common/SingletonDataSource',
     './SystemLanguageModel'
 ], function(SingletonDataSource, SystemLanguageModel) {
-    var SystemLanguageDatasource = SingletonDataSource.define({
-        name: "SystemLanguageDatasource",
+    var SystemLanguageDataSource = SingletonDataSource.define({
+        name: "SystemLanguageDataSource",
         parameters: {
             transport: {
                 read: {
@@ -18,5 +18,5 @@ define(['common/SingletonDataSource',
             }
         }
     });
-    return SystemLanguageDatasource;
+    return SystemLanguageDataSource;
 });
