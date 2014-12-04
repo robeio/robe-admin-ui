@@ -1,13 +1,14 @@
 define([
     'text!./Workspace.html',
     'modules/Login/Login',
+    'robe/widget/sidemenu/SideMenu',
     'kendo/kendo.fx.min',
     'kendo/kendo.progressbar.min',
     'kendo/kendo.button.min',
     'kendo/kendo.window.min',
     'kendo/kendo.panelbar.min',
     'robe/view/RobeView'
-], function (view, LoginView) {
+], function (view, LoginView,SideMenu) {
 
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
 
@@ -159,62 +160,16 @@ define([
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (response) {
-                WorkspaceView.addIcons(response[0]);
-                $('#menu').kendoPanelBar({
-                    dataSource: response[0].items,
-                    select: function (e) {
-                        var items = $(e.item).attr("class");
-                        var arr = items.split(' ');
-                        var selection = "k-";
-                        for (var i = 0; i < arr.length; i++) {
-                            var css = arr[i];
-                            if (css.indexOf("command:") == 0) {
-                                selection = css.substring(8);
-                                var ul = $(e.item).children("ul");
-                                if (ul.children("li").length > 1) {
-                                    break;
-                                }
-                                $('#lblContainerTitle').text($(e.item).find("span").text());
-                                WorkspaceView.openMenuItem(selection);
-                                break;
-                            }
-                        }
+                console.log(response);
+                //ignore root item
+                SideMenu.items = response[0].items;
+                console.log(response[0].items);
+                SideMenu.render();
 
-                    }
-                });
-                $('#menu').find("span").find("span").remove();
+                $('#lblContainerTitle').text("Hoş Geldiniz");
 
             }
         });
-    };
-
-    WorkspaceView.previousItem = "";
-
-    WorkspaceView.openMenuItem = function (menuitem) {
-
-        if (menuitem.indexOf("k-") == 0)
-            return;
-        if (WorkspaceView.previousItem == menuitem)
-            return;
-        else
-            WorkspaceView.previousItem = menuitem;
-        try {
-            kendo.destroy($('#container'));
-            $('#container').html('');
-            window.location.href = '#/' + menuitem;
-        } catch (e) {
-            console.error(menuitem + " JS: " + e);
-        }
-        kendo.fx($("#container")).fade("in").play();
-    };
-
-    WorkspaceView.addIcons = function (menu) {
-        if (menu.hasOwnProperty("items")) {
-            for (var i = 0; i < menu.items.length; i++) {
-                WorkspaceView.addIcons(menu.items[i]);
-            }
-        }
-        menu.imageUrl = "./icon/menu/" + menu.cssClass.substring(8) + ".png";
     };
 
 

@@ -295,3 +295,285 @@ li .a {
 
 }
 
+#main-menu-toggle {
+    background: #1c1e21;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    padding: 8px 13px;
+    font-size: 16px;
+    text-shadow: none;
+    text-decoration: none;
+    cursor: pointer
+}
+
+a#main-menu-toggle.close {
+    opacity: 1;
+    background: #282b2e !important;
+    padding: 10px 13px !important
+}
+
+a#main-menu-min {
+    display: block;
+    border-bottom: 1px solid #dbdee0;
+    width: 100%;
+    margin: 30px 0;
+    position: relative;
+    text-decoration: none
+}
+
+a#main-menu-min i {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
+    background: #dbdee0;
+    font-size: 14px;
+    padding: 3px 0;
+    color: #7c848d;
+    text-align: center
+}
+
+a#main-menu-min i:hover {
+    background: #ced1d4;
+    color: #6f7880
+}
+
+#sidebar-left {
+    padding: 10px !important;
+    z-index: 2
+}
+
+.sidebar-nav > ul {
+    margin: -9px -25px;
+    border: none;
+    padding-bottom: 1px;
+    font-size: 14px;
+    white-space: nowrap
+}
+
+.sidebar-nav > ul > li > ul, .sidebar-nav > ul > li > ul > li > ul, .sidebar-nav > ul > li > ul > li > ul > li > ul {
+    list-style: none;
+    display: none;
+    margin: 0;
+    padding: 0
+}
+
+.nav.main-menu > li {
+    margin-top: -1px
+}
+
+.nav.main-menu > li > a, .nav.main-menu > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > a, .nav.main-menu > li > ul > li > ul > li > ul > li > a {
+    margin: 0;
+    height: 40px;
+    padding: 1px 0 0;
+    color: #7c848d;
+    border: none;
+    border-bottom: 1px solid #dbdee0;
+    background: 0 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    text-decoration: none;
+    display: block;
+    position: relative
+}
+
+.nav.main-menu > li > a .chevron, .nav.main-menu > li > ul > li > a .chevron, .nav.main-menu > li > ul > li > ul > li > a .chevron, .nav.main-menu > li > ul > li > ul > li > ul > li > a .chevron {
+    font-family: FontAwesome;
+    position: absolute;
+    top: 2px;
+    right: -5px;
+    height: 40px;
+    width: 40px;
+    padding: 12px 0;
+    display: inline-block;
+    text-align: center;
+    font-size: 10px;
+    color: #b2b8bd !important
+}
+
+.nav.main-menu > li > a .chevron.opened:after, .nav.main-menu > li > ul > li > a .chevron.opened:after, .nav.main-menu > li > ul > li > ul > li > a .chevron.opened:after, .nav.main-menu > li > ul > li > ul > li > ul > li > a .chevron.opened:after {
+    height: 100%;
+    width: 100%;
+    content: "\f078";
+    text-shadow: none
+}
+
+.nav.main-menu > li > a .chevron.closed:after, .nav.main-menu > li > ul > li > a .chevron.closed:after, .nav.main-menu > li > ul > li > ul > li > a .chevron.closed:after, .nav.main-menu > li > ul > li > ul > li > ul > li > a .chevron.closed:after {
+    height: 100%;
+    width: 100%;
+    content: "\f053";
+    text-shadow: none;
+    color: #b2b8bd !important
+}
+
+.nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i {
+    margin-right: 10px;
+    height: 38px;
+    width: 40px;
+    padding: 13px 0;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #dbdee0
+}
+
+.nav.main-menu > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li > a > i {
+    margin-right: 10px;
+    height: 38px;
+    width: 40px;
+    padding: 13px 0;
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    border-right: 1px solid #dbdee0
+}
+
+.nav.main-menu > li > ul > li > a {
+    background: #e4e5e7
+}
+
+.nav.main-menu > li > ul > li > ul > li > a {
+    background: #e1e3e5
+}
+
+.nav.main-menu > li > ul > li > ul > li > ul > li > a {
+    background: #dee0e2
+}
+
+.nav.main-menu > li > a:hover, .nav.main-menu > li > ul > li > a:hover, .nav.main-menu > li > ul > li > ul > li > a:hover, .nav.main-menu > li > ul > li > ul > li > ul > li > a:hover {
+    background: #ced1d4;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0
+}
+
+.nav.main-menu > li > a:hover > i, .nav.main-menu > li > ul > li > a:hover > i, .nav.main-menu > li > ul > li > ul > li > a:hover > i, .nav.main-menu > li > ul > li > ul > li > ul > li > a:hover > i {
+    border-right: 1px solid #c8ccd0
+}
+
+.nav.main-menu > li > a:hover, .nav.main-menu > li > ul > li > a:hover {
+    background: #ced1d4;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0
+}
+
+.nav.main-menu > li.active > a, .nav.main-menu > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li.active > a, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a {
+    background: #ced1d4
+}
+
+.nav.main-menu > li.active > a > i, .nav.main-menu > li > ul > li.active > a > i, .nav.main-menu > li > ul > li > ul > li.active > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li.active > a > i {
+    border-right: 1px solid #c8ccd0
+}
+
+.nav.main-menu > li.active > a:hover, .nav.main-menu > li > ul > li.active > a:hover {
+    border: none;
+    color: #fff
+}
+
+.nav.main-menu > li.active > ul {
+    padding: 5px 0;
+    background: #dbdee0
+}
+
+.nav.main-menu > li:first-child > a {
+    margin: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0
+}
+
+.nav.main-menu > li:last-child > a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0
+}
+
+#sidebar-left.minified {
+    width: 40px !important;
+    margin-right: -40px
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li {
+    position: relative
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li > a {
+    width: 40px;
+    position: relative
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li > a.open {
+    cursor: default
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li > a .chevron {
+    display: none;
+    position: absolute;
+    left: 178px;
+    z-index: 1000
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li > a .text {
+    position: absolute;
+    z-index: 1000;
+    background: #e9ebec;
+    min-height: 40px;
+    width: 150px;
+    padding: 8px 15px;
+    border: 1px solid #dbdee0;
+    top: 0;
+    left: 39px;
+    display: none !important
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li > ul {
+    display: none !important
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li:hover > a {
+    position: relative;
+    cursor: pointer
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li:hover > a .chevron {
+    display: inline-block
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li:hover > a .text {
+    position: absolute;
+    z-index: 1000;
+    background: #e9ebec;
+    min-height: 40px;
+    width: 180px;
+    padding: 8px 15px;
+    border: 1px solid #dbdee0;
+    top: 0;
+    left: 39px;
+    display: block !important
+}
+
+#sidebar-left.minified .sidebar-nav > ul > li:hover > ul {
+    display: block !important;
+    position: absolute;
+    top: 39px;
+    left: 39px;
+    z-index: 1000;
+    width: 180px;
+    background: #e9ebec;
+    border: 1px solid #dbdee0;
+    border-bottom: none
+}
