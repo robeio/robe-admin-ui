@@ -577,3 +577,44 @@ a#main-menu-min i:hover {
     border: 1px solid #dbdee0;
     border-bottom: none
 }
+
+.Archive:before{
+    font-family: FontAwesome;
+    content: "\f17a"
+}
+.Dashboard:before{
+    font-family: FontAwesome;
+    content: "\f0e4"
+}
+.MailTemplateManagement:before{
+    font-family: FontAwesome;
+    content: "\f0e0"
+}
+.Manager:before{
+    font-family: FontAwesome;
+    content: "\f0b1"
+}
+.MenuManagement:before{
+    font-family: FontAwesome;
+    content: "\f0c9"
+}
+.PermissionManagement:before{
+    font-family: FontAwesome;
+    content: "\f084"
+}
+.QuartzJobManagement:before{
+    font-family: FontAwesome;
+    content: "\f017"
+}
+.RoleManagement:before{
+    font-family: FontAwesome;
+    content: "\f132"
+}
+.UserManagement:before{
+    font-family: FontAwesome;
+    content: "\f0c0"
+}
+.UserProfileManagement:before{
+    font-family: FontAwesome;
+    content: "\f007"
+}
