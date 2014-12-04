@@ -5,14 +5,14 @@
     <parent>
         <artifactId>robe-parent</artifactId>
         <groupId>io.robe</groupId>
-        <version>0.4.0</version>
+        <version>0.4.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.robe</groupId>
     <artifactId>robe-admin-ui</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
 
     <name>robe-admin-ui</name>
     <description>UI project for Robe-Admin module.</description>
