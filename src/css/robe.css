@@ -1,3 +1,137 @@
+#logout:before  {
+    font-family: FontAwesome;
+    content: "\f08b";
+}
+
+.nav.main-menu>li>a .chevron.closed:after, .nav.main-menu>li>ul>li>a .chevron.closed:after, .nav.main-menu>li>ul>li>ul>li>a .chevron.closed:after, .nav.main-menu>li>ul>li>ul>li>ul>li>a .chevron.closed:after {
+    height: 100%;
+    width: 100%;
+    content: "\f053";
+    text-shadow: none;
+    color: #b2b8bd!important;
+}
+
+.dropdown-menu {
+    min-width: 80px!important;
+}
+
+
+.row-fluid {
+    width: 100%;
+    *zoom: 1;
+}
+
+.row-fluid .span3 {
+    width: 15%;
+    float: left !important;
+    margin-right: 15px;
+    padding-left: 10px;
+}
+
+.row-fluid .span6 {
+    width: 83%;
+    float: left;
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    #sidebar-left-div {
+        width: 50px;
+    }
+    .nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i {
+        margin-right: 10px;
+        height: 38px;
+        width: 40px;
+        padding: 13px 0;
+        display: inline-block;
+        text-align: center;
+        border-right: 0px solid #dbdee0 !important;
+    }
+
+    .row-fluid .span3 {
+        width: 50px;
+    }
+
+    .row-fluid .span6 {
+        width: 85%;
+    }
+
+    .nav-collapse, .nav-collapse.collapse {
+        height: auto !important;
+        overflow: visible !important;
+        margin-left: -20px !important;
+    }
+
+    .nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li > a > i {
+        height: 38px;
+        width: 100%;
+        padding: 11px 0;
+        display: inline-block;
+        text-align: center;
+        border-right: 1px solid #dbdee0;
+    }
+
+    .nav.main-menu>li>a>i, .nav.main-menu>li>ul>li>a>i, .nav.main-menu>li>ul>li>ul>li>a>i, .nav.main-menu>li>ul>li>ul>li>ul>li>a>i {
+        height: 38px;
+        width: 100%;
+        padding: 11px 0;
+        display: inline-block;
+        text-align: center;
+        border-right: 1px solid #dbdee0;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+
+    .row-fluid .span3 {
+        width: auto !important;
+        float: none !important;
+    }
+
+    .row-fluid .span6 {
+        width: 100% !important;
+        float: left;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+    #sidebar-left-div {
+        display: block !important;
+        height: auto !important;
+    }
+
+    .row-fluid .span3 {
+        position: relative !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+    .navbar-toggle {
+        position: absolute;
+        top: -3px;
+        right: -10px;
+        z-index: 100;
+        background: transparent !important;
+        text-shadow: none !important;
+        border: none !important
+    }
+
+    .navbar-toggle .icon-bar {
+        background: white
+    }
+
+    .navbar-collapse {
+        max-height: 300px;
+        border-top: 0;
+        box-shadow: none;
+        overflow-x: hidden;
+        padding-right: 0;
+        padding-left: 0
+    }
+}
+
 .k-grid-email-request {
     float: right !important;
 }
@@ -6,17 +140,23 @@ span.k-tooltip {
     margin-left: 6px;
 }
 
+.panel-title {
+    font-size: 12px !important;
+}
+
+table {
+    font-size: 12px !important;
+}
+
+body {
+    font-size: 12px !important;
+}
+
 .gridTriggers .k-grid-header .k-header {
-    /*padding: 0px 10px !important;*/
-    /*margin: 0px !important;*/
-    /*border: 0px!important;*/
     background: white !important;
 }
 
 #gridJobs .k-grid-header .k-header .k-pager-wrap .k-grid-pager .k-widget {
-    /*padding: 0px 10px !important;*/
-    /*margin: 0px !important;*/
-    /*border: 0px!important;*/
     background: white !important;
 }
 
@@ -578,43 +718,52 @@ a#main-menu-min i:hover {
     border-bottom: none
 }
 
-.Archive:before{
+.Archive:before {
     font-family: FontAwesome;
     content: "\f17a"
 }
-.Dashboard:before{
+
+.Dashboard:before {
     font-family: FontAwesome;
     content: "\f0e4"
 }
-.MailTemplateManagement:before{
+
+.MailTemplateManagement:before {
     font-family: FontAwesome;
     content: "\f0e0"
 }
-.Manager:before{
+
+.Manager:before {
     font-family: FontAwesome;
     content: "\f0b1"
 }
-.MenuManagement:before{
+
+.MenuManagement:before {
     font-family: FontAwesome;
     content: "\f0c9"
 }
-.PermissionManagement:before{
+
+.PermissionManagement:before {
     font-family: FontAwesome;
     content: "\f084"
 }
-.QuartzJobManagement:before{
+
+.QuartzJobManagement:before {
     font-family: FontAwesome;
     content: "\f017"
 }
-.RoleManagement:before{
+
+.RoleManagement:before {
     font-family: FontAwesome;
     content: "\f132"
 }
-.UserManagement:before{
+
+.UserManagement:before {
     font-family: FontAwesome;
     content: "\f0c0"
 }
-.UserProfileManagement:before{
+
+.UserProfileManagement:before {
     font-family: FontAwesome;
     content: "\f007"
 }

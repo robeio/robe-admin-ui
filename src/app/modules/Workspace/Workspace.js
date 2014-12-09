@@ -7,6 +7,7 @@ define([
     'kendo/kendo.button.min',
     'kendo/kendo.window.min',
     'kendo/kendo.panelbar.min',
+    'lib/bootstrap/bootstrap.min',
     'robe/view/RobeView'
 ], function (view, LoginView,SideMenu) {
 
