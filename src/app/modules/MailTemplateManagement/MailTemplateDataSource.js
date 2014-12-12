@@ -1,7 +1,9 @@
 define([
 	'common/SingletonDataSource', './MailTemplateModel'
 ], function(SingletonDataSource, MailTemplateModel) {
+
 	var MailManagementDataSource = SingletonDataSource.define({
+
 		name: "MailManagementDataSource",
 		parameters: {
 			transport: {

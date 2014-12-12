@@ -8,13 +8,13 @@ define([
     'kendo/kendo.dropdownlist.min',
     'robe/AlertDialog',
     'robe/view/RobeView'
-], function(view, MailTemplateDataSource,SystemLanguageDataSource) {
+], function (view, MailTemplateDataSource, SystemLanguageDataSource) {
 
     var MailTemplateManagement = require('robe/view/RobeView').define({
         name: "MailTemplateManagement",
         html: view,
         containerId: "container",
-        initialize: function() {
+        initialize: function () {
             $("#templateGrid").kendoGrid({
                 dataSource: MailTemplateDataSource.get(),
                 sortable: true,
@@ -68,7 +68,7 @@ define([
                 },
                 edit: onEdit
             });
-           
+
 
             function onEdit(e) {
                 var editWindow = this.editable.element.data("kendoWindow");
@@ -80,12 +80,15 @@ define([
             };
 
             function userTemplatePopupEditor(container, options) {
-                var exampleTemplate =
-                    "<p>Sayın $name $username,</p>" +
-                    " <p>Kısa süre önce bir şifre sıfırlama isteği aldık. Şifrenizi sıfırlamak istiyorsanız <a>buradan</a> " +
-                    "işleminizi gerçekleştirebilirsiniz.</p>" +
-                    "<p>Eğer isteğin sizin tarafınızdan gönderilmediğini düşünüyorsanız, lütfen bunu bize aşağıdaki linkten" + "bildiriniz.</p>" +
-                    "<p><a>BildirimLinki</a></p>";
+                var exampleChangePassword =
+                    "<p>Sayın ${name} ${surname} ,</p>" +
+                    " <p>Kısa süre önce bir şifre sıfırlama isteği aldık. Şifrenizi sıfırlamak istiyorsanız <a href='${ticketUrl}'>buradan</a> " +
+                    "işleminizi gerçekleştirebilirsiniz.</p>";
+
+                var exampleRegister =
+                    "<p>Sayın kullanıcı,</p>" +
+                    " <p>Kısa süre önce bir kayıt olma isteği aldık. Kayıt olmak istiyorsanız <a href='${ticketUrl}'>buradan</a> " +
+                    "işleminizi gerçekleştirebilirsiniz.</p>";
                 $('<textarea name="template" required="required" data-required-msg="Template alanı gerekli." style="width: 600px;" data-bind="value:' + options.field + '"/>')
                     .appendTo(container)
                     .kendoEditor({
@@ -123,8 +126,11 @@ define([
                             "backColor"
                         ],
                         insertHtml: [{
-                            text: "Example Mail",
-                            value: exampleTemplate
+                            text: "Change Password",
+                            value: exampleChangePassword
+                        }, {
+                            text: "Register Form",
+                            value: exampleRegister
                         }]
                     });
 
