@@ -70,8 +70,6 @@ define([
         });
 
         kendo.destroy($("#container"));
-//        Welcome page created again.Why did we give blank html content ??
-//        $("#container").html("");
 
         $("#logout").click(function () {
             $.cookie.destroy("auth-token");
