@@ -68,6 +68,9 @@ define([
                 var ForgotPassword = require('modules/ForgotPassword/ForgotPassword');
                 ForgotPassword.render();
             });
+            $('#dialog').data("kendoWindow").setOptions({
+                width: 420
+            });
 
         }
     });
