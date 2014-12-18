@@ -15,6 +15,10 @@ define([
         html: view,
         containerId: "container",
         initialize: function () {
+
+            i18n.init("MailTemplateManagement");
+            console.log("meee")
+
             $("#templateGrid").kendoGrid({
                 dataSource: MailTemplateDataSource.get(),
                 sortable: true,
@@ -24,21 +28,21 @@ define([
                 },
                 toolbar: [{
                     name: "create",
-                    text: "Yeni Template",
+                    text: "Yeni Template".i18n(),
                     height: 100,
                     width: 100
                 }],
                 columns: [{
                     field: "lang",
-                    title: "Dil",
+                    title: "Dil".i18n(),
                     editor: userTemplateLanguagePopupEditor
 
                 }, {
                     field: "code",
-                    title: "Kod"
+                    title: "Kod".i18n()
                 }, {
                     field: "template",
-                    title: "Template",
+                    title: "Template".i18n(),
                     editor: userTemplatePopupEditor,
                     hidden: true
                 }, {
@@ -46,8 +50,8 @@ define([
                         name: "edit",
                         text: {
                             edit: "",
-                            update: "Güncelle",
-                            cancel: "İptal"
+                            update: "Güncelle".i18n(),
+                            cancel: "İptal".i18n()
                         },
                         className: "grid-command-iconfix"
                     }, {
@@ -61,9 +65,9 @@ define([
                 editable: {
                     mode: "popup",
                     window: {
-                        title: "Kayıt"
+                        title: "Kayıt".i18n()
                     },
-                    confirmation: "Silmek istediğinizden emin misiniz?",
+                    confirmation: "Silmek istediğinizden emin misiniz?".i18n(),
                     confirmDelete: "Yes"
                 },
                 edit: onEdit
@@ -140,13 +144,15 @@ define([
                 $('<input name="lang" required="required" data-required-msg="Dil alanı gerekli." data-text-field="name" data-value-field="code" class="pull-left" style="width: 175px;" data-bind="value:' + options.field + '"/>')
                     .appendTo(container)
                     .kendoDropDownList({
-                        optionLabel: "Dil seçiniz...",
+                        optionLabel: "Seçiniz...".i18n(),
                         dataTextField: "name",
                         dataValueField: "code",
                         dataSource: SystemLanguageDataSource.get(),
                         index: 0
                     });
             };
+
+            i18n.translate();
         }
     });
 

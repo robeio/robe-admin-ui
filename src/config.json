@@ -1,4 +1,10 @@
 {
-	"backendURL":"../../robe/" ,
-	"adminURL":"./admin-ui/"
+  "backendURL": "../../robe/",
+  "adminURL": "./admin-ui/",
+  "lang": {
+    "default": "tr",
+    "en": "English",
+    "tr": "Türkçe"
+
+  }
 }

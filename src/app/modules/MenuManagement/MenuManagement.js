@@ -1,4 +1,3 @@
-var MenuManagementView;
 define([
     'text!./MenuManagement.html',
     './MenuDataSource',
@@ -7,15 +6,16 @@ define([
     'kendo/kendo.window.min',
     'kendo/kendo.treeview.min',
     'robe/view/RobeView'
-], function(view,MenuDataSource,MenuTreeModel) {
+], function (view, MenuDataSource, MenuTreeModel) {
 
     var MenuManagementView = require('robe/view/RobeView').define({
         name: "MenuManagementView",
         html: view,
         containerId: "container",
 
+        initialize: function () {
+            i18n.init("MenuManagement");
 
-        initialize: function() {
             $("#gridMenus").kendoGrid({
                 dataSource: MenuDataSource.get(),
                 sortable: true,
@@ -25,23 +25,23 @@ define([
                 },
                 toolbar: [{
                     name: "create",
-                    text: "Yeni Menü"
+                    text: "Yeni Menü".i18n()
                 }],
                 columns: [{
                     field: "name",
-                    title: "Ad",
+                    title: "Ad".i18n(),
                     width: "110px"
                 }, {
                     field: "code",
-                    title: "Kod",
+                    title: "Kod".i18n(),
                     width: "110px"
                 }, {
                     command: [{
                         name: "edit",
                         text: {
                             edit: "",
-                            update: "Güncelle",
-                            cancel: "İptal"
+                            update: "Güncelle".i18n(),
+                            cancel: "İptal".i18n()
                         },
                         className: "grid-command-iconfix"
                     }, {
@@ -62,9 +62,9 @@ define([
                 editable: {
                     mode: "popup",
                     window: {
-                        title: "Kayıt"
+                        title: "Kayıt".i18n()
                     },
-                    confirmation: "Silmek istediğinizden emin misiniz?",
+                    confirmation: "Silmek istediğinizden emin misiniz?".i18n(),
                     confirmDelete: "Yes"
                 }
             });
@@ -98,14 +98,14 @@ define([
                     url: AdminApp.getBackendURL() + "menu/roots",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    success: function(response) {
+                    success: function (response) {
                         var dataSource = new kendo.data.HierarchicalDataSource({
                             data: response,
                             schema: MenuTreeModel
                         });
                         $("#treeMenus").data("kendoTreeView").setDataSource(dataSource);
                         if (e != null) {
-                            showToast("success", "Yenileme Başarılı");
+                            showToast("success", "Yenileme Başarılı".i18n());
                         }
                     }
                 });
@@ -127,12 +127,13 @@ define([
                     url: AdminApp.getBackendURL() + "menu/movenode/" + sourceOid + "/" + destinationOid,
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    success: function() {
-                        showToast("success", "Başarıyla Güncellendi");
+                    success: function () {
+                        showToast("success", "Başarıyla Güncellendi".i18n());
                     }
                 });
 
             };
+            i18n.translate();
         }
     });
 

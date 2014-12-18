@@ -9,17 +9,18 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div id="progressBar"></div>
     <!--TODO icon renkleri değiştirilecek-->
-    <div class="btn-group pull-right" style="margin: 15px" >
+    <div class="btn-group pull-right" style="margin: 15px">
+
         <button type="button" class="btn btn-info" id="active-user-name"></button>
-        <button  type="button" class="btn btn-info dropdown-toggle" style="height: 35px"
+        <button type="button" class="btn btn-info dropdown-toggle" style="height: 35px"
                 data-toggle="dropdown">
             <span class="caret"></span>
             <span class="sr-only">Toggle Dropdown</span>
         </button>
 
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu" id="user-menu" role="menu">
             <li>
-                <a id="logout" href="">Çıkış</a>
+                <a id="logout" href="" lang="tr">Çıkış</a>
             </li>
         </ul>
     </div>
@@ -53,10 +54,10 @@
         <div class="col-md-12 column well well-sm panel">
             <div class="row clearfix panel-heading" style='border-bottom: lightgray dotted 1px; margin-bottom: 5px;'>
                 <div class="col-md-6">
-                    <h4 id="lblContainerTitle">Hoşgeldiniz</h4>
+                    <h4 id="lblContainerTitle" lang="tr">Hoşgeldiniz</h4>
                 </div>
                 <div class="col-md-6">
-                    <button id="btnContainerHelp" class="pull-right"><b class="fa fa-h-square"></b>&nbspHelp</button>
+                    <button id="btnContainerHelp" class="pull-right"><b class="fa fa-h-square"></b><span lang="tr">&nbsp;Yardım</span></button>
                 </div>
             </div>
             <div class='row clearfix' id='container'>
@@ -72,6 +73,6 @@
     </div>
 </div>
 <div id="containerHelpWindow" hidden="true">
-    <p>Menüyü kullanarak işlemlerinizi gerçekleştirebilirsiniz.</p>
+    <p lang="tr">Menüyü kullanarak işlemlerinizi gerçekleştirebilirsiniz.</p>
 
 </div>

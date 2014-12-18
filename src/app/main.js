@@ -12,8 +12,8 @@ require.config({
         'lib/jquery/jquery.min': {
             exports: '$'
         },
-         'lib/zebra_cookie': {
-            deps:['lib/jquery/jquery.min']
+        'lib/zebra_cookie': {
+            deps: ['lib/jquery/jquery.min']
         },
         'lib/underscore/underscore': {
             exports: '_'
@@ -30,7 +30,7 @@ require.config({
         'lib/requirejs-router/router.min': {
             exports: 'Router'
         },
-        'lib/alertmessage/jquery.toastmessage':{
+        'lib/alertmessage/jquery.toastmessage': {
             deps: ["lib/jquery/jquery.min"]
         },
         'robe/AlertDialog': {
@@ -48,7 +48,8 @@ define([
     'robe/AlertDialog',
     'lib/underscore/underscore',
     'lib/support/console.min',
-    'lib/kendoui/js/cultures/kendo.culture.tr-TR.min'
-], function(App) {
+    'lib/kendoui/js/cultures/kendo.culture.tr-TR.min',
+    "lib/lang/lang"
+], function (App) {
     App.initialize();
 });

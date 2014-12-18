@@ -1,0 +1,22 @@
+{
+  "Seçiniz...": "Select...",
+  "Yardım": "Help",
+  "Evet": "Yes",
+  "Hayır": "No",
+  "Güncelle": "Update",
+  "İptal": "Cancel",
+  "Kayıt": "Record",
+  "Silmek istediğinizden emin misiniz?": "Are you sure you want to delete?",
+  "Ana Roller": "Main Roles",
+  "Rol Havuzu": "Role Pool",
+  "Alt Roller": "Child Roles",
+  "Roller": "Roles",
+  "Gruplama": "Grouping",
+  "Yeni Rol": "New Role",
+  "Ad": "Name",
+  "Kod": "Code",
+  "Yeni rol için, tablonun \"Yeni Rol\" butonuna tıklayınız.": "For the new Role, click the table \"New Role\" button.",
+  "Form verilerini doldurduktan sonra \"Güncelle\" butonuna tıklayınız.": "Click the \"Update\" button after filling out the form data.",
+  "Düzenlemek ve Silmek için satırdaki butonları kullanınız": "For Edit and Delete use buttons to the line"
+}
+

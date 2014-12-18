@@ -19,6 +19,8 @@ define([
         containerId: "container",
 
         initialize: function () {
+
+            i18n.init("PermissionManagement");
             var me = this;
 
             $("#gridServices").kendoGrid({
@@ -32,13 +34,13 @@ define([
                     width: 8
                 }, {
                     field: "method",
-                    title: "Method",
+                    title: "Metod".i18n(),
                     width: 20
                 }, {
                     field: "path",
-                    title: "Servis",
+                    title: "Servis".i18n(),
                     width: 90,
-                    headerTemplate: "Servis<button class=\"pull-right\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>"
+                    headerTemplate: "<span lang='tr'>Servis</span><button class=\"pull-right\" id=\"btnRefreshServices\"><span class=\"k-icon k-si-refresh\"/></button>"
                 }]
             });
 
@@ -89,7 +91,7 @@ define([
                     });
                 },
                 autoBind: false,
-                text: "Seçiniz...",
+                text: "Seçiniz...".i18n(),
                 index: -1
             });
 
@@ -126,7 +128,7 @@ define([
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (response) {
-                            showToast("success", "Başarılı. Bulunan Yeni Servis Sayısı :" + response);
+                            showToast("success", "Başarılı. Bulunan Yeni Servis Sayısı :".i18n() + response);
                             ServiceDataSource.read();
                         }
                     });
@@ -225,6 +227,7 @@ define([
                 return items;
             }
 
+            i18n.translate();
         }
     });
 

@@ -1,27 +1,3 @@
-function removeItem(e, id) {
-    var GroupedRoleDataSource = removeItem.prototype.GroupedRoleDataSource;
-    var UnGroupedRoleDataSource = removeItem.prototype.UnGroupedRoleDataSource;
-    var selectedGroup = removeItem.prototype.selectedGroup;
-    var item = removeItem.prototype.GroupedRoleDataSource.get(false).getByUid(id);
-
-    $.ajax({
-        type: "DELETE",
-        url: AdminApp.getBackendURL() + "role/destroyRoleGroup/" + selectedGroup + "/" + item.oid,
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        success: function(response) {
-            UnGroupedRoleDataSource.get(false).add(item);
-            GroupedRoleDataSource.get(false).remove(item);
-            $(e).parent().remove();
-        },
-        error: function(e) {
-            $.pnotify({
-                text: "Bir hata oluştu",
-                type: 'error'
-            });
-        }
-    });
-}
 define([
     'text!./RoleManagement.html',
     './RoleDataSource',
@@ -32,14 +8,16 @@ define([
     'kendo/kendo.listview.min',
     'kendo/kendo.tabstrip.min',
     'robe/view/RobeView'
-], function(view, RoleDataSource,GroupedRoleDataSource,UnGroupedRoleDataSource) {
+], function (view, RoleDataSource, GroupedRoleDataSource, UnGroupedRoleDataSource) {
 
     var RoleManagementView = require('robe/view/RobeView').define({
         name: "RoleManagementView",
         html: view,
         containerId: "container",
 
-        initialize: function() {
+        initialize: function () {
+
+            i18n.init("RoleManagement");
 
             $("#gridRoles").kendoGrid({
                 dataSource: RoleDataSource.get(),
@@ -49,21 +27,21 @@ define([
                 },
                 toolbar: [{
                     name: "create",
-                    text: "Yeni Rol"
+                    text: "Yeni Rol".i18n()
                 }],
                 columns: [{
                     field: "name",
-                    title: "Ad"
+                    title: "Ad".i18n()
                 }, {
                     field: "code",
-                    title: "Kod"
+                    title: "Kod".i18n()
                 }, {
                     command: [{
                         name: "edit",
                         text: {
                             edit: "",
-                            update: "Güncelle",
-                            cancel: "İptal"
+                            update: "Güncelle".i18n(),
+                            cancel: "İptal".i18n()
                         },
                         className: "grid-command-iconfix"
                     }, {
@@ -77,9 +55,9 @@ define([
                 editable: {
                     mode: "popup",
                     window: {
-                        title: "Kayıt"
+                        title: "Kayıt".i18n()
                     },
-                    confirmation: "Silmek istediğinizden emin misiniz?",
+                    confirmation: "Silmek istediğinizden emin misiniz?".i18n(),
                     confirmDelete: "Yes"
                 }
             });
@@ -106,19 +84,19 @@ define([
 
             $("#listUnGroupedRoles").kendoDraggable({
                 filter: ".move",
-                hint: function(element) {
+                hint: function (element) {
                     return element.clone();
                 }
             });
 
             $("#listGroupedRoles").kendoDropTarget({
-                dragenter: function(e) {
+                dragenter: function (e) {
                     e.draggable.hint.css("opacity", 0.6);
                 },
-                dragleave: function(e) {
+                dragleave: function (e) {
                     e.draggable.hint.css("opacity", 1);
                 },
-                drop: function(e) {
+                drop: function (e) {
 
                     var data = RoleDataSource.get(false).view();
                     var groupOid = removeItem.prototype.selectedGroup;
@@ -132,7 +110,7 @@ define([
                             url: AdminApp.getBackendURL() + "role/group/" + groupOid + "/" + item.oid,
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
-                            success: function() {
+                            success: function () {
                                 GroupedRoleDataSource.get(false).add(item);
                                 UnGroupedRoleDataSource.get(false).remove(item);
                             }
@@ -144,7 +122,7 @@ define([
             function onListChange(e) {
 
                 var data = RoleDataSource.get(false).view(),
-                    selected = $.map(this.select(), function(item) {
+                    selected = $.map(this.select(), function (item) {
                         removeItem.prototype.selectedGroup = data[$(item).index()].oid;
                         return removeItem.prototype.selectedGroup;
                     });
@@ -154,14 +132,14 @@ define([
                     url: AdminApp.getBackendURL() + "role/" + selected,
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    success: function(response) {
+                    success: function (response) {
                         GroupedRoleDataSource.get().data(response.roles);
                         var oids = [];
                         for (var i = 0; i < response.roles.length; i++) {
                             oids.push(response.roles[i].oid);
                         }
                         oids.push(removeItem.prototype.selectedGroup);
-                        var unGrouped = RoleDataSource.get(false).data().filter(function(elem) {
+                        var unGrouped = RoleDataSource.get(false).data().filter(function (elem) {
                             return oids.indexOf(elem.oid) === -1;
                         });
                         UnGroupedRoleDataSource.get().data(unGrouped);
@@ -170,7 +148,34 @@ define([
             };
 
             $("#tabstrip").kendoTabStrip();
+
+            i18n.translate();
         }
     });
     return RoleManagementView;
 });
+//TODO foksiyon initialize içine eklenmeli
+function removeItem(e, id) {
+    var GroupedRoleDataSource = removeItem.prototype.GroupedRoleDataSource;
+    var UnGroupedRoleDataSource = removeItem.prototype.UnGroupedRoleDataSource;
+    var selectedGroup = removeItem.prototype.selectedGroup;
+    var item = removeItem.prototype.GroupedRoleDataSource.get(false).getByUid(id);
+
+    $.ajax({
+        type: "DELETE",
+        url: AdminApp.getBackendURL() + "role/destroyRoleGroup/" + selectedGroup + "/" + item.oid,
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            UnGroupedRoleDataSource.get(false).add(item);
+            GroupedRoleDataSource.get(false).remove(item);
+            $(e).parent().remove();
+        },
+        error: function (e) {
+            $.pnotify({
+                text: "Bir hata oluştu",
+                type: 'error'
+            });
+        }
+    });
+}

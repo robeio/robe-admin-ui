@@ -8,16 +8,18 @@ define([
     'kendo/kendo.window.min',
     'kendo/kendo.panelbar.min',
     'lib/bootstrap/bootstrap.min',
-    'robe/view/RobeView'
-], function (view, LoginView,SideMenu) {
+    'robe/view/RobeView',
+], function (view, LoginView, SideMenu) {
 
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
 
     WorkspaceView.render = function () {
+
         kendo.destroy($('#body'));
         $('#body').html('');
         $('#body').append(view);
         WorkspaceView.initialize();
+        i18n.init("Workspace");
     };
 
     WorkspaceView.initialize = function () {
@@ -73,6 +75,7 @@ define([
 
         $("#logout").click(function () {
             $.cookie.destroy("auth-token");
+            $.cookie.destroy("lang");
             location.reload();
         });
 
@@ -94,7 +97,7 @@ define([
 
         function onShowHelp() {
             var wnd = $("#containerHelpWindow").kendoWindow({
-                title: "Yardım",
+                title: "Yardım".i18n(),
                 modal: true,
                 visible: false,
                 resizable: false,
@@ -144,12 +147,30 @@ define([
         };
 
         function loadLogin() {
-            showDialog(null, "Giriş");
+            showDialog(null, "Giriş".i18n());
             kendo.destroy($('#dialogMessage'));
             $('#dialogMessage').html('');
             LoginView.parentPage = me;
             LoginView.render();
         };
+
+
+        $('ul#user-menu').delegate('a', 'click', function () {
+            var element = $(this);
+            var code = element.attr("code");
+            $.cookie.write("lang", code);
+            location.reload();
+        });
+
+        for (var key in  AdminApp.getLangs()) {
+            var value = AdminApp.getLangs()[key];
+            var code = value.value;
+            var text = value.text;
+            $('#user-menu').prepend('<li><a href="#" id="language-' + code + '" code="' + code + '">' + text + '</a></li>');
+        }
+        $('#language-' + $.cookie.read("lang")).addClass("li-active");
+        i18n.translate();
+
     };
 
     WorkspaceView.loadMenu = function () {
@@ -162,10 +183,11 @@ define([
                 console.log(response);
                 //ignore root item
                 SideMenu.items = response[0].items;
-                console.log(response[0].items);
                 SideMenu.render();
-
-                $('#lblContainerTitle').text("Hoş Geldiniz");
+                $('#lblContainerTitle').text("Hoşgeldiniz".i18n());
+                $('#language-' + $.cookie.read("lang")).addClass("li-active");
+                i18n.init("Workspace");
+                i18n.translate();
 
             }
         });

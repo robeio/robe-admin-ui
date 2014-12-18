@@ -18,10 +18,11 @@ define([
 
         initialize: function () {
 
+            i18n.init("UserProfileManagement");
             var me = this;
 
             var panelError = $("#panelError");
-            var panelHeader=$("#panelHeader");
+            var panelHeader = $("#panelHeader");
             $.ajax({
                 type: "GET",
                 url: AdminApp.getBackendURL() + "user/profile",
@@ -67,19 +68,19 @@ define([
                 var message = $("#confirmMessage");
 
                 if ((newPassword.val().length < 4) || (newPassword.val.length > 15)) {
-                    error += "Şifreniz en az 4 en fazla 15 karakter uzunluğunda olmalı.<br/>";
+                    error += "Şifreniz en az 4 en fazla 15 karakter uzunluğunda olmalı.".i18n() + "<br/>";
                     message.innerHTML = error;
                     isValid = false;
                 }
                 // Accepts Only Alphanumeric Chars
                 if (!(newPassword.val().match(/^.*(?=.*[a-zA-Z])(?=.*\d).*$/i))) {
-                    error += "Şifrenizde en az bir adet rakam ve bir adet harf olmalıdır<br/>";
+                    error += "Şifrenizde en az bir adet rakam ve bir adet harf olmalıdır".i18n() + "<br/>";
                     message.innerHTML = error;
                     isValid = false;
                 }
 
                 if (!(newPassword.val().match(/^\S*$/))) {
-                    error += "Şifrenizde boşluk olamaz.<br/>";
+                    error += "Şifrenizde boşluk olamaz".i18n() + "<br/>";
                     message.innerHTML = error;
 
                     isValid = false;
@@ -142,6 +143,7 @@ define([
                     }
                 }
             });
+            i18n.translate();
         }
     });
 

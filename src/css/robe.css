@@ -1,20 +1,24 @@
-#logout:before  {
+.li-active {
+    color: green !important;
+    /*background-color: green!important;*/
+}
+
+#logout:before {
     font-family: FontAwesome;
     content: "\f08b";
 }
 
-.nav.main-menu>li>a .chevron.closed:after, .nav.main-menu>li>ul>li>a .chevron.closed:after, .nav.main-menu>li>ul>li>ul>li>a .chevron.closed:after, .nav.main-menu>li>ul>li>ul>li>ul>li>a .chevron.closed:after {
+.nav.main-menu > li > a .chevron.closed:after, .nav.main-menu > li > ul > li > a .chevron.closed:after, .nav.main-menu > li > ul > li > ul > li > a .chevron.closed:after, .nav.main-menu > li > ul > li > ul > li > ul > li > a .chevron.closed:after {
     height: 100%;
     width: 100%;
     content: "\f053";
     text-shadow: none;
-    color: #b2b8bd!important;
+    color: #b2b8bd !important;
 }
 
 .dropdown-menu {
-    min-width: 80px!important;
+    min-width: 80px !important;
 }
-
 
 .row-fluid {
     width: 100%;
@@ -37,6 +41,7 @@
     #sidebar-left-div {
         width: 50px;
     }
+
     .nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i {
         margin-right: 10px;
         height: 38px;
@@ -70,7 +75,7 @@
         border-right: 1px solid #dbdee0;
     }
 
-    .nav.main-menu>li>a>i, .nav.main-menu>li>ul>li>a>i, .nav.main-menu>li>ul>li>ul>li>a>i, .nav.main-menu>li>ul>li>ul>li>ul>li>a>i {
+    .nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li > a > i {
         height: 38px;
         width: 100%;
         padding: 11px 0;
