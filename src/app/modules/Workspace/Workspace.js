@@ -166,7 +166,7 @@ define([
             var value = AdminApp.getLangs()[key];
             var code = value.value;
             var text = value.text;
-            $('#user-menu').prepend('<li><a href="#" id="language-' + code + '" code="' + code + '">' + text + '</a></li>');
+            $('#user-menu').prepend('<li><a href="#" lang="' + code + '" id="language-' + code + '" code="' + code + '">' + text + '</a></li>');
         }
         $('#language-' + $.cookie.read("lang")).addClass("li-active");
         i18n.translate();
