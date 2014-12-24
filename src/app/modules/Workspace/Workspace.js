@@ -8,7 +8,7 @@ define([
     'kendo/kendo.window.min',
     'kendo/kendo.panelbar.min',
     'lib/bootstrap/bootstrap.min',
-    'robe/view/RobeView',
+    'robe/view/RobeView'
 ], function (view, LoginView, SideMenu) {
 
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
