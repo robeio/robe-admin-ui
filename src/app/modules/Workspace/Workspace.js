@@ -8,7 +8,7 @@ define([
     'kendo/kendo.window.min',
     'kendo/kendo.panelbar.min',
     'lib/bootstrap/bootstrap.min',
-    'robe/view/RobeView',
+    'robe/view/RobeView'
 ], function (view, LoginView, SideMenu) {
 
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
@@ -166,7 +166,7 @@ define([
             var value = AdminApp.getLangs()[key];
             var code = value.value;
             var text = value.text;
-            $('#user-menu').prepend('<li><a href="#" id="language-' + code + '" code="' + code + '">' + text + '</a></li>');
+            $('#user-menu').prepend('<li><a href="#" lang="' + code + '" id="language-' + code + '" code="' + code + '">' + text + '</a></li>');
         }
         $('#language-' + $.cookie.read("lang")).addClass("li-active");
         i18n.translate();

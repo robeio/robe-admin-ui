@@ -5,21 +5,32 @@ define([
     var TriggerModel = kendo.data.Model.define({
         id: "oid",
         fields: {
-            oid: {
-                editable: false,
+            name: {
+                editable: true,
                 nullable: false,
                 type: "string",
                 hidden: true
             },
-            jobId: {
+            group: {
                 editable: true,
-                nullable: true,
-                type: "string",
-                hidden: true
+                nullable: false,
+                type: "string"
             },
-            cronExpression: {
+            startTime: {
                 editable: true,
                 nullable: true,
+                type: "number",
+                defaultValue: -1
+            },
+            endTime: {
+                editable: true,
+                nullable: true,
+                type: "number",
+                defaultValue: -1
+            },
+            type: {
+                editable: true,
+                nullable: false,
                 type: "string"
             },
             active: {
@@ -27,10 +38,19 @@ define([
                 nullable: true,
                 type: "boolean"
             },
-            fireTime: {
+            jobId: {
+                editable: true,
+                nullable: false
+            },
+            repeatCount: {
                 editable: true,
                 nullable: true,
-                type: "string"
+                type: "number"
+            },
+            repeatInterval: {
+                editable: true,
+                nullable: true,
+                type: "number"
             }
         }
     });

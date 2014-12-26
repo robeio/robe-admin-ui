@@ -1,11 +1,13 @@
 define([
     'text!./QuartzJobManagement.html',
+    './CronManagement',
     './QuartzJobDataSource',
     './TriggerModel',
     'kendo/kendo.grid.min',
     'robe/view/RobeView',
-    'kendo/kendo.multiselect.min'
-], function (view, QuartzJobDataSource, TriggerModel) {
+    'kendo/kendo.multiselect.min',
+
+], function (view, CronManagement, QuartzJobDataSource, TriggerModel) {
 
     var QuartzJobManagement = require('robe/view/RobeView').define({
         name: "QuartzJobManagement",
@@ -13,6 +15,9 @@ define([
         containerId: "container",
 
         initialize: function () {
+
+            i18n.init("QuartzJobManagement");
+            var currentRow;
             $("#gridJobs").kendoGrid({
                 dataSource: QuartzJobDataSource.get(),
                 sortable: true,
@@ -22,9 +27,9 @@ define([
                 autoBind: false,
                 detailInit: detailInit,
                 dataBound: function () {
-                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                    // TODO change another good way .first()
+                    this.expandRow(this.tbody.find("tr.k-master-row"));
                 },
-                type: "odata",
                 columns: [
                     {
                         field: "oid",
@@ -32,18 +37,17 @@ define([
                         hidden: true
                     },
                     {
-                        field: "schedulerName",
-                        title: "Scheduler Name",
+                        field: "name",
+                        title: "İsim".i18n(),
                         width: 150
                     },
                     {
-                        field: "jobClassName",
-                        title: "Job Name"
+                        field: "jobClass",
+                        title: "İş Sınıfı".i18n()
                     },
                     {
                         field: "description",
-                        title: "Description",
-                        editor: cronExpressionEditor
+                        title: "Açıklama".i18n()
                     },
                     {
                         command: [
@@ -61,8 +65,8 @@ define([
             });
 
             function detailInit(e) {
-                $("<div class='gridTriggers'/>").appendTo(e.detailCell).kendoGrid({
-                    editable: "popup",
+
+                $("<div id='" + e.data.oid + "' class='gridTriggers'/>").appendTo(e.detailCell).kendoGrid({
                     dataSource: {
                         transport: {
                             read: {
@@ -75,13 +79,28 @@ define([
                                 type: "POST",
                                 url: AdminApp.getBackendURL() + "trigger/update",
                                 dataType: "json",
-                                contentType: "application/json"
+                                contentType: "application/json",
+                                complete: function () {
+                                    showToast("success", "Başarı ile güncellendi".i18n());
+                                }
+                            },
+                            create: {
+                                type: "POST",
+                                url: AdminApp.getBackendURL() + "trigger/add",
+                                dataType: "json",
+                                contentType: "application/json",
+                                complete: function () {
+                                    showToast("success", "Başarı ile oluşturuldu".i18n());
+                                }
                             },
                             destroy: {
                                 type: "DELETE",
                                 url: AdminApp.getBackendURL() + "trigger",
                                 dataType: "json",
-                                contentType: "application/json"
+                                contentType: "application/json",
+                                complete: function () {
+                                    showToast("success", "Başarı ile silindi".i18n());
+                                }
                             },
                             parameterMap: function (options, operation) {
                                 if (operation !== "read") {
@@ -96,27 +115,63 @@ define([
                             field: "jobId",
                             operator: "eq",
                             value: e.data.oid
-                        }
+                        },
+                        serverPaging: false,
+                        serverFiltering: false,
+                        serverSorting: false
                     },
-                    scrollable: false,
-                    sortable: true,
-                    pageable: false,
+                    editable: {
+                        mode: "popup",
+                        window: {
+                            title: "Kayıt".i18n()
+                        },
+                        confirmation: "Silmek istediğinizden emin misiniz?".i18n(),
+                        confirmDelete: "Yes"
+                    },
+                    edit: OnEdit,
+                    serverFiltering: false,
                     columns: [
                         {
-                            field: "cronExpression",
-                            title: "Cron Expression",
-                            editor: cronExpressionEditor
+                            field: "type",
+                            title: "Tip".i18n(),
+                            editor: typeDropdownEditor,
+                            template: getTypeText
                         },
                         {
-                            field: "fireTime",
-                            title: "Fire Time",
-                            template: "#=(data.fireTime==-1)?'Start Immediately': fireTime #"
+                            field: "cron",
+                            title: "Cron".i18n()
+                        }, {
+                            field: "name",
+                            title: "İsim".i18n()
+                        }, {
+                            field: "group",
+                            title: "Grup".i18n()
+                        }, {
+                            field: "startTime",
+                            title: "Başlangıç Tarihi".i18n(),
+                            editor: startTimeEditor,
+                            template: "#=data.startTime==-1?data.startTime:kendo.toString(new Date(data.startTime),'dd/MM/yyyy HH:mm:ss')#"
+                        }, {
+                            field: "endTime",
+                            title: "Bitiş Tarihi".i18n(),
+                            editor: endTimeEditor,
+                            template: "#=(data.endTime==-1 || !(data.endTime))?data.endTime:kendo.toString(new Date(data.endTime),'dd/MM/yyyy HH:mm:ss')#"
+                        },
+                        {
+                            field: "repeatCount",
+                            title: "Tekrar Sayısı".i18n(),
+                            editor: numberEditor
+                        },
+                        {
+                            field: "repeatInterval",
+                            title: "Tekrar Sıklığı".i18n(),
+                            editor: numberEditor
                         },
                         {
                             field: "active",
-                            title: "Is Active",
-                            template: "<span class='"+"#=(data.active)?'k-icon k-i-tick':'k-icon k-i-cancel'#'/>",
-                            width: 80
+                            title: "Aktif?".i18n(),
+                            template: "<span class='" + "#=(data.active)?'k-icon k-i-tick':'k-icon k-i-cancel'#'/>",
+                            width: 70
                         },
                         {
                             command: [
@@ -137,7 +192,9 @@ define([
                                 {
                                     name: "edit",
                                     text: {
-                                        edit: ""
+                                        edit: "",
+                                        update: "Güncelle".i18n(),
+                                        cancel: "İptal".i18n()
                                     },
                                     className: "grid-command-iconfix"
                                 },
@@ -153,6 +210,146 @@ define([
                     ]
                 });
             }
+
+            var getTypeText = function (value) {
+                for (var key in data) {
+                    var obj = data[key];
+                    if (data.hasOwnProperty(key)) {
+                        if (obj.value == value.type) {
+                            return obj.text;
+                        }
+                    }
+
+                }
+                return data[value.type];
+            };
+
+            function OnEdit(e) {
+
+                if (e.model.isNew()) {
+                    e.model.jobId = currentRow;
+                    e.model.startTime = -1;
+                    e.model.endTime = -1;
+                    e.container.find("input[name=startTime]").val(-1);
+                    e.container.find("input[name=endTime]").val(-1);
+                }
+                e.container.find("input[name=active]").hide();
+                e.container.find("label[for=active]").hide();
+
+                var input = e.container.find("input[name=cron]");
+                if (e.model.type != "CRON") {
+                    input.attr('readonly', true);
+                    e.model.cron = "";
+                    input.val("");
+                } else {
+                    if (!input.val()) {
+                        e.model.cron = "* * * * * ?";
+                        input.val("* * * * * ?");
+                    }
+
+                }
+                input.focus(function () {
+                    if (!input.attr("readonly")) {
+                        CronManagement.render(input.val());
+                    }
+
+                });
+            }
+
+            function numberEditor(container, options) {
+                $('<input data-bind="value:' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoNumericTextBox({
+                        min: 0,
+                        format: '#'
+                    });
+            }
+
+            function endTimeEditor(container, options) {
+                var field = options.field;
+
+                var value = (options.model.endTime == -1 || !(options.model.endTime)) ? "" : new Date(options.model.startTime);
+
+                $('<input data-text-field="' + field + '" data-value-field="' + field + '"/>')
+                    .appendTo(container)
+                    .kendoDatePicker({
+                        format: "dd/MM/yyyy HH:mm:ss",
+                        culture: 'tr-TR',
+                        value: value,
+                        change: function (e) {
+                            if (this.value()) {
+                                options.model.set('endTime', this.value().getTime());
+                            } else {
+                                options.model.set('endTime', -1);
+                            }
+
+                        },
+                        open: function () {
+                            if (this.value()) {
+                                options.model.set('endTime', this.value().getTime());
+                            } else {
+                                options.model.set('endTime', -1);
+                            }
+                        }
+                    });
+            };
+
+            function startTimeEditor(container, options) {
+                var field = options.field;
+                var value = (options.model.startTime == -1 || !(options.model.startTime)) ? "" : new Date(options.model.startTime);
+
+                $('<input data-text-field="' + field + '" data-value-field="' + field + '"/>')
+                    .appendTo(container)
+                    .kendoDatePicker({
+                        format: "dd/MM/yyyy HH:mm:ss",
+                        culture: 'tr-TR',
+                        value: value,
+                        open: function () {
+                            if (this.value()) {
+                                options.model.set('startTime', this.value().getTime());
+                            } else {
+                                options.model.set('startTime', -1);
+                            }
+                        },
+                        change: function (e) {
+                            if (this.value()) {
+                                options.model.set('startTime', this.value().getTime());
+                            } else {
+                                options.model.set('startTime', -1);
+                            }
+                        }
+                    });
+            };
+            var data = [
+                {text: "Temel".i18n(), value: "SIMPLE"},
+                {text: "Cron".i18n(), value: "CRON"},
+                {text: "Uygulama Açıldığında".i18n(), value: "ON_APP_START"},
+                {text: "Uygulama Durdurulduğunda".i18n(), value: "ON_APP_STOP"}
+            ];
+
+            function typeDropdownEditor(container, options) {
+                $('<input required  data-text-field="text" data-value-field="value"  data-bind="value:' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoDropDownList({
+                        autoBind: false,
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: data,
+                        text: "Seçiniz...".i18n(),
+                        placeholder: "Seçiniz...".i18n(),
+                        index: -1,
+                        change: function () {
+                            if (this.value() != "CRON") {
+                                options.model.set("cron", "");
+                                $('[name="cron"]').prop('readonly', true);
+                            } else {
+                                options.model.set("cron", "* * * * * ?");
+                                $('[name="cron"]').prop('readonly', "");
+                            }
+                            options.model.set("type", this.value());
+                        }
+                    });
+            };
 
             function fire(e) {
                 $.ajax({
@@ -175,287 +372,30 @@ define([
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
-                        console.log(response);
                         QuartzJobDataSource.read();
                     }
                 });
             }
 
             function addTrigger(e) {
-                $.ajax({
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "trigger/add",
-                    dataType: "json",
-                    data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (response) {
-                        console.log(response);
-                        QuartzJobDataSource.read();
-                    }
-                });
+
+                var currentRowItem = $(e.currentTarget).closest("tr");
+                var gridJobs = $("#gridJobs").data("kendoGrid");
+                var dataItem = this.dataItem(currentRowItem);
+                currentRow = dataItem.oid;
+                gridJobs.expandRow(currentRowItem);
+
+                var grid = $('#' + currentRow).data("kendoGrid");
+
+                if ($(currentRowItem).find(".k-icon").hasClass("k-minus")) {
+                    gridJobs.collapseRow(this);
+                } else {
+                    gridJobs.expandRow(this);
+                }
+                grid.addRow();
             }
 
-            function onChange(e) {
-
-                var cronString = "";
-
-                var test = $("#hiddenCron").val();
-                console.log(" hidden Cron " + test);
-
-                //Second cron builder and controller
-
-                var multiselectSecond = $("#second").data("kendoMultiSelect");
-                if (multiselectSecond.value().indexOf("Every Second") != -1) {
-                    multiselectSecond.value(["Every Second"]);
-                    cronString += "* ";
-                } else if (multiselectSecond.value().length < 1) {
-                    multiselectSecond.value(0);
-                    cronString += multiselectSecond.value() + " ";
-                } else {
-                    cronString += multiselectSecond.value() + " ";
-                }
-
-                //Minute cron builder and controller
-
-                var multiselectMinute = $("#minute").data("kendoMultiSelect");
-                if (multiselectMinute.value().indexOf("Every Minute") != -1) {
-                    multiselectMinute.value(["Every Minute"]);
-                    cronString += "* ";
-                } else if (multiselectMinute.value().length < 1) {
-                    multiselectMinute.value(0);
-                    cronString += multiselectMinute.value() + " ";
-                } else {
-                    cronString += multiselectMinute.value() + " ";
-                }
-
-                //Hour cron builder and controller
-
-                var multiselectHour = $("#hour").data("kendoMultiSelect");
-                if (multiselectHour.value().indexOf("Every Hour") != -1) {
-                    multiselectHour.value(["Every Hour"]);
-                    cronString += "* ";
-                } else if (multiselectHour.value().length < 1) {
-                    multiselectHour.value(0);
-                    cronString += multiselectHour.value() + " ";
-                } else {
-                    cronString += multiselectHour.value() + " ";
-                }
-
-                //Day cron builder and controller
-
-                var multiselectDay = $("#day").data("kendoMultiSelect");
-                if (multiselectDay.value().indexOf("Every Day") != -1) {
-                    multiselectDay.value(["Every Day"]);
-                    cronString += "* ";
-                } else if (multiselectDay.value().length < 1) {
-                    multiselectDay.value(1);
-                    cronString += multiselectDay.value() + " ";
-                } else {
-                    cronString += multiselectDay.value() + " ";
-                }
-
-                //Month cron builder and controller
-
-                var multiselectMonth = $("#month").data("kendoMultiSelect");
-                if (multiselectMonth.value().indexOf("Every Month") != -1) {
-                    multiselectMonth.value(["Every Month"]);
-                    cronString += "* ";
-                } else if (multiselectMonth.value().length < 1) {
-                    multiselectMonth.value(1);
-                    cronString += multiselectMonth.value() + " ";
-                } else {
-                    cronString += multiselectMonth.value() + " ";
-                }
-
-                //Days of week cron builder and controller
-
-                var multiselectDayOfWeek = $("#dayOfWeek").data("kendoMultiSelect");
-                if (multiselectDayOfWeek.value().indexOf("?") != -1) {
-                    multiselectDayOfWeek.value("?");
-                    cronString += "?";
-                } else if (multiselectDayOfWeek.value().length < 1) {
-                    multiselectDayOfWeek.value(1);
-                    cronString += multiselectDayOfWeek.value() + " ";
-                } else {
-                    cronString += multiselectDayOfWeek.value();
-                }
-
-                $("#hiddenCron").val(cronString);
-                $("#hiddenCron").trigger("change");
-            }
-
-            function setDefaultValues(exCron) {
-                var allValues = exCron.split(" ");
-                var secondValues = allValues[0].split(",");
-                var minuteValues = allValues[1].split(",");
-                var hourValues = allValues[2].split(",");
-                var dayValues = allValues[3].split(",");
-                var monthValues = allValues[4].split(",");
-                var dayOfWeekValues = allValues[5].split(",");
-
-                if (secondValues.indexOf("*") != -1) {
-                    $("#second").data("kendoMultiSelect").value("Every Second");
-                } else {
-                    $("#second").data("kendoMultiSelect").value(secondValues);
-                }
-
-                if (minuteValues.indexOf("*") != -1) {
-                    $("#minute").data("kendoMultiSelect").value("Every Minute");
-                } else {
-                    $("#minute").data("kendoMultiSelect").value(minuteValues);
-                }
-
-                if (hourValues.indexOf("*") != -1) {
-                    $("#hour").data("kendoMultiSelect").value("Every Hour");
-                } else {
-                    $("#hour").data("kendoMultiSelect").value(hourValues);
-                }
-
-                if (dayValues.indexOf("*") != -1) {
-                    $("#day").data("kendoMultiSelect").value("Every Day");
-                } else {
-                    $("#day").data("kendoMultiSelect").value(dayValues);
-                }
-
-                if (monthValues.indexOf("*") != -1) {
-                    $("#month").data("kendoMultiSelect").value("Every Month");
-                } else {
-                    $("#month").data("kendoMultiSelect").value(monthValues);
-                }
-
-                if (dayOfWeekValues.indexOf("?") != -1) {
-                    $("#dayOfWeek").data("kendoMultiSelect").value("?");
-                } else {
-                    $("#dayOfWeek").data("kendoMultiSelect").value(dayOfWeek);
-                }
-
-            }
-
-            function changeCheckBox() {
-                if ($(this).is(':checked')) {
-                    $("#dayOfWeek").data("kendoMultiSelect").enable(true);
-                    $("#dayOfWeek").data("kendoMultiSelect").value(6);
-                    $("#day").data("kendoMultiSelect").value("?");
-                    $("#day").data("kendoMultiSelect").enable(false);
-                } else {
-                    $("#dayOfWeek").data("kendoMultiSelect").enable(false);
-                    $("#dayOfWeek").data("kendoMultiSelect").value("?");
-                    $("#day").data("kendoMultiSelect").enable(true);
-                }
-                onChange();
-            }
-
-            function cronExpressionEditor(container, options) {
-                var seconds = ["Every Second"];
-                var minutes = ["Every Minute"];
-                var hours = ["Every Hour"];
-                var days = ["Every Day", "?", "Last Day of Month"];
-                var months = ["Every Month"];
-                var daysOfWeek = [
-                    {
-                        name: " ? ",
-                        value: "?"
-                    },
-                    {
-                        name: "Monday",
-                        value: "2"
-                    },
-                    {
-                        name: "Tuesday",
-                        value: "3"
-                    },
-                    {
-                        name: "Wednesday",
-                        value: "4"
-                    },
-                    {
-                        name: "Thursday",
-                        value: "5"
-                    },
-                    {
-                        name: "Friday",
-                        value: "6"
-                    },
-                    {
-                        name: "Saturday",
-                        value: "7"
-                    },
-                    {
-                        name: "Sunday",
-                        value: "1"
-                    }
-                ];
-
-                // Paramters for cron builder (Days of week,Months, Days, Hours, Minutes, Seconds)
-
-                for (var i = 0; i < 60; i++) {
-                    seconds.push(i);
-                }
-                for (var i = 1; i < 32; i++) {
-                    days.push(i);
-                }
-                for (var i = 1; i < 13; i++) {
-                    months.push(i);
-                }
-                for (var i = 0; i < 60; i++) {
-                    minutes.push(i);
-                }
-                for (var i = 0; i < 24; i++) {
-                    hours.push(i);
-                }
-
-                $('<div class="cron" "></div>').appendTo(container);
-                $('<div class="header">Second</div><select id="second" multiple="multiple"></select>').appendTo(".cron");
-                $('<div class="header">Minute</div><select id="minute" multiple="multiple"></select>').appendTo(".cron");
-                $('<div class="header">Hour</div><select id="hour" multiple="multiple"></select>').appendTo(".cron");
-                $('<div class="header">Day of Month</div><select id="day" multiple="multiple"></select>').appendTo(".cron");
-                $('<div class="header">Month</div><select id="month" multiple="multiple"></select>').appendTo(".cron");
-                $('<input type="checkbox" id="enableDaysOfWeek" name="enable" value="Enable Days of Week"><div class="header">Day of Week</div><select id="dayOfWeek" multiple="multiple"></select>').appendTo(".cron");
-                $('<div class="well well-sm" style="margin-top:10px; margin-bottom: 10px;"><div class="header"> Your Cron Expression </div></div>').appendTo(".cron");
-                $('<input id="hiddenCron" class="k-textbox" name="cronExpression" data-bind/>').appendTo(".cron");
-                $('input:checkbox').change(changeCheckBox);
-
-
-                var seconds = $("#second").kendoMultiSelect({
-                    dataSource: seconds,
-                    change: onChange
-                });
-
-                var minutes = $("#minute").kendoMultiSelect({
-                    dataSource: minutes,
-                    change: onChange
-                });
-
-                var minutes = $("#hour").kendoMultiSelect({
-                    dataSource: hours,
-                    change: onChange
-                });
-
-                var days = $("#day").kendoMultiSelect({
-                    dataSource: days,
-                    change: onChange
-                });
-
-                var months = $("#month").kendoMultiSelect({
-                    dataSource: months,
-                    change: onChange
-                });
-
-                var dayOfWeek = $("#dayOfWeek").kendoMultiSelect({
-                    dataSource: daysOfWeek,
-                    dataTextField: 'name',
-                    dataValueField: 'value',
-                    change: onChange,
-                    enable: false
-                })
-
-                if (options.model.cronExpression != "" && options.model.cronExpression != null) {
-                    setDefaultValues(options.model.cronExpression);
-                } else {
-                    setDefaultValues("0 0 0 0 0 ?");
-                    onChange();
-                }
-            }
+            i18n.translate();
         }
     });
 

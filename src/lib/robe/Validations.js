@@ -1,4 +1,4 @@
-function getValidations(field, label, isRequired, isEmail, minlength, maxlength, regexp) {
+function getValidations(field, label, isRequired, isEmail, minlength, maxlength, regexp, regexMsg) {
     var validations = {};
 
     if (isRequired)
@@ -32,7 +32,11 @@ function getValidations(field, label, isRequired, isEmail, minlength, maxlength,
     if (regexp)
         validations[field + "_regexp"] = function (input) {
             if ((input.is("[data-bind='value:" + field + "']") && !(new RegExp(regexp).test(input.val())))) {
-                input.attr("data-" + field + "_regexp-msg", label + " alanı " + regexp + " formatına uymalı.");
+                if (regexMsg) {
+                    input.attr("data-" + field + "_regexp-msg", regexMsg);
+                } else {
+                    input.attr("data-" + field + "_regexp-msg", label + " alanı " + regexp + " formatına uymalı.");
+                }
                 return false;
             }
             return true;
