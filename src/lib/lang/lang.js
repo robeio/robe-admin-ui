@@ -25,6 +25,13 @@
         console.log("view changing to:" + view);
         console.log("lang:" + getLang());
 
+        if (kendo.culture().name != getLang()) {
+            if (!kendo.cultures[getLang()]) {
+                console.log("loading culture:" + getLang())
+                LoadCultureJs();
+            }
+        }
+
         if (isDefaultLanguage()) {
             return;
         }
@@ -32,6 +39,7 @@
         //if (!langMap[view]) {
         var path = './app/modules/' + view + '/' + getLang() + '.json';
         langMap[view] = loadLangJson(path);
+
         //}
     }
 
@@ -53,20 +61,26 @@
         return data;
     }
 
+    function LoadCultureJs() {
+        require(["./lib/kendoui/js/cultures/kendo.culture." + getLang() + ".min.js"], function (d) {
+            kendo.culture(getLang());
+        });
+    }
+
 
     function translate() {
 
-        //TODO each only cookie language ?
-        $("*[lang]").each(function () {
+        $('*[lang]').each(function () {
             var element = $(this);
             if (element.children().length > 0) {
                 return;
             }
-            //var attrLang = element.attr("lang");
-            //TODO check if has cookie language ? (attrLang==getLang()) ?
-            var innerHtml = element.html();
-            element.html(innerHtml.i18n());
-            element.attr("lang", getLang());
+            var attrLang = element.attr("lang");
+            if (attrLang != getLang()) {
+                var innerHtml = element.html();
+                element.html(innerHtml.i18n());
+                element.attr("lang", getLang());
+            }
 
 
         });

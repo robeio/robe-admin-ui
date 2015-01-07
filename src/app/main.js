@@ -48,7 +48,6 @@ define([
     'robe/AlertDialog',
     'lib/underscore/underscore',
     'lib/support/console.min',
-    'lib/kendoui/js/cultures/kendo.culture.tr-TR.min',
     "lib/lang/lang"
 ], function (App) {
     App.initialize();
