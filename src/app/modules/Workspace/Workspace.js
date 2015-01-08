@@ -2,6 +2,7 @@ define([
     'text!./Workspace.html',
     'modules/Login/Login',
     'robe/widget/sidemenu/SideMenu',
+    'text!./ErrorWindow.html',
     'kendo/kendo.fx.min',
     'kendo/kendo.progressbar.min',
     'kendo/kendo.button.min',
@@ -9,12 +10,11 @@ define([
     'kendo/kendo.panelbar.min',
     'lib/bootstrap/bootstrap.min',
     'robe/view/RobeView'
-], function (view, LoginView, SideMenu) {
+], function (view, LoginView, SideMenu, ErrorWindow) {
 
     var WorkspaceView = require('robe/view/RobeView').define("WorkspaceView", view, "container");
 
     WorkspaceView.render = function () {
-
         kendo.destroy($('#body'));
         $('#body').html('');
         $('#body').append(view);
@@ -23,42 +23,49 @@ define([
     };
 
     WorkspaceView.initialize = function () {
+        var errorTemplate = kendo.template(ErrorWindow);
+
+        var errorMessageWindow = $("#errorMessage").kendoWindow({
+            visible: false,
+            modal: true,
+            width: "500px"
+        }).data("kendoWindow");
 
         $(document).ajaxError(function (event, request, settings) {
             var response;
-            $("#btnDialogClose").css('display', '');
-            $('#dialogMessage').html('');
             try {
                 if (request.status == 401) {
                     loadLogin();
                     $('#loginError').show();
-                    $("#btnDialogClose").css('display', 'none');
                 }
                 else {
                     response = JSON.parse(request.responseText);
                     if ($.isArray(response)) {
-                        response = response[0];
+                        response = JSON.stringify(response[0]);
                     }
-                    showDialog("Hata Detayı : " + response.value, "Hata : " + response.name);
+                    for (var i = 0; i < 20; i++) {
+                        response.value += response.value;
+                    }
                 }
             }
             catch (err) {
+                console.log(err)
                 console.log("Unparsable response data :" + request.responseText);
-                showDialog(request.responseText, request.statusText);
+                response = {
+                    name: request.statusText, value: request.responseText
+                };
 
             }
+
+            errorMessageWindow.title(response.name);
+            errorMessageWindow.content(errorTemplate(response));
+            errorMessageWindow.open().center();
+
+            $("#error-window-close-button").click(function (ev) {
+                ev.preventDefault();
+                errorMessageWindow.close()
+            });
         });
-
-        $("#btnDialogClose").kendoButton({
-            icon: "close",
-            click: onCloseClick
-        });
-
-        $("#btnDialogClose").css('display', 'none');
-
-        function onCloseClick(e) {
-            $('#dialog').data("kendoWindow").close();
-        }
 
         var me = this;
         $("#progressBar").kendoProgressBar({
