@@ -33,30 +33,34 @@ define([
 
         $(document).ajaxError(function (event, request, settings) {
             var response;
-            try {
-                if (request.status == 401) {
-                    loadLogin();
-                    $('#loginError').show();
-                }
-                else {
+            if (request.status == 401) {
+                loadLogin();
+                $('#loginError').show();
+            } else if (request.status == 403) {
+                response = {
+                    name: "Forbidden", value: "No permission for this request"
+                };
+                showErrorMessage(response);
+            } else {
+                try {
                     response = JSON.parse(request.responseText);
                     if ($.isArray(response)) {
                         response = JSON.stringify(response[0]);
                     }
-                    for (var i = 0; i < 20; i++) {
-                        response.value += response.value;
-                    }
+                } catch (err) {
+                    console.log(err);
+                    console.log("Unparsable response data :" + request.responseText);
+                    response = {
+                        name: request.statusText, value: request.responseText
+                    };
+
                 }
-            }
-            catch (err) {
-                console.log(err)
-                console.log("Unparsable response data :" + request.responseText);
-                response = {
-                    name: request.statusText, value: request.responseText
-                };
+                showErrorMessage(response);
 
             }
+        });
 
+        function showErrorMessage(response) {
             errorMessageWindow.title(response.name);
             errorMessageWindow.content(errorTemplate(response));
             errorMessageWindow.open().center();
@@ -65,7 +69,7 @@ define([
                 ev.preventDefault();
                 errorMessageWindow.close()
             });
-        });
+        }
 
         var me = this;
         $("#progressBar").kendoProgressBar({
