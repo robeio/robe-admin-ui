@@ -21,7 +21,7 @@ define([
 					var item = this.items[i];
 					var renderedItem = $(itemView);
 					var icon = renderedItem.find('#itemIcon');
-					icon.attr("class" , icon.attr("class") + item.cssClass);
+					icon.attr("class" , icon.attr("class") + item.command);
 
 					renderedItem.click(function(e){
 						var item = $(e.target).parent('#itemCommand').parent().find('#itemSubItems');
@@ -35,7 +35,7 @@ define([
 					var subItems = item['items'];
 					for(var j = 0 ; j < subItems.length; j++ ){
 						var renderedSubItem = $(subItemView);
-						renderedSubItem.find('#itemRef').attr("href" , "#/"+subItems[j].cssClass);
+						renderedSubItem.find('#itemRef').attr("href" , "#/"+subItems[j].command);
 						var name = renderedSubItem.find('#itemName');
 						var icon = renderedSubItem.find('#itemIcon');
 
@@ -48,7 +48,7 @@ define([
         						$('#lblContainerTitle').text($(e.target).text());
         					}
 						});
-						icon.attr("class" , icon.attr("class") + subItems[j].cssClass);
+						icon.attr("class" , icon.attr("class") + subItems[j].command);
 						renderedSubItems.append(renderedSubItem);
 
 					}

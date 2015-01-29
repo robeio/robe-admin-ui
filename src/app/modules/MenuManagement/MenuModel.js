@@ -22,6 +22,10 @@ define([
                 editable: true,
                 nullable: false,
                 validation: getValidations("code", "Kod", true, false, 2, 50, "[A-Za-z]+")
+            },itemOrder: {
+                editable: true,
+                nullable: false,
+                validation: getValidations("itemOrder", "Sıra", true, false, null, null, "[0-9]+")
             }
         }
     });

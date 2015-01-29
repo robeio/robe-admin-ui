@@ -35,6 +35,10 @@ define([
                     field: "code",
                     title: "Kod".i18n(),
                     width: "110px"
+                },{
+                    field: "itemOrder",
+                    title: "Sıra".i18n(),
+                    width: "30px"
                 }, {
                     command: [{
                         name: "edit",
@@ -74,23 +78,13 @@ define([
             $("#treeMenus").kendoTreeView({
                 dragAndDrop: true,
                 dataTextField: "name",
-                drop: onTreeMenuDrop,
-                drag: onTreeMenuDrag
-
+                drop: onTreeMenuDrop
             });
 
             $("#btnRefreshMenuTree").kendoButton({
                 click: refreshTree
             });
 
-            function onTreeMenuDrag(e) {
-                // if the current status is "insert-top/middle/bottom"
-                if (e.statusClass.indexOf("insert") >= 0) {
-                    // deny the operation
-                    e.setStatusClass("k-denied");
-                    return;
-                }
-            };
 
             function refreshTree(e) {
                 $.ajax({
@@ -112,25 +106,51 @@ define([
             }
 
             function onTreeMenuDrop(e) {
+                console.log(e.statusClass);
 
                 if (!e.valid) {
                     return;
                 }
                 var treeview = $("#treeMenus").data("kendoTreeView");
-                var sourceOid = treeview.dataItem(e.sourceNode).oid;
-                var destinationOid = sourceOid;
-                if (e.dropPosition == "over")
-                    destinationOid = treeview.dataItem(e.destinationNode).oid;
+                var sourceItem = treeview.dataItem(e.sourceNode);
+                //over, before, or after.
+                var destinationItem  = treeview.dataItem(e.destinationNode);
 
-                $.ajax({
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "menu/movenode/" + sourceOid + "/" + destinationOid,
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function () {
-                        showToast("success", "Başarıyla Güncellendi".i18n());
+                if (e.dropPosition == "over") {
+
+                    $.ajax({
+                        type: "POST",
+                        url: AdminApp.getBackendURL() + "menu/movenode/" + sourceItem.oid + "/" + destinationItem.oid,
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            showToast("success", "Başarıyla Güncellendi".i18n());
+                        }
+                    });
+                } else {
+                    var order =  destinationItem.itemOrder;
+                    if(e.dropPosition == "before"){
+                        order--;
+                    }else{
+                        order++;
                     }
-                });
+                    sourceItem.itemOrder = order;
+                    delete sourceItem.index;
+                    $.ajax({
+                        type: "POST",
+                        url: AdminApp.getBackendURL() + "menu",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: kendo.stringify(sourceItem),
+                        success: function () {
+                            showToast("success", "Başarıyla Güncellendi".i18n());
+                            MenuDataSource.get();
+
+                        }
+                    });
+
+
+                }
 
             };
             i18n.translate();
