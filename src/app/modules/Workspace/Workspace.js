@@ -85,8 +85,9 @@ define([
         kendo.destroy($("#container"));
 
         $("#logout").click(function () {
-            $.cookie.destroy("auth-token");
-            $.cookie.destroy("lang");
+            var domainPath = $.cookie("domain").split(';');
+            $.removeCookie("auth-token",{domain: domainPath[0] , path: domainPath[1] });
+            $.removeCookie("lang");
             location.reload();
         });
 
@@ -125,10 +126,10 @@ define([
             showIndicator(false);
         });
 
-        if ($.cookie.read("auth-token") == null) {
+        if ($.cookie("auth-token") == null) {
             loadLogin();
         } else {
-            $("#active-user-name").html($.cookie.read("userEmail"));
+            $("#active-user-name").html($.cookie("userEmail"));
             this.loadMenu();
         }
 
@@ -179,7 +180,7 @@ define([
             var text = value.text;
             $('#user-menu').prepend('<li><a href="#" lang="' + code + '" id="language-' + code + '" code="' + code + '">' + text + '</a></li>');
         }
-        $('#language-' + $.cookie.read("lang")).addClass("li-active");
+        $('#language-' + $.cookie("lang")).addClass("li-active");
         i18n.translate();
 
     };
@@ -196,7 +197,7 @@ define([
                 SideMenu.items = response[0].items;
                 SideMenu.render();
                 $('#lblContainerTitle').text("Hoşgeldiniz".i18n());
-                $('#language-' + $.cookie.read("lang")).addClass("li-active");
+                $('#language-' + $.cookie("lang")).addClass("li-active");
                 i18n.init("Workspace");
                 i18n.translate();
 

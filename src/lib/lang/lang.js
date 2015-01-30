@@ -16,7 +16,7 @@
     };
 
     function getLang() {
-        var lng = $.cookie.read("lang");
+        var lng = $.cookie("lang");
         return (lng && lng != 'undefined') ? lng : AdminApp.getLang();
     }
 

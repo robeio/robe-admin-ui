@@ -12,7 +12,7 @@ require.config({
         'lib/jquery/jquery.min': {
             exports: '$'
         },
-        'lib/zebra_cookie': {
+        'lib/jquery.cookie': {
             deps: ['lib/jquery/jquery.min']
         },
         'lib/underscore/underscore': {
@@ -44,7 +44,7 @@ require.config({
 define([
     'AdminUIApp',
     'lib/jquery/jquery.min',
-    'lib/zebra_cookie',
+    'lib/jquery.cookie',
     'robe/AlertDialog',
     'lib/underscore/underscore',
     'lib/support/console.min',
