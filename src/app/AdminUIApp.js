@@ -21,10 +21,10 @@ define(['router'], function () {
 
         $.getJSON("./config.json", function (response) {
             AdminApp.backendURL = response.backendURL;
-            AdminApp.lang = response.lang.default;
+            AdminApp.lang = response.lang.defaultLang;
             for (var key in response.lang) {
                 //TODO change to another good way
-                if (key != "default") {
+                if (key != "defaultLang") {
                     AdminApp.langs.push({text: response.lang[key], value: key});
                 }
             }
