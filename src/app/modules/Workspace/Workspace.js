@@ -170,7 +170,7 @@ define([
         $('ul#user-menu').delegate('a', 'click', function () {
             var element = $(this);
             var code = element.attr("code");
-            $.cookie.write("lang", code);
+            $.cookie("lang", code);
             location.reload();
         });
 
