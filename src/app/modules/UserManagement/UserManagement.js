@@ -167,7 +167,7 @@ define([
 
 
             function userRoleDropDownEditor(container, options) {
-                $('<input required  data-text-field="name" data-value-field="oid"  data-bind="value:' + options.field + '"/>')
+                $('<input required data-required-msg="Rol alanı gerekli."  data-text-field="name" data-value-field="oid"  data-bind="value:' + options.field + '"/>')
                     .appendTo(container)
                     .kendoDropDownList({
                         autoBind: false,
@@ -176,7 +176,7 @@ define([
                         text: "Seçiniz...".i18n(),
                         dataSource: RoleDataSource.get(),
                         placeholder: "Seçiniz...".i18n(),
-                        index: -1
+                        optionLabel: "Seçiniz...".i18n()
                     });
             };
 
