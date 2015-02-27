@@ -45,7 +45,7 @@ define([
                 try {
                     response = JSON.parse(request.responseText);
                     if ($.isArray(response)) {
-                        response = JSON.stringify(response[0]);
+                        response = response[0];
                     }
                 } catch (err) {
                     console.log(err);
@@ -86,7 +86,7 @@ define([
 
         $("#logout").click(function () {
             var domainPath = $.cookie("domain").split(';');
-            $.removeCookie("auth-token",{domain: domainPath[0] , path: domainPath[1] });
+            $.removeCookie("auth-token", {domain: domainPath[0], path: domainPath[1]});
             $.removeCookie("lang");
             location.reload();
         });
