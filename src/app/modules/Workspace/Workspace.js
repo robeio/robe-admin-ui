@@ -34,6 +34,7 @@ define([
         $(document).ajaxError(function (event, request, settings) {
             var response;
             if (request.status == 401) {
+                removeCookie(false);
                 loadLogin();
                 $('#loginError').show();
             } else if (request.status == 403) {
@@ -85,10 +86,7 @@ define([
         kendo.destroy($("#container"));
 
         $("#logout").click(function () {
-            var domainPath = $.cookie("domain").split(';');
-            $.removeCookie("auth-token", {domain: domainPath[0], path: domainPath[1]});
-            $.removeCookie("lang");
-            location.reload();
+            removeCookie(true);
         });
 
         $("#settings").kendoButton({
@@ -106,6 +104,15 @@ define([
         $("#btnContainerHelp").kendoButton({
             click: onShowHelp
         });
+
+        function removeCookie(reload) {
+            var domainPath = $.cookie("domain").split(';');
+            $.removeCookie("auth-token", {domain: domainPath[0], path: domainPath[1]});
+            $.removeCookie("lang");
+            if (reload) {
+                location.reload();
+            }
+        }
 
         function onShowHelp() {
             var wnd = $("#containerHelpWindow").kendoWindow({
