@@ -315,16 +315,6 @@ tr[role="row"]:hover {
     vertical-align: middle;
 }
 
-.login td {
-    text-align: right;
-    font-weight: bold;
-}
-
-.login button {
-    float: right;
-    margin-top: 10px;
-    width: 100px;
-}
 
 .archiveDetails td {
     text-align: right;
@@ -771,4 +761,23 @@ a#main-menu-min i:hover {
 .UserProfileManagement:before {
     font-family: FontAwesome;
     content: "\f007"
+}
+
+.newdialog{
+    width: 100%;
+    height: 100%;
+    background-color: whitesmoke;
+    /*opacity: 0.9;*/
+    z-index: 100000;
+    position: absolute;
+    text-align: center;
+    display: none;
+}
+
+.login{
+    opacity:1 !important;
+    position: relative;
+    top: 10%;
+    display: inline-block;
+    text-align: left;
 }

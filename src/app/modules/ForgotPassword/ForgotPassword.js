@@ -8,7 +8,7 @@ define([
     var ForgotPassword = require('robe/view/RobeView').define({
         name: "ForgotPassword",
         html: view,
-        containerId: "dialogMessage",
+        containerId: "dialogLogin",
 
         initialize: function () {
             $('#btnForgotPassword').kendoButton({
@@ -24,8 +24,8 @@ define([
                                 console.log("Success : " + response);
                                 showToast("success","Şifreniz mail adresinize başarılı bir şekilde gönderildi");
 
-                                kendo.destroy($('#dialogMessage'));
-                                $('#dialogMessage').html('');
+                                kendo.destroy($('#dialogLogin'));
+                                $('#dialogLogin').html('');
                                 var LoginView = require('modules/Login/Login');
                                 LoginView.render();
                             },
@@ -45,8 +45,8 @@ define([
 
             $('#btnReturnLogin').kendoButton({
                 click: function () {
-                    kendo.destroy($('#dialogMessage'));
-                    $('#dialogMessage').html('');
+                    kendo.destroy($('#dialogLogin'));
+                    $('#dialogLogin').html('');
                     var LoginView = require('modules/Login/Login');
                     LoginView.render();
                 },

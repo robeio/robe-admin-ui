@@ -1,34 +1,51 @@
-<div id="login-panel" title="Kullanıcı Giriş Ekranı" class="login">
-    <div id="loginError" class="k-block k-error-colored"><span class="lng">Hatalı kullanıcı adı veya parola.</span></div>
+<div id="login-panel" title="Kullanıcı Giriş Ekranı" class="login panel panel-default">
+    <div class="panel-heading">Kullanıcı Giriş Ekranı</div>
+    <div class="container-fluid panel body">
+        <div class="row">
+            <div class="hidden-xs hidden-sm col-md-4" style="text-align: center">
+                <img src="./icon/lock.png" style="float: none"/>
+            </div>
 
-    <img src="./icon/lock.png" style="float:left"/>
+            <div class="col-md-8">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
 
-    <table id="login-table" style="padding-top:20px;line-height:35px;">
-        <tr>
-        </tr>
-        <tr>
-            <td lang="tr-TR">Kullanıcı Adı :</td>
-            <td><input type="text" id="username" class="k-textbox" value="admin@robe.io"></td>
-        </tr>
-        <tr>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-5" lang="tr-TR" for="username">Kullanıcı Adı</label>
 
-            <td id="txtPassword" lang="tr-TR">Parola :</td>
-            <td><input type="password" id="password" class="k-textbox" value="123123"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input id="language"/></td>
+                        <div class="col-md-7"><input type="text" id="username" class="form-control k-textbox"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-5" lang="tr-TR" for="password">Parola</label>
 
-        </tr>
-        <tr>
-            <td></td>
-            <td align="right"><a id="forgotPassword" href="#"><span lang="tr-TR" style="font-size: 8pt;">Şifremi Unuttum ?</span></a></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td align="right">
-                <button id="login-button"><span lang="tr-TR">Giriş</span></button>
-            </td>
-        </tr>
-    </table>
-</div>
+                        <div class="col-md-7"><input type="password" id="password" class="form-control k-textbox"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a id="forgotPassword" href="#">
+                                <button lang="tr-TR" class="btn-link">Şifremi Unuttum !</button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkbox pull-right">
+                                <label lang="tr-TR" for="rememberme">Beni Hatırla</label><input type="checkbox" id="rememberme"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6"><input id="language" style="width: 100%"/></div>
+
+                        <div class="col-md-6">
+                            <button id="login-button"  style="width: 100%;"><span
+                                    lang="tr-TR">Giriş</span></button>
+                        </div>
+                    </div>
+                    <div id="loginError" class="alert alert-danger" role="alert"><span class="lng">Hatalı kullanıcı adı veya parola.</span>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>

@@ -166,9 +166,9 @@ define([
         };
 
         function loadLogin() {
-            showDialog(null, "Giriş".i18n());
-            kendo.destroy($('#dialogMessage'));
-            $('#dialogMessage').html('');
+            //showDialog(null, "Giriş".i18n());
+            kendo.destroy($('#dialogLogin'));
+            $('#dialogLogin').show();
             LoginView.parentPage = me;
             LoginView.render();
         };

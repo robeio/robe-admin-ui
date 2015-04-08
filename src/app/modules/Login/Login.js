@@ -13,7 +13,7 @@ define([
     var LoginView = require('robe/view/RobeView').define({
         name: "LoginView",
         html: view,
-        containerId: "dialogMessage",
+        containerId: "dialogLogin",
         parentPage: null,
         initialize: function () {
 
@@ -56,7 +56,7 @@ define([
                                 }
                             }
                             $.cookie("domain",domain +";" + path);
-                            $('#dialog').data("kendoWindow").close();
+                            $('#dialogLogin').hide();
                             $("#active-user-name").html($("#username").val());
                             me.parentPage.loadMenu();
                         },
@@ -89,13 +89,10 @@ define([
 
 
             $("#forgotPassword").click(function () {
-                kendo.destroy($('#dialogMessage'));
-                $('#dialogMessage').html('');
+                kendo.destroy($('#dialogLogin'));
+                $('#dialogLogin').html('');
                 var ForgotPassword = require('modules/ForgotPassword/ForgotPassword');
                 ForgotPassword.render();
-            });
-            $('#dialog').data("kendoWindow").setOptions({
-                width: 420
             });
 
             $("#language").kendoDropDownList({
@@ -103,11 +100,24 @@ define([
                 dataValueField: "value",
                 dataSource: AdminApp.getLangs(),
                 height: 100,
-                width: 40,
                 value: i18n.lang()
-            }).closest(".k-widget").width(80);
+            }).closest(".k-widget");
 
             i18n.translate();
+
+            $("#rememberme").change(function() {
+                if(this.checked) {
+                    $.cookie('rememberme',$("#username").val());
+                }else{
+                    $.removeCookie('rememberme');
+                }
+            });
+
+            if($.cookie("rememberme") !== undefined){
+                $("#username").val($.cookie('rememberme'));
+                $("#rememberme").prop('checked',true)
+            }
+
 
         }
 
