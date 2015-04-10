@@ -781,3 +781,7 @@ a#main-menu-min i:hover {
     display: inline-block;
     text-align: left;
 }
+
+.submenu-selected{
+    background-color: #ced1d4 !important;
+}

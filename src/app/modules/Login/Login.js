@@ -15,6 +15,7 @@ define([
         html: view,
         containerId: "dialogLogin",
         parentPage: null,
+        callback : null,
         initialize: function () {
 
             i18n.init("Login");
@@ -58,7 +59,7 @@ define([
                             $.cookie("domain",domain +";" + path);
                             $('#dialogLogin').hide();
                             $("#active-user-name").html($("#username").val());
-                            me.parentPage.loadMenu();
+                            me.parentPage.loadMenu(me.callback);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             console.log(errorThrown);

@@ -35,7 +35,7 @@ define([
             var response;
             if (request.status == 401) {
                 removeCookie(false);
-                loadLogin();
+                loadLogin(me.callback);
                 $('#loginError').show();
             } else if (request.status == 403) {
                 response = {
@@ -134,10 +134,10 @@ define([
         });
 
         if ($.cookie("auth-token") == null) {
-            loadLogin();
+            loadLogin(me.callback);
         } else {
             $("#active-user-name").html($.cookie("userEmail"));
-            this.loadMenu();
+            this.loadMenu(me.callback);
         }
 
         function onClickSettingsButton(e) {
@@ -165,11 +165,12 @@ define([
 
         };
 
-        function loadLogin() {
+        function loadLogin(callback) {
             //showDialog(null, "Giriş".i18n());
             kendo.destroy($('#dialogLogin'));
             $('#dialogLogin').show();
             LoginView.parentPage = me;
+            LoginView.callback = callback;
             LoginView.render();
         };
 
@@ -192,12 +193,14 @@ define([
 
     };
 
-    WorkspaceView.loadMenu = function () {
+    WorkspaceView.loadMenu = function (callback) {
         $.ajax({
             type: "GET",
             url: AdminApp.getBackendURL() + "menu/user",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
+            callback:callback,
+
             success: function (response) {
                 console.log(response);
                 //ignore root item
@@ -207,7 +210,9 @@ define([
                 $('#language-' + $.cookie("lang")).addClass("li-active");
                 i18n.init("Workspace");
                 i18n.translate();
-
+                if (callback != null) {
+                    callback();
+                }
             }
         });
     };

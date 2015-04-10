@@ -48,15 +48,35 @@ define([
             moduleId: 'modules/UserProfileManagement/UserProfileManagement'
         }
     }).on('routeload', function (View, routeArguments) {
-        View.render();
-    }).init();
+        var href = window.location.href;
+        var path = href.substring(href.indexOf(".html") + 5, href.length);
+        var isWorkspace = ( path == "#/Workspace");
+        if (!isWorkspace && $('#container').length == 0) {
+            var route = this.routes.Workspace;
+            require([route.moduleId], function (module) {
+
+                var callback = function () {
+                    var selected = $("[href='"+window.location.hash+"']");
+                    if (selected.length != 0) {
+                        $(selected[0]).click();
+                    }
+                };
+                module.callback = callback;
+                module.render();
+            });
+        } else {
+            View.render();
+        }
+    }).init({
+        fireInitialStateChange: true
+    });
 
     var href = window.location.href;
-    if (href.indexOf("#/Workspace", href.length - "#/Workspace".length) == -1) {
+    if (href.indexOf("index.html", href.length - "index.html".length) != -1) {
         $('#body').html('');
         window.location.href = "#/Workspace";
     }
-
     return Router;
+
 
 });

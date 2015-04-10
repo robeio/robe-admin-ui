@@ -1,4 +1,3 @@
-var admin = admin || {};
 var AdminApp;
 
 define(['router'], function () {
