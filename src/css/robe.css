@@ -782,6 +782,6 @@ a#main-menu-min i:hover {
     text-align: left;
 }
 
-.submenu-selected{
+.submenuitem-selected{
     background-color: #ced1d4 !important;
 }

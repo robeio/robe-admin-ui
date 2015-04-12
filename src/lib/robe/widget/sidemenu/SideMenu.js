@@ -23,7 +23,7 @@ define([
                 icon.attr("class", icon.attr("class") + item.command);
 
                 renderedItem.find('a').click(this.onItemClick);
-                renderedItem.find('a').attr("oid","item"+i);
+                renderedItem.find('a').attr("oid", "item" + i);
                 var renderedSubItems = renderedItem.find('#itemSubItems');
                 renderedItem.find('#itemName').html(item.text);
                 var subItems = item['items'];
@@ -35,7 +35,8 @@ define([
 
                     name.html(subItems[j].text);
                     renderedSubItem.find('a').click(this.onSubItemClick);
-                    renderedSubItem.find('a').attr("parentOid","item"+i);
+                    renderedSubItem.find('a').attr("parentOid", "item" + i);
+                    renderedSubItem.find('a').attr("oid", "subitem" + j);
                     icon.attr("class", icon.attr("class") + subItems[j].command);
                     renderedSubItems.append(renderedSubItem);
 
@@ -44,9 +45,16 @@ define([
             }
 
         },
+        currentItem:null,
+        currentSubItem:null,
         onItemClick: function (e) {
+            e.preventDefault();
+            var selected = $(e.target).closest("a");
+            if (SideMenu.currentItem != null) {
+                if (selected.attr("oid") == SideMenu.currentItem.attr("oid"))
+                    return;
+            }
             var subItems = $('#items').find("#itemSubItems:visible");
-            console.log(e);
             for (var i = 0; i < subItems.length; i++) {
                 $(subItems[i]).hide();
             }
@@ -55,24 +63,29 @@ define([
                 item = $(e.target).parent().find('#itemSubItems');
             }
 
-
+            SideMenu.currentItem = selected;
             item.fadeToggle(200)
         },
         onSubItemClick: function (e) {
-            var selected = $("[class='submenu submenu-selected']");
-            if (selected.length != 0) {
-                $(selected[0]).removeClass("submenu-selected")
+            e.preventDefault();
+            var selected = $(e.target).closest("a");
+
+            if (SideMenu.currentSubItem != null) {
+                if (selected.attr("oid") == SideMenu.currentSubItem.attr("oid"))
+                    return;
+                SideMenu.currentSubItem.removeClass("submenuitem-selected")
             }
-            selected = $(e.target).closest("a");
-            selected.addClass("submenu-selected")
+            selected.addClass("submenuitem-selected")
             if (e.target.tagName == 'I' || e.target.tagName == 'i') {
                 $('#lblContainerTitle').text($(e.target).siblings('span').text());
 
             } else {
                 $('#lblContainerTitle').text($(e.target).text());
             }
-            $("[oid='"+selected.attr("parentOid")+"']").click();
-
+            SideMenu.currentSubItem = selected;
+            $("[oid='" + selected.attr("parentOid") + "']").click();
+            window.location.href = selected.attr("href");
+            return false;
         },
         syncMenu2Url: function () {
             var selected = $("[href='" + window.location.hash + "']");
