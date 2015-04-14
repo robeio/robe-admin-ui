@@ -510,7 +510,6 @@ a#main-menu-min i:hover {
     padding: 1px 0 0;
     color: #7c848d;
     border: none;
-    border-bottom: 1px solid #dbdee0;
     background: 0 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -783,5 +782,6 @@ a#main-menu-min i:hover {
 }
 
 .submenuitem-selected{
-    background-color: #ced1d4 !important;
+    background-color: whitesmoke !important;
+    color: black !important;
 }
