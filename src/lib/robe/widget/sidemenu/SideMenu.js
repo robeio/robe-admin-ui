@@ -64,6 +64,8 @@ define([
             }
 
             SideMenu.currentItem = selected;
+            SideMenu.currentSubItem = null;
+
             item.fadeToggle(200)
         },
         onSubItemClick: function (e) {
@@ -82,8 +84,8 @@ define([
             } else {
                 $('#lblContainerTitle').text($(e.target).text());
             }
-            SideMenu.currentSubItem = selected;
             $("[oid='" + selected.attr("parentOid") + "']").click();
+            SideMenu.currentSubItem = selected;
             window.location.href = selected.attr("href");
             return false;
         },
