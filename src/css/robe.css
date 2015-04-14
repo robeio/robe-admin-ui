@@ -571,7 +571,7 @@ a#main-menu-min i:hover {
 }
 
 .nav.main-menu > li > ul > li > a {
-    background: #e4e5e7
+    background: white;
 }
 
 .nav.main-menu > li > ul > li > ul > li > a {
