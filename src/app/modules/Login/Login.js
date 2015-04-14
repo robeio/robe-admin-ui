@@ -15,7 +15,7 @@ define([
         html: view,
         containerId: "dialogLogin",
         parentPage: null,
-        callback : null,
+        callback: null,
         initialize: function () {
 
             i18n.init("Login");
@@ -30,7 +30,6 @@ define([
                     $.cookie("lang", $("#language").val());
                     $.cookie("userEmail", $("#username").val());
 
-
                     $.ajax({
                         type: "POST",
                         url: AdminApp.getBackendURL() + "authentication/login",
@@ -39,7 +38,7 @@ define([
                             password: CryptoJS.SHA256($("#password").val()).toString()
                         }),
                         contentType: "application/json; charset=utf-8",
-                        success: function (response,textStatus, request) {
+                        success: function (response, textStatus, request) {
 
                             $(document.body).unbind("keydown");
                             var domain = response.domain;
@@ -47,18 +46,25 @@ define([
 
                             var path = "";
 
-                            for(var i in params){
+                            for (var i in params) {
                                 var param = params[i];
-                                if(param.indexOf("path") == 0) {
+                                if (param.indexOf("path") == 0) {
                                     path = param.split("=")[1];
                                 }
-                                if(param.indexOf("domain") == 0) {
+                                if (param.indexOf("domain") == 0) {
                                     domain = param.split("=")[1];
                                 }
                             }
-                            $.cookie("domain",domain +";" + path);
+                            $.cookie("domain", domain + ";" + path);
                             $('#dialogLogin').hide();
                             $("#active-user-name").html($("#username").val());
+
+                            if ($("#rememberme").prop('checked') == true) {
+                                $.cookie('rememberme', $("#username").val());
+                            } else {
+                                $.removeCookie('rememberme');
+                            }
+
                             me.parentPage.loadMenu(me.callback);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
@@ -88,7 +94,6 @@ define([
                 }
             });
 
-
             $("#forgotPassword").click(function () {
                 kendo.destroy($('#dialogLogin'));
                 $('#dialogLogin').html('');
@@ -105,18 +110,9 @@ define([
             }).closest(".k-widget");
 
             i18n.translate();
-
-            $("#rememberme").change(function() {
-                if(this.checked) {
-                    $.cookie('rememberme',$("#username").val());
-                }else{
-                    $.removeCookie('rememberme');
-                }
-            });
-
-            if($.cookie("rememberme") !== undefined){
+            if ($.cookie("rememberme") !== undefined) {
                 $("#username").val($.cookie('rememberme'));
-                $("#rememberme").prop('checked',true)
+                $("#rememberme").prop('checked', true)
             }
 
 
