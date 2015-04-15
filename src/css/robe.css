@@ -315,7 +315,6 @@ tr[role="row"]:hover {
     vertical-align: middle;
 }
 
-
 .archiveDetails td {
     text-align: right;
     margin: 5px
@@ -516,7 +515,9 @@ a#main-menu-min i:hover {
     border-radius: 0;
     text-decoration: none;
     display: block;
-    position: relative
+    position: relative;
+    cursor : pointer;
+
 }
 
 .nav.main-menu > li > a .chevron, .nav.main-menu > li > ul > li > a .chevron, .nav.main-menu > li > ul > li > ul > li > a .chevron, .nav.main-menu > li > ul > li > ul > li > ul > li > a .chevron {
@@ -545,7 +546,7 @@ a#main-menu-min i:hover {
     width: 100%;
     content: "\f053";
     text-shadow: none;
-    color: #b2b8bd !important
+    color: #b2b8bd !important;
 }
 
 .nav.main-menu > li > a > i, .nav.main-menu > li > ul > li > a > i {
@@ -555,7 +556,8 @@ a#main-menu-min i:hover {
     padding: 13px 0;
     display: inline-block;
     text-align: center;
-    border-right: 1px solid #dbdee0
+    border-right: 1px solid #dbdee0;
+
 }
 
 .nav.main-menu > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > a > i, .nav.main-menu > li > ul > li > ul > li > ul > li > a > i {
@@ -762,7 +764,7 @@ a#main-menu-min i:hover {
     content: "\f007"
 }
 
-.newdialog{
+.newdialog {
     width: 100%;
     height: 100%;
     background-color: whitesmoke;
@@ -773,15 +775,15 @@ a#main-menu-min i:hover {
     display: none;
 }
 
-.login{
-    opacity:1 !important;
+.login {
+    opacity: 1 !important;
     position: relative;
     top: 10%;
     display: inline-block;
     text-align: left;
 }
 
-.submenuitem-selected{
+.submenuitem-selected {
     background-color: whitesmoke !important;
     color: black !important;
 }
