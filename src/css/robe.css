@@ -1,3 +1,7 @@
+.form-control {
+    padding-bottom: 0 !important;
+}
+
 .li-active {
     color: green !important;
     /*background-color: green!important;*/
@@ -516,7 +520,7 @@ a#main-menu-min i:hover {
     text-decoration: none;
     display: block;
     position: relative;
-    cursor : pointer;
+    cursor: pointer;
 
 }
 
