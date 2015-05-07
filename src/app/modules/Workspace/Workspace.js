@@ -151,22 +151,7 @@ define([
                 $("#progressBar").data("kendoProgressBar").value(1);
         };
 
-        function showDialog(message, title) {
-            if (message != null)
-                $('#dialogMessage').html(message);
-            if (title == null)
-                title = "";
-            $('#dialog').data("kendoWindow").setOptions({
-                width: 420
-            });
-            $('#dialog').data("kendoWindow").title(title);
-            $('#dialog').data("kendoWindow").open();
-            $('#dialog').data("kendoWindow").center();
-
-        };
-
         function loadLogin(callback) {
-            //showDialog(null, "Giriş".i18n());
             kendo.destroy($('#dialogLogin'));
             $('#dialogLogin').show();
             LoginView.parentPage = me;
@@ -199,7 +184,7 @@ define([
             url: AdminApp.getBackendURL() + "menu/user",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            callback:callback,
+            callback: callback,
 
             success: function (response) {
                 console.log(response);

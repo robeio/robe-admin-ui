@@ -94,7 +94,8 @@ define([
                 }
             });
 
-            $("#forgotPassword").click(function () {
+            $("#forgotPassword").click(function (ev) {
+                ev.preventDefault();
                 kendo.destroy($('#dialogLogin'));
                 $('#dialogLogin').html('');
                 var ForgotPassword = require('modules/ForgotPassword/ForgotPassword');

@@ -11,26 +11,39 @@ define([
         containerId: "dialogLogin",
 
         initialize: function () {
+
+            var alert = $('#messageFromServer');
+
+            alert.hide();
+
             $('#btnForgotPassword').kendoButton({
                 click: function (token) {
-                    if ($("#forgotEmail").val() == "" || $("#forgotEmail").val() == null) {
-                        $("#messageFromServer").text("Lütfen e-posta adresinizi yazınız...");
+
+                    console.log(alert.val())
+                    if (!$("#forgotEmail").val()) {
+                        alert.text("Lütfen e-posta adresinizi yazınız...");
+                        alert.show();
                     } else {
+                        alert.hide();
                         $.ajax({
                             type: "POST",
                             url: AdminApp.getBackendURL() + "authentication/forgotpassword/" + $("#forgotEmail").val(),
                             dataType: "text",
                             success: function (response) {
                                 console.log("Success : " + response);
-                                showToast("success","Şifreniz mail adresinize başarılı bir şekilde gönderildi");
-
-                                kendo.destroy($('#dialogLogin'));
-                                $('#dialogLogin').html('');
-                                var LoginView = require('modules/Login/Login');
-                                LoginView.render();
+                                showToast("success", "Şifreniz mail adresinize başarılı bir şekilde gönderildi");
+                                alert.text("Mail Adresinize Ticket Gönderilmiştir");
+                                alert.removeClass("alert-danger");
+                                alert.addClass("alert-success");
+                                alert.show();
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
-                                console.log("Error : " + errorThrown);
+                                console.log("Error : " + jqXHR);
+                                var response = JSON.parse(jqXHR.responseText);
+                                alert.text(response.value);
+                                alert.removeClass("alert-success");
+                                alert.addClass("alert-danger");
+                                alert.show();
                             }
                         });
                     }
@@ -41,7 +54,6 @@ define([
             $('#dialog').data("kendoWindow").setOptions({
                 width: 302
             });
-
 
             $('#btnReturnLogin').kendoButton({
                 click: function () {
