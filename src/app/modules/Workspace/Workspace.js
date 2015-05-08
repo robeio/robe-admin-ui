@@ -160,7 +160,8 @@ define([
         };
 
 
-        $('ul#user-menu').delegate('a', 'click', function () {
+        $('ul#user-menu').delegate('a', 'click', function (ev) {
+            ev.preventDefault();
             var element = $(this);
             var code = element.attr("code");
             $.cookie("lang", code);
