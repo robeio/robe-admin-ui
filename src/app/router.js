@@ -46,6 +46,10 @@ define([
         UserProfileManagement: {
             path: '/UserProfileManagement',
             moduleId: 'modules/UserProfileManagement/UserProfileManagement'
+        },
+        SystemParameter: {
+            path: '/SystemParameter',
+            moduleId: 'modules/SystemParameterManagement/SystemParameterManagement'
         }
     }).on('routeload', function (View, routeArguments) {
         var href = window.location.href;
@@ -56,7 +60,7 @@ define([
             require([route.moduleId], function (module) {
 
                 var callback = function () {
-                    var selected = $("[href='"+window.location.hash+"']");
+                    var selected = $("[href='" + window.location.hash + "']");
                     if (selected.length != 0) {
                         $(selected[0]).click();
                     }
