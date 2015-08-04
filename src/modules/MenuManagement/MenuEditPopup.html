@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div id="menuTreePopupView" data-template="fieldsTemplate" data-bind="source:data">
+</div>
+
+<script id="fieldsTemplate" type="text/x-kendo-template">
+    <ul>
+        <li>
+            <label lang="tr-TR">Kod</label>
+            <input data-bind="value:code"/>
+        </li>
+        <li>
+            <label lang="tr-TR">İsim</label>
+            <input data-bind="value:name"/>
+        </li>
+    </ul>
+    <button id="cancelMenuPopup" data-bind="click: cancelMenuPopup" lang="tr-TR" class="k-button">İptal</button>
+    <button id="saveMenuPopup" data-bind="click: saveMenuPopup" lang="tr-TR" class="k-button">Kaydet</button>
+</script>

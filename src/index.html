@@ -1,12 +1,12 @@
 <html lang="en">
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="./resources/icon/fav32.png"/>
+    <title lang="tr-TR">robe.io</title>
 
-    <link rel="shortcut icon" href="icon/logo.ico" />
-
-    <title lang="tr">robe.io</title>
 
     <!--KENDO CSS START-->
     <link href="./lib/kendoui/styles/kendo.common.min.css" rel="stylesheet">
@@ -15,26 +15,73 @@
     <!--KENDO JS END-->
 
 
-    <link rel="stylesheet" type="text/css" href="./css/robe.css"/>
-    <script src="./lib/support/ie.js"></script>
-    <script src="./lib/support/json3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./resources/css/robe.css"/>
 
     <!-- FONT AWESOME START-->
-    <link href="lib/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- FONT AWESOME START -->
 
-    <!-- TOASTMESSAGE NOTIFY CSS START-->
-    <link href="./lib/alertmessage/css/jquery.toastmessage.css" rel="stylesheet">
-    <!--TOASTMESSAGE NOTIFY CSS END-->
 
-    <link href="./lib/bootstrap/bootstrap.orange.css" rel="stylesheet">
-
-    <script data-main="./app/main" src="lib/requirejs/require.js"></script>
-    <script src="lib/support/respond.min.js"></script>
+    <script data-main="./index" src="./lib/requirejs/require.js?v=0.5.4.3"></script>
 
 </head>
 
 <body id="body">
+<div class="container-fluid ">
+    <div class="row">
+        <div class=" col-xs-12 header zero-left-padding zero-right-padding">
+            <div class="col-xs-1 col-sm-2 ">
+                <img class="logo" src="resources/icon/logo.png" id="bannerLogo"/>
+            </div>
+            <div class="col-xs-11 col-sm-10 btn-group zero-right-padding">
 
+                <div class="pull-left" style="background:#233c53; color:whitesmoke;position: absolute;bottom: 0px;"><h4
+                        id="pageTitle" style="margin-top:0px!important;" lang="tr-TR">Hoşgeldiniz</h4></div>
+                <a class="btn  notification-btn pull-right" data-toggle="dropdown" id="logout">
+                    <i class="fa fa-sign-out"></i>
+                    <span style="height: 12px" lang="tr-TR">Çıkış</span>
+                </a>
+
+                <a class="btn notification-btn  pull-right" data-toggle="dropdown" href="#" id="profile-dropdown">
+                    <img class="img-circle" src="resources/icon/default_profile_pic.jpg"
+                         style="margin-right: 7px; width: 20px;;"/><span
+                        class="hidden-xs">John Doe</span>
+                </a>
+                <a class="btn  notification-btn  pull-right" data-toggle="dropdown" href="index.html#">
+                    <i class="fa fa-envelope"></i>
+                    <span class="number">1</span>
+                </a>
+                <a class="btn notification-btn  pull-right" data-toggle="dropdown" href="index.html#"
+                   style="margin-right: 7px">
+                    <i class="fa fa-warning"></i>
+                    <span class="number">11</span>
+                </a>
+                <a class="btn  notification-btn  pull-right" data-toggle="dropdown" href="index.html#">
+                    <i class="fa fa-bullhorn"></i>
+                    <span class="number">3</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="row fill">
+        <div class="wrapper">
+            <div class="col-sm-2" id="sidebar-left">
+                <div class="input-group hidden-xs" style="background: #233c53; padding-left:8px; margin-right: -1px;">
+                    <input type="text" id="menu-search" class="form-control menu-search" placeholder="Ara" lang="""tr-TR">
+                    <span class="glyphicon glyphicon-search input-group-addon"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10 inner-shadow">
+            <div id='container' style="margin-top:0px!important;padding-top: 15px !important;">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="notification" hidden>
+<div id="dialogPopup" class="dialog" hidden>
+</div>
 </body>
 </html>

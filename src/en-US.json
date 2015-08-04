@@ -1,0 +1,15 @@
+{
+  "Hoşgeldiniz": "Welcome",
+  "Çıkış": "Exit",
+  "Giriş sayfasına yönlendiriliyorsunuz.": "Redirecting to login.",
+  "Ara": "Search",
+  "Yönetici": "Manager",
+  "Dash": "Dashboard",
+  "Profil Yönetimi": "Profile",
+  "Menü Yönetimi": "Menu Management",
+  "Kullanıcı Yönetimi": "User Management",
+  "İzin Atama": "Permission Management",
+  "Rol Yönetimi": "Role Management",
+  "Mail Template Yönetimi": "Mail Template Management",
+  "Quartz İş Yönetimi": "Quartz Job Management"
+}

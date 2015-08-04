@@ -1,8 +1,7 @@
 {
-  "backendURL": "../../robe/",
-  "adminURL": "./admin-ui/",
-  "lang": {
-    "defaultLang": "tr-TR",
+  "backendURL": "../../../robe/",
+  "defaultLanguage": "tr-TR",
+  "languages": {
     "en-US": "English",
     "tr-TR": "Türkçe"
   }
