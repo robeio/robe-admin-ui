@@ -1,0 +1,52 @@
+<div id="login-panel" title="Kullanıcı Giriş Ekranı" class="login panel panel-default">
+    <div class="panel-heading">Kullanıcı Giriş Ekranı</div>
+    <div class="container-fluid panel body">
+        <div class="row">
+            <div class="hidden-xs hidden-sm col-md-4" style="text-align: center">
+                <img src="./icon/lock.png" style="float: none"/>
+            </div>
+
+            <div class="col-md-8">
+                <div class="form-horizontal">
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5" lang="tr-TR" for="username">Kullanıcı Adı</label>
+
+                        <div class="col-md-7"><input type="text" id="username" class="k-textbox"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5" lang="tr-TR" for="password">Parola</label>
+
+                        <div class="col-md-7"><input type="password" id="password" class="k-textbox"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a id="forgotPassword" href="#">
+                                <button lang="tr-TR" class="btn-link">Şifremi Unuttum !</button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkbox pull-right">
+                                <label lang="tr-TR" for="rememberme">Beni Hatırla</label><input type="checkbox"
+                                                                                                id="rememberme"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6"><input id="language" style="width: 100%"/></div>
+
+                        <div class="col-md-6">
+                            <button id="login-button" style="width: 100%;"><span
+                                    lang="tr-TR">Giriş</span></button>
+                        </div>
+                    </div>
+                    <div id="loginError" class="alert alert-danger" role="alert"><span class="lng">Hatalı kullanıcı adı veya parola.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

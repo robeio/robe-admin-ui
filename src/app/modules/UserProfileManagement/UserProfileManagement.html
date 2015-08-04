@@ -1,0 +1,45 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class=" panel k-block" style="width: 400px; background-color:transparent; color:black;">
+    <div id="panelHeader" class="hidden" style="height: auto;text-align: center">
+        <div id="panelError" class="hidden"></div>
+    </div>
+    <form id="userProfileManagementForm" data-role="validator" novalidate="novalidate">
+
+        <ul>
+            <li>
+                <label for="firstAndLastName" class="required" lang="tr-TR">Ad-Soyad:</label>
+                <input type="text" class="k-textbox" id="firstAndLastName" disabled/>
+            </li>
+            <li>
+                <label for="emailAddress" class="required" lang="tr-TR">E-Posta Adresi:</label>
+                <input type="text" class="k-textbox" id="emailAddress" disabled/>
+            </li>
+            <li>
+                <label for="emailAddress" class="required" lang="tr-TR">Eski Şifre:</label>
+                <input type="password" class="k-textbox" id="oldPassword" required="required"/>
+            </li>
+            <li>
+                <label for="newPassword" class="required" lang="tr-TR">Yeni Şifre:</label>
+                <input type="password" class="k-textbox" id="newPassword" required="required"/>
+            </li>
+            <li>
+                <label for="reNewPassword" class="required" lang="tr-TR">Şifre Tekrarı:</label>
+                <input type="password" class="k-textbox" id="reNewPassword" required="required"/>
+            </li>
+            <li>
+                <div align="right">
+                    <button type="button" id="savePassword" style="margin-right: 20px;margin-top: 5px" data-role="button" data-sprite-css-class="k-icon k-i-tick"
+                            data-click='save'><span lang="tr-TR">Kaydet</span></button>
+                </div>
+
+            </li>
+        </ul>
+    </form>
+</div>
+<!-- HELP WINDOW START-->
+<div id="containerHelpWindow" hidden="true">
+    <p lang="tr-TR">Şifrenizi bu ekrandan değiştirebilirsiniz</p>
+
+</div>
+<!-- HELP WINDOW END-->

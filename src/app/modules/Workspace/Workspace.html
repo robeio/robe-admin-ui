@@ -1,0 +1,77 @@
+<div id="dialog" title="Mesaj" class="dialog">
+    <div id="dialogMessage" class="dialogMessage"></div>
+</div>
+<div id="dialogLogin" class="newdialog "></div>
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div id="progressBar"></div>
+    <!--TODO icon renkleri değiştirilecek-->
+    <div class="btn-group pull-right" style="margin: 15px">
+
+        <button type="button" class="btn btn-info" id="active-user-name"></button>
+        <button type="button" class="btn btn-info dropdown-toggle" style="height: 35px"
+                data-toggle="dropdown">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+
+        <ul class="dropdown-menu" id="user-menu" role="menu">
+            <li>
+                <a id="logout" href="" lang="tr-TR">Çıkış</a>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-header">
+        <a class="navbar-brand">
+            <img class="footer" src="icon/logo.png" id="bannerLogo"/>
+            <span id="bannerTitle"></span>
+        </a>
+    </div>
+
+
+    <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar-left-div">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+
+
+</nav>
+
+<div class="row-fluid">
+    <div class="span3">
+        <div class="collapse out sidebar-nav" id="sidebar-left-div">
+            <div id="sidebar-left" class="panel panel-default">
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="col-md-12 column well well-sm panel">
+            <div class="row clearfix panel-heading" style='border-bottom: lightgray dotted 1px; margin-bottom: 5px;'>
+                <div class="col-md-6">
+                    <h4 id="lblContainerTitle" lang="tr-TR">Hoşgeldiniz</h4>
+                </div>
+                <div class="col-md-6">
+                    <button id="btnContainerHelp" class="pull-right"><b class="fa fa-h-square"></b><span lang="tr">&nbsp;Yardım</span></button>
+                </div>
+            </div>
+            <div class='row clearfix' id='container'>
+                <div class="jumbotron">
+                    <h1>robe.io</h1>
+
+                    <p>Welcome to the robe.io</p>
+
+                    <p><a class="btn btn-primary btn-lg" role="button">Learn more about robe.io</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="containerHelpWindow" hidden="true">
+    <p lang="tr-TR">Menüyü kullanarak işlemlerinizi gerçekleştirebilirsiniz.</p>
+
+</div>
+
+<div id="errorMessage"></div>
