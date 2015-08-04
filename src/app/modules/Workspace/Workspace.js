@@ -33,10 +33,14 @@ define([
 
         $(document).ajaxError(function (event, request, settings) {
             var response;
+
             if (request.status == 401) {
                 removeCookie(false);
                 loadLogin(me.callback);
-                $('#loginError').show();
+                var errorDiv = $('#loginError');
+                errorDiv.find('span').text("Hatalı kullanıcı adı veya parola.");
+                errorDiv.show();
+
             } else if (request.status == 403) {
                 response = {
                     name: "Forbidden", value: "No permission for this request"
@@ -54,6 +58,13 @@ define([
                     response = {
                         name: request.statusText, value: request.responseText
                     };
+
+                    if (request.responseText == "User blocked.") {
+                        var errorDiv = $('#loginError');
+                        errorDiv.find('span').text("Kullanıcı Bloke edilmiş.Sistem yöneticinize başvurunuz.");
+                        errorDiv.show();
+                    }
+
 
                 }
                 showErrorMessage(response);
