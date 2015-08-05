@@ -63,11 +63,13 @@ define([
                         var errorDiv = $('#loginError');
                         errorDiv.find('span').text("Kullanıcı Bloke edilmiş.Sistem yöneticinize başvurunuz.");
                         errorDiv.show();
+                    } else {
+                        showErrorMessage(response);
                     }
 
 
                 }
-                showErrorMessage(response);
+
 
             }
         });

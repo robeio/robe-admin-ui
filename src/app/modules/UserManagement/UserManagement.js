@@ -2,6 +2,7 @@ define([
     'text!./UserManagement.html',
     './UserDataSource',
     '../RoleManagement/RoleDataSource',
+    'kendo/kendo.tooltip.min',
     'kendo/kendo.grid.min',
     'kendo/kendo.window.min',
     'robe/view/RobeView'
@@ -39,6 +40,12 @@ define([
                 dataSource: UserDataSource.get(),
                 sortable: true,
                 autoBind: false,
+                dataBound: function () {
+                    $(".k-grid-run").kendoTooltip({
+                        content: "Blok Kaldır",
+                        position: "top"
+                    });
+                },
                 pageable: {
                     refresh: true
                 },
@@ -95,10 +102,15 @@ define([
                                 name: "destroy",
                                 text: "",
                                 className: "grid-command-iconfix"
+                            }, {
+                                name: "run",
+                                text: "",
+                                imageClass: "k-icon k-i-unlock",
+                                click: unBlockUser
                             }
                         ],
                         title: "&nbsp;",
-                        width: "80px"
+                        width: "120px"
                     }
                 ],
                 editable: {
@@ -110,6 +122,26 @@ define([
                     confirmDelete: "Yes"
                 }
             });
+
+            function unBlockUser(e) {
+                e.preventDefault();
+
+                kendo.ui.progress($("#body"), true);
+                $.ajax({
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "user/unblock",
+                    dataType: "json",
+                    data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        kendo.ui.progress($("#body"), false);
+                        showToast("success", "Kullanıcı block kaldırıldı.");
+                    },
+                    error: function () {
+                        kendo.ui.progress($("#body"), false);
+                    }
+                });
+            }
 
 
             $(".k-grid-email-request", "#gridUsers").bind("click", function (ev) {
