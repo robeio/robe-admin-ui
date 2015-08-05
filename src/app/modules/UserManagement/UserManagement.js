@@ -125,26 +125,31 @@ define([
 
             function unBlockUser(e) {
                 e.preventDefault();
+                var r = confirm("Bloklamayı kaldırmak istediğinizde emin misiniz ?");
+                if (r == true) {
+                    kendo.ui.progress($("#body"), true);
+                    $.ajax({
+                        type: "POST",
+                        url: AdminApp.getBackendURL() + "user/unblock",
+                        dataType: "json",
+                        data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (response) {
+                            kendo.ui.progress($("#body"), false);
+                            showToast("success", "Kullanıcı block kaldırıldı.");
+                        },
+                        error: function () {
+                            kendo.ui.progress($("#body"), false);
+                        }
+                    });
+                }
 
-                kendo.ui.progress($("#body"), true);
-                $.ajax({
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "user/unblock",
-                    dataType: "json",
-                    data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (response) {
-                        kendo.ui.progress($("#body"), false);
-                        showToast("success", "Kullanıcı block kaldırıldı.");
-                    },
-                    error: function () {
-                        kendo.ui.progress($("#body"), false);
-                    }
-                });
+
             }
 
 
             $(".k-grid-email-request", "#gridUsers").bind("click", function (ev) {
+                ev.preventDefault();
                 var alert = $("#alert");
                 alert.removeClass("k-block k-error-colored");
                 alert.html("");
