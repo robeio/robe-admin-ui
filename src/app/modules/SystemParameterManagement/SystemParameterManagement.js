@@ -23,6 +23,11 @@ define([
                     {
                         name: "create",
                         text: "Yeni Ekle".i18n()
+                    },
+                    {
+                        name: "clear-cache",
+                        text: "Parametre önbelleğini temizle".i18n(),
+                        imageClass: "k-icon k-i-refresh"
                     }
                 ],
                 columns: [
@@ -63,6 +68,21 @@ define([
                     confirmation: "Silmek istediğinizden emin misiniz?".i18n(),
                     confirmDelete: "Yes"
                 }
+            });
+
+            $(".k-grid-clear-cache", "#gridSystemParameters").bind("click", function (ev) {
+                ev.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "systemparameter/clearcache",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) {
+                        showToast("success", "Parametre önbelleği başarıyla temizlendi.".i18n())
+                    }
+                });
+
             });
 
             i18n.translate();

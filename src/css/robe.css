@@ -738,8 +738,12 @@ a#main-menu-min i:hover {
     color: black !important;
 }
 
+.k-grid-clear-cache {
+    float: right !important;
+}
+
 .Archive:before {
-    font-family: FontAwesome;
+    font-family: FontAwesome, serif;
     content: "\f17a"
 }
 

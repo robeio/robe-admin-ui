@@ -45,6 +45,16 @@ define([
                         content: "Blok Kaldır",
                         position: "top"
                     });
+                    var gridData = this.dataSource.view();
+                    for (var i = 0; i < gridData.length; i++) {
+                        var currentUid = gridData[i].uid;
+                        if (gridData[i].active) {
+                            var currentRow = this.table.find("tr[data-uid='" + currentUid + "']");
+                            var unBlockButton = $(currentRow).find(".k-grid-run");
+                            unBlockButton.hide();
+                        }
+                    }
+
                 },
                 pageable: {
                     refresh: true
