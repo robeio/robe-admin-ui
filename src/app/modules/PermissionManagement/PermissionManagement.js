@@ -69,6 +69,12 @@ define([
                 dataSource: RoleDataSource.get(),
                 change: function () {
                     var roleOid = $("#cmbRoles").val();
+                    if (!roleOid && roleOid == ""){
+                        var tree = $("#treeMenus").data("kendoTreeView");
+                        checkByNodeIds(tree.dataSource.data(), []);
+                        checkRows([]);
+                        return;
+                    }
                     $.ajax({
                         type: "GET",
                         url: AdminApp.getBackendURL() + "permission/" + roleOid + "/menu",
@@ -91,7 +97,7 @@ define([
                     });
                 },
                 autoBind: false,
-                text: "Seçiniz...".i18n(),
+                optionLabel: "Seçiniz...".i18n(),
                 index: -1
             });
 
@@ -105,7 +111,9 @@ define([
                         data: response,
                         schema: MenuTreeModel
                     });
-                    $("#treeMenus").data("kendoTreeView").setDataSource(dataSource);
+                    var tree = $("#treeMenus").data("kendoTreeView");
+                    tree.setDataSource(dataSource);
+                    tree.expand(".k-item");
                 }
             });
 
@@ -113,6 +121,7 @@ define([
                 checkboxes: {
                     checkChildren: true
                 },
+                loadOnDemand: false,
                 select: function (e) {
                     e.preventDefault();
                     $(e.node).find(':checkbox').click();
