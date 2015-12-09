@@ -138,7 +138,10 @@ define([
                         contentType: "application/json; charset=utf-8",
                         success: function (response) {
                             showToast("success", "Başarılı. Bulunan Yeni Servis Sayısı :".i18n() + response);
-                            ServiceDataSource.read();
+                            ServiceDataSource.parameters.transport.read.complete=  function (){
+                                $("#cmbRoles").data("kendoDropDownList").trigger("change");
+                            }
+                            ServiceDataSource.read(true);
                         }
                     });
                 }
