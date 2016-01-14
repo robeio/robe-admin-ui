@@ -2,6 +2,11 @@ define([
     'lib/requirejs-router/router.min'
 ], function (Router) {
 
+    /**
+     * TODO might be change in next release unless page render work okay !!
+     */
+    var preView = null;
+
     Router.registerRoutes({
         Workspace: {
             path: '/Workspace',
@@ -51,26 +56,36 @@ define([
             path: '/SystemParameter',
             moduleId: 'modules/SystemParameterManagement/SystemParameterManagement'
         }
-    }).on('routeload', function (View, routeArguments) {
+    }).on('routeload', function (View, args) {
         var href = window.location.href;
         var path = href.substring(href.indexOf(".html") + 5, href.length);
         var isWorkspace = ( path == "#/Workspace");
         if (!isWorkspace && $('#container').length == 0) {
             var route = this.routes.Workspace;
             require([route.moduleId], function (module) {
-
                 var callback = function () {
                     var selected = $("[href='" + window.location.hash + "']");
                     if (selected.length != 0) {
                         $(selected[0]).click();
                     }
                 };
+                module.args = args;
                 module.callback = callback;
                 module.render();
+
+                if (View) {
+                    View.args = args;
+                    View.render();
+                }
+
             });
         } else {
-            View.render();
+            if (preView != View) {
+                View.args = args;
+                View.render();
+            }
         }
+        preView = View;
     }).init({
         fireInitialStateChange: true
     });
