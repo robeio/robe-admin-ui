@@ -135,7 +135,7 @@ define([
 
             function unBlockUser(e) {
                 e.preventDefault();
-                var r = confirm("Bloklamayı kaldırmak istediğinizde emin misiniz ?");
+                var r = confirm("Engellemeyi kaldırmak istediğinizden emin misiniz ?".i18n());
                 if (r == true) {
                     kendo.ui.progress($("#body"), true);
                     $.ajax({
@@ -146,7 +146,7 @@ define([
                         contentType: "application/json; charset=utf-8",
                         success: function (response) {
                             kendo.ui.progress($("#body"), false);
-                            showToast("success", "Kullanıcı block kaldırıldı.");
+                            showToast("success", "Kullanıcı engeli kaldırıldı.".i18n());
                         },
                         error: function () {
                             kendo.ui.progress($("#body"), false);

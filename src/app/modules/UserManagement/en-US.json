@@ -23,6 +23,8 @@
   "Rol&nbsp;&nbsp;": "Role",
   "Yeni kullanıcı için, tablonun \"Yeni Kullanıcı\" butonuna tıklayınız.": "For the new User, click the table \"New User\" button.",
   "Form verilerini doldurduktan sonra \"Güncelle\" butonuna tıklayınız.": "Click the \"Update\" button after filling out the form data.",
-  "Düzenlemek ve Silmek için satırdaki butonları kullanınız": "For Edit and Delete use buttons to the line"
+  "Düzenlemek ve Silmek için satırdaki butonları kullanınız": "For Edit and Delete use buttons to the line",
+  "Engellemeyi kaldırmak istediğinizden emin misiniz ?": "Are you sure you want to unblock?",
+  "Kullanıcı engeli kaldırıldı.": "User unblocked."
 }
 
