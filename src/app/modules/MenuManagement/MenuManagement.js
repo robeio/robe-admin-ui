@@ -167,10 +167,10 @@ define([
                         contentType: "application/json; charset=utf-8",
                         data: kendo.stringify(sourceItem),
                         success: function () {
+
+                            refreshTree(null);
                             showToast("success", "Başarıyla Güncellendi".i18n());
                             MenuDataSource.get(true);
-
-                            expandNextLevel();
                         }
                     });
 
