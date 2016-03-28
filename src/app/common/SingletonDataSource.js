@@ -11,21 +11,36 @@ define([
              * TODO setting default cache false for internet explorer cache problem.
              */
 
-            if (transport.read) {
-                transport.read.cache = false;
+            if (transport) {
+                if (transport.read) {
+                    transport.read.cache = false;
+                }
+
+                if (transport.destroy) {
+
+                    transport.destroy.baseUrl = transport.destroy.url;
+
+                    transport.destroy.url = function (options) {
+                        return transport.destroy.baseUrl + "/" + options.oid;
+                    };
+
+                    transport.destroy.cache = false;
+                }
+
+                if (transport.update) {
+                    transport.update.baseUrl = transport.update.url;
+                    transport.update.url = function (options) {
+                        return transport.update.baseUrl + "/" + options.oid;
+                    };
+
+                    transport.update.cache = false;
+                }
+
+                if (transport.create) {
+                    transport.create.cache = false;
+                }
             }
 
-            if (transport.destroy) {
-                transport.destroy.cache = false;
-            }
-
-            if (transport.update) {
-                transport.update.cache = false;
-            }
-
-            if (transport.create) {
-                transport.create.cache = false;
-            }
 
             this.data = new kendo.data.DataSource(this.parameters);
             this.data.bind("error", this.requestError);

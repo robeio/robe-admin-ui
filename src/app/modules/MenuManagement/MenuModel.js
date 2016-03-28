@@ -1,6 +1,6 @@
 define([
     'kendo/kendo.data.min', 'robe/Validations'
-], function() {
+], function () {
 
     var MenuModel = kendo.data.Model.define({
         id: "oid",
@@ -22,10 +22,14 @@ define([
                 editable: true,
                 nullable: false,
                 validation: getValidations("code", "Kod", true, false, 2, 50, "[A-Za-z]+")
-            },itemOrder: {
+            },
+            index: {
                 editable: true,
                 nullable: false,
-                validation: getValidations("itemOrder", "Sıra", true, false, null, null, "[0-9]+")
+                validation: getValidations("index", "Sıra", true, false, null, null, "[0-9]+")
+            },
+            items: {
+                defaultValue: []
             }
         }
     });

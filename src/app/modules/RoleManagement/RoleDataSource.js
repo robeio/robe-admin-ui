@@ -7,25 +7,25 @@ define([
             transport: {
                 read: {
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "role/all",
+                    url: AdminApp.getBackendURL() + "roles",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 update: {
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "role",
+                    type: "PUT",
+                    url: AdminApp.getBackendURL() + "roles",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 destroy: {
                     type: "DELETE",
-                    url: AdminApp.getBackendURL() + "role",
+                    url: AdminApp.getBackendURL() + "roles",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 create: {
-                    type: "PUT",
-                    url: AdminApp.getBackendURL() + "role",
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "roles",
                     dataType: "json",
                     contentType: "application/json"
                 },

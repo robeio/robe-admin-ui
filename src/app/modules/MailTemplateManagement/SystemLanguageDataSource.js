@@ -7,7 +7,7 @@ define(['common/SingletonDataSource',
             transport: {
                 read: {
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "language/all",
+                    url: AdminApp.getBackendURL() + "languages",
                     dataType: "json",
                     contentType: "application/json"
                 }

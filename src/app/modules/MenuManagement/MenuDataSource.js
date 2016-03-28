@@ -7,25 +7,28 @@ define([
             transport: {
                 read: {
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "menu/all",
+                    url: AdminApp.getBackendURL() + "menus",
                     dataType: "json",
-                    contentType: "application/json"
+                    contentType: "application/json",
+                    success: function (data) {
+                        console.log(data)
+                    }
                 },
                 update: {
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "menu",
+                    type: "PUT",
+                    url: AdminApp.getBackendURL() + "menus",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 destroy: {
                     type: "DELETE",
-                    url: AdminApp.getBackendURL() + "menu",
+                    url: AdminApp.getBackendURL() + "menus",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 create: {
-                    type: "PUT",
-                    url: AdminApp.getBackendURL() + "menu",
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "menus",
                     dataType: "json",
                     contentType: "application/json"
                 },

@@ -98,19 +98,6 @@ define([
 
         kendo.destroy($("#container"));
 
-        $("#logout").click(function () {
-
-            $.ajax({
-                type: "POST",
-                url: AdminApp.getBackendURL() + "authentication/logout",
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                }
-            });
-            removeCookie(true);
-        });
-
         $("#settings").kendoButton({
             click: onClickSettingsButton
         });
@@ -128,9 +115,14 @@ define([
         });
 
         function removeCookie(reload) {
-            var domainPath = $.cookie("domain").split(';');
-            $.removeCookie("auth-token", {domain: domainPath[0], path: domainPath[1]});
-            $.removeCookie("lang");
+            if ($.cookie("auth-token")) {
+                if ($.cookie("domain")) {
+                    var domainPath = $.cookie("domain").split(';');
+                    if (domainPath.length >= 2) {
+                        $.removeCookie("auth-token", {domain: domainPath[0], path: domainPath[1]});
+                    }
+                }
+            }
             if (reload) {
                 location.reload();
             }
@@ -181,13 +173,28 @@ define([
             LoginView.render();
         };
 
-
         $('ul#user-menu').delegate('a', 'click', function (ev) {
             ev.preventDefault();
             var element = $(this);
-            var code = element.attr("code");
-            $.cookie("lang", code);
-            location.reload();
+            var id = element.attr("id");
+            if (id == "logout") {
+                $.ajax({
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "authentication/logout",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    complete: function (response) {
+                        removeCookie(true)
+                    }
+                });
+            } else {
+                var code = element.attr("code");
+                if (code && (typeof code == "string")) {
+                    $.cookie("lang", code);
+                    location.reload();
+                }
+            }
+
         });
 
         for (var key in  AdminApp.getLangs()) {
@@ -204,7 +211,7 @@ define([
     WorkspaceView.loadMenu = function (callback) {
         $.ajax({
             type: "GET",
-            url: AdminApp.getBackendURL() + "menu/user",
+            url: AdminApp.getBackendURL() + "menus/user",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             callback: callback,

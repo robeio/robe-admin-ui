@@ -77,7 +77,7 @@ define([
                     }
                     $.ajax({
                         type: "GET",
-                        url: AdminApp.getBackendURL() + "permission/" + roleOid + "/menu",
+                        url: AdminApp.getBackendURL() + "permissions/" + roleOid + "/menu",
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (response) {
@@ -88,7 +88,7 @@ define([
                     });
                     $.ajax({
                         type: "GET",
-                        url: AdminApp.getBackendURL() + "permission/" + roleOid + "/service",
+                        url: AdminApp.getBackendURL() + "permissions/" + roleOid + "/service",
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (response) {
@@ -103,7 +103,7 @@ define([
 
             $.ajax({
                 type: "GET",
-                url: AdminApp.getBackendURL() + "menu/roots",
+                url: AdminApp.getBackendURL() + "menus/roots",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {

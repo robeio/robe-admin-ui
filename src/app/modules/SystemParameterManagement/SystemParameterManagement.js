@@ -75,7 +75,7 @@ define([
 
                 $.ajax({
                     type: "POST",
-                    url: AdminApp.getBackendURL() + "systemparameter/clearcache",
+                    url: AdminApp.getBackendURL() + "systemparameters/clearcache",
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {

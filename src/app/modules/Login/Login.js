@@ -18,15 +18,21 @@ define([
         callback: null,
         initialize: function () {
 
+            if ($.cookie("auth-token")) {
+                if ($.cookie("domain")) {
+                    var domainPath = $.cookie("domain").split(';');
+                    if (domainPath.length >= 2) {
+                        $.removeCookie("auth-token", {domain: domainPath[0], path: domainPath[1]});
+                    }
+                }
+            }
             i18n.init("Login");
 
-            var token = $.cookie("auth-token");
             $('#loginError').hide();
             var me = this;
 
             $('#login-button').kendoButton({
-                click: function (token) {
-
+                click: function () {
                     $.cookie("lang", $("#language").val());
                     $.cookie("userEmail", $("#username").val());
 
@@ -42,7 +48,7 @@ define([
 
                             $(document.body).unbind("keydown");
                             var domain = response.domain;
-                            var params = domain.split(';')
+                            var params = domain.split(';');
 
                             var path = "";
 
@@ -55,6 +61,7 @@ define([
                                     domain = param.split("=")[1];
                                 }
                             }
+
                             $.cookie("domain", domain + ";" + path);
                             $('#dialogLogin').hide();
                             $("#active-user-name").html($("#username").val());

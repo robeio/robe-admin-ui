@@ -7,19 +7,19 @@ define([
             transport: {
                 read: {
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "quartzJob",
+                    url: AdminApp.getBackendURL() + "quartzjobs",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 update: {
                     type: "POST",
-                    url: AdminApp.getBackendURL() + "quartzJob/update",
+                    url: AdminApp.getBackendURL() + "quartzjobs/update",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 create: {
                     type: "POST",
-                    url: AdminApp.getBackendURL() + "quartzJob/fire",
+                    url: AdminApp.getBackendURL() + "quartzjob/fire",
                     dataType: "json",
                     contentType: "application/json"
                 },

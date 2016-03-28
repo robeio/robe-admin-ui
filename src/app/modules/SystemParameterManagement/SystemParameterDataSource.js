@@ -7,25 +7,25 @@ define([
             transport: {
                 read: {
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "systemparameter/all",
+                    url: AdminApp.getBackendURL() + "systemparameters",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 update: {
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "systemparameter",
+                    type: "PUT",
+                    url: AdminApp.getBackendURL() + "systemparameters",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 destroy: {
                     type: "DELETE",
-                    url: AdminApp.getBackendURL() + "systemparameter",
+                    url: AdminApp.getBackendURL() + "systemparameters",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 create: {
-                    type: "PUT",
-                    url: AdminApp.getBackendURL() + "systemparameter",
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "systemparameters",
                     dataType: "json",
                     contentType: "application/json"
                 },

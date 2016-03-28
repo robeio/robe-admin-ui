@@ -71,13 +71,15 @@ define([
                         transport: {
                             read: {
                                 type: "GET",
-                                url: AdminApp.getBackendURL() + "trigger",
+                                url: AdminApp.getBackendURL() + "triggers",
                                 dataType: "json",
                                 contentType: "application/json"
                             },
                             update: {
-                                type: "POST",
-                                url: AdminApp.getBackendURL() + "trigger/update",
+                                type: "PUT",
+                                url: function (options) {
+                                    return AdminApp.getBackendURL() + "triggers/" + options.oid;
+                                },
                                 dataType: "json",
                                 contentType: "application/json",
                                 complete: function () {
@@ -86,7 +88,7 @@ define([
                             },
                             create: {
                                 type: "POST",
-                                url: AdminApp.getBackendURL() + "trigger/add",
+                                url: AdminApp.getBackendURL() + "triggers",
                                 dataType: "json",
                                 contentType: "application/json",
                                 complete: function () {
@@ -95,7 +97,9 @@ define([
                             },
                             destroy: {
                                 type: "DELETE",
-                                url: AdminApp.getBackendURL() + "trigger",
+                                url: function (options) {
+                                    return AdminApp.getBackendURL() + "triggers/" + options.oid;
+                                },
                                 dataType: "json",
                                 contentType: "application/json",
                                 complete: function () {
@@ -179,14 +183,14 @@ define([
                                     name: "run",
                                     text: "",
                                     imageClass: "k-icon k-i-arrow-e",
-                                    className: "k-link k-pager-nav grid-command-iconfix",
+                                    className: "grid-command-iconfix",
                                     click: fire
                                 },
                                 {
                                     name: "stop",
                                     text: "",
                                     className: "grid-command-iconfix",
-                                    imageClass: "k-icon k-i-seek-e grid-command-iconfix",
+                                    imageClass: "k-icon k-i-seek-e",
                                     click: stop
                                 },
                                 {
@@ -327,17 +331,16 @@ define([
                 {text: "Uygulama Durdurulduğunda".i18n(), value: "ON_APP_STOP"}
             ];
 
+
             function typeDropdownEditor(container, options) {
-                $('<input required  data-text-field="text" data-value-field="value"  data-bind="value:' + options.field + '"/>')
+                $('<input name="type" required data-required-msg="Lütfen Seçiniz" data-value-primitive=true  data-value-field="value" data-text-field="text"  data-bind="value:' + options.field + '"/>')
                     .appendTo(container)
                     .kendoDropDownList({
                         autoBind: false,
                         dataTextField: "text",
                         dataValueField: "value",
+                        optionLabel: "<Seçiniz>",
                         dataSource: data,
-                        text: "Seçiniz...".i18n(),
-                        placeholder: "Seçiniz...".i18n(),
-                        index: -1,
                         change: function () {
                             if (this.value() != "CRON") {
                                 options.model.set("cron", "");
@@ -349,25 +352,30 @@ define([
                             options.model.set("type", this.value());
                         }
                     });
-            };
+
+            }
 
             function fire(e) {
+                e.preventDefault();
+
                 $.ajax({
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "trigger/run",
+                    type: "PUT",
+                    url: AdminApp.getBackendURL() + "triggers/run",
                     dataType: "json",
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
                     success: function (response) {
-                        QuartzJobDataSource.read();
+                        QuartzJobDataSource.read(true);
                     }
                 });
             }
 
             function stop(e) {
+
+                e.preventDefault();
                 $.ajax({
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "trigger/stop",
+                    type: "PUT",
+                    url: AdminApp.getBackendURL() + "triggers/stop",
                     dataType: "json",
                     data: kendo.stringify(this.dataItem($(e.currentTarget).closest("tr"))),
                     contentType: "application/json; charset=utf-8",
@@ -378,6 +386,8 @@ define([
             }
 
             function addTrigger(e) {
+
+                e.preventDefault();
 
                 var currentRowItem = $(e.currentTarget).closest("tr");
                 var gridJobs = $("#gridJobs").data("kendoGrid");

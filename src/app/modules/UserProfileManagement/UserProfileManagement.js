@@ -25,7 +25,7 @@ define([
             var panelHeader = $("#panelHeader");
             $.ajax({
                 type: "GET",
-                url: AdminApp.getBackendURL() + "user/profile",
+                url: AdminApp.getBackendURL() + "users/profile",
                 contentType: "application/json",
                 success: function (response) {
                     $("#emailAddress").val(response.email);
@@ -114,7 +114,7 @@ define([
                     if (validatePassword() && isMatch()) {
                         $.ajax({
                             type: "POST",
-                            url: AdminApp.getBackendURL() + "user/updatePassword",
+                            url: AdminApp.getBackendURL() + "users/updatePassword",
                             data: {
                                 newPassword: CryptoJS.SHA256($("#newPassword").val()).toString(),
                                 oldPassword: CryptoJS.SHA256($("#oldPassword").val()).toString()

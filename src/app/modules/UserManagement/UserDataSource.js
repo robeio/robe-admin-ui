@@ -8,30 +8,25 @@ define([
             transport: {
                 read: {
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "user/all",
+                    url: AdminApp.getBackendURL() + "users",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 update: {
-                    type: "POST",
-                    url: AdminApp.getBackendURL() + "user",
+                    type: "PUT",
+                    url: AdminApp.getBackendURL() + "users",
                     dataType: "json",
-                    contentType: "application/json",
-                    success: function (data, x, r) {
-                        console.log(data);
-                        console.log(x);
-                        console.log(r);
-                    }
+                    contentType: "application/json"
                 },
                 destroy: {
                     type: "DELETE",
-                    url: AdminApp.getBackendURL() + "user",
+                    url: AdminApp.getBackendURL() + "users",
                     dataType: "json",
                     contentType: "application/json"
                 },
                 create: {
-                    type: "PUT",
-                    url: AdminApp.getBackendURL() + "user",
+                    type: "POST",
+                    url: AdminApp.getBackendURL() + "users",
                     dataType: "json",
                     contentType: "application/json",
                     complete: function (data, status) {

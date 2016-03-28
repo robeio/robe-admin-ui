@@ -20,7 +20,8 @@ define([
                 code: {
                     editable: true,
                     nullable: false
-                },itemOrder: {
+                },
+                index: {
                     editable: true,
                     nullable: false
                 },

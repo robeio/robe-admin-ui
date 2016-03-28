@@ -7,7 +7,7 @@ define([
         transport: {
             read: {
                 type: "GET",
-                url: AdminApp.getBackendURL() + "service/all",
+                url: AdminApp.getBackendURL() + "services",
                 dataType: "json",
                 contentType: "application/json"
             }

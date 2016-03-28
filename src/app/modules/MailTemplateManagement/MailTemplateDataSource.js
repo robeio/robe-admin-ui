@@ -9,25 +9,25 @@ define([
 			transport: {
 				read: {
 					type: "GET",
-					url: AdminApp.getBackendURL() + "mailtemplate/all",
+					url: AdminApp.getBackendURL() + "mailtemplates",
 					dataType: "json",
 					contentType: "application/json"
 				},
 				create: {
-					type: "PUT",
-					url: AdminApp.getBackendURL() + "mailtemplate",
+					type: "POST",
+					url: AdminApp.getBackendURL() + "mailtemplates",
 					dataType: "json",
 					contentType: "application/json"
 				},
 				update: {
-					type: "POST",
-					url: AdminApp.getBackendURL() + "mailtemplate",
+					type: "PUT",
+					url: AdminApp.getBackendURL() + "mailtemplates",
 					dataType: "json",
 					contentType: "application/json"
 				},
 				destroy: {
 					type: "DELETE",
-					url: AdminApp.getBackendURL() + "mailtemplate",
+					url: AdminApp.getBackendURL() + "mailtemplates",
 					dataType: "json",
 					contentType: "application/json"
 				},

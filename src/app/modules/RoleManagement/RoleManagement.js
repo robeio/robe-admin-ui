@@ -107,7 +107,7 @@ define([
                     } else {
                         $.ajax({
                             type: "PUT",
-                            url: AdminApp.getBackendURL() + "role/group/" + groupOid + "/" + item.oid,
+                            url: AdminApp.getBackendURL() + "roles/group/" + groupOid + "/" + item.oid,
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
                             success: function () {
@@ -129,11 +129,10 @@ define([
 
                 $.ajax({
                     type: "GET",
-                    url: AdminApp.getBackendURL() + "role/" + selected,
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
+                    url: AdminApp.getBackendURL() + "roles/" + selected,
+                    contentType: "application/json",
                     success: function (response) {
-                        GroupedRoleDataSource.get().data(response.roles);
+                        GroupedRoleDataSource.get(false).data(response.roles);
                         var oids = [];
                         for (var i = 0; i < response.roles.length; i++) {
                             oids.push(response.roles[i].oid);
@@ -163,7 +162,7 @@ function removeItem(e, id) {
 
     $.ajax({
         type: "DELETE",
-        url: AdminApp.getBackendURL() + "role/destroyRoleGroup/" + selectedGroup + "/" + item.oid,
+        url: AdminApp.getBackendURL() + "roles/destroyRoleGroup/" + selectedGroup + "/" + item.oid,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (response) {
