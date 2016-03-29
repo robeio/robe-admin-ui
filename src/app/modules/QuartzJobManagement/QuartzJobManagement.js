@@ -116,7 +116,7 @@ define([
                             model: TriggerModel
                         },
                         filter: {
-                            field: "jobId",
+                            field: "jobOid",
                             operator: "eq",
                             value: e.data.oid
                         },
@@ -231,7 +231,7 @@ define([
             function OnEdit(e) {
 
                 if (e.model.isNew()) {
-                    e.model.jobId = currentRow;
+                    e.model.jobOid = currentRow;
                     e.model.startTime = -1;
                     e.model.endTime = -1;
                     e.container.find("input[name=startTime]").val(-1);

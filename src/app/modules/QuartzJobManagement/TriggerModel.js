@@ -38,7 +38,7 @@ define([
                 nullable: true,
                 type: "boolean"
             },
-            jobId: {
+            jobOid: {
                 editable: true,
                 nullable: false
             },
