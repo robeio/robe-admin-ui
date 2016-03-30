@@ -28,12 +28,12 @@ define([
                     text: "Yeni Menü".i18n()
                 }],
                 columns: [{
-                    field: "name",
+                    field: "text",
                     title: "Ad".i18n(),
                     width: "110px"
                 }, {
-                    field: "code",
-                    title: "Kod".i18n(),
+                    field: "path",
+                    title: "Yol".i18n(),
                     width: "110px"
                 }, {
                     field: "index",
@@ -88,7 +88,7 @@ define([
 
             var treeView = $("#treeMenus").kendoTreeView({
                 dragAndDrop: true,
-                dataTextField: "name",
+                dataTextField: "text",
                 drop: onTreeMenuDrop
             }).data("kendoTreeView");
 

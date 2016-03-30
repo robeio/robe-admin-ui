@@ -13,15 +13,19 @@ define([
                 editable: true,
                 nullable: true
             },
-            name: {
+            text: {
                 editable: true,
                 nullable: false,
-                validation: getValidations("name", "Ad", true, false, 2, 50, "[A-Za-z]+")
+                validation: getValidations("text", "Ad", true, false, 2, 50, "[A-Za-z]+")
             },
-            code: {
+            module: {
+                editable: true,
+                nullable: true
+            },
+            path: {
                 editable: true,
                 nullable: false,
-                validation: getValidations("code", "Kod", true, false, 2, 50, "[A-Za-z]+")
+                validation: getValidations("path", "Yol", true, false, 2, 50, "[A-Za-z]+")
             },
             index: {
                 editable: true,

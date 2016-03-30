@@ -20,7 +20,7 @@ define([
                 var item = this.items[i];
                 var renderedItem = $(itemView);
                 var icon = renderedItem.find('#itemIcon');
-                icon.attr("class", icon.attr("class") + item.command);
+                icon.attr("class", icon.attr("class") + item.path);
 
                 renderedItem.find('a').click(this.onItemClick);
                 renderedItem.find('a').attr("oid", "item" + i);
@@ -29,7 +29,7 @@ define([
                 var subItems = item['items'];
                 for (var j = 0; j < subItems.length; j++) {
                     var renderedSubItem = $(subItemView);
-                    renderedSubItem.find('#itemRef').attr("href", "#/" + subItems[j].command);
+                    renderedSubItem.find('#itemRef').attr("href", "#/" + subItems[j].path);
                     var name = renderedSubItem.find('#itemName');
                     var icon = renderedSubItem.find('#itemIcon');
 
@@ -37,7 +37,7 @@ define([
                     renderedSubItem.find('a').click(this.onSubItemClick);
                     renderedSubItem.find('a').attr("parentOid", "item" + i);
                     renderedSubItem.find('a').attr("oid", "subitem" + j);
-                    icon.attr("class", icon.attr("class") + subItems[j].command);
+                    icon.attr("class", icon.attr("class") + subItems[j].path);
                     renderedSubItems.append(renderedSubItem);
 
                 }
